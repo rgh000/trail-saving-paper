@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  27 JAN 2020 15:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  27 JAN 2020 16:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -375,10 +375,22 @@ Overfull \hbox (72.05148pt too wide) in paragraph at lines 94--94
 [][] 
  []
 
-[5] [6 <./cactus_cadical.pdf> <./cactus_maple2.pdf>] (./report.bbl
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 11.
+<test.pdf, id=26, 339.35483pt x 348.94565pt>
+File: test.pdf Graphic file (type pdf)
+ <use test.pdf>
+Package pdftex.def Info: test.pdf used on input line 95.
+(pdftex.def)             Requested size: 271.48424pt x 279.15689pt.
 
-(/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+<test2.pdf, id=27, 316.82565pt x 323.99144pt>
+File: test2.pdf Graphic file (type pdf)
+ <use test2.pdf>
+Package pdftex.def Info: test2.pdf used on input line 96.
+(pdftex.def)             Requested size: 253.46085pt x 259.1935pt.
+ [5] [6 <./cactus_cadical.pdf> <./cactus_maple2.pdf>] [7 <./test.pdf>] [8 <./te
+st2.pdf>]
+(./report.bbl
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 11.
+ (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 Underfull \hbox (badness 2213) in paragraph at lines 39--45
@@ -398,18 +410,18 @@ Underfull \hbox (badness 1400) in paragraph at lines 54--61
  as Part of
  []
 
-[7
+[9
 
-]) [8] (./report.aux) )
+]) [10] (./report.aux) )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 5237 strings out of 492995
- 76744 string characters out of 6132704
- 181296 words of memory out of 5000000
- 8708 multiletter control sequences out of 15000+600000
+ 5246 strings out of 492995
+ 76863 string characters out of 6132704
+ 182296 words of memory out of 5000000
+ 8716 multiletter control sequences out of 15000+600000
  16600 words of font info for 38 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  39i,8n,58p,978b,3381s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -424,10 +436,10 @@ r/local/texlive/2017/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/
 texlive/2017/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/20
 17/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2017/texmf-d
 ist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on report.pdf (8 pages, 183692 bytes).
+Output written on report.pdf (10 pages, 233998 bytes).
 PDF statistics:
- 90 PDF objects out of 1000 (max. 8388607)
- 67 compressed objects within 1 object stream
+ 112 PDF objects out of 1000 (max. 8388607)
+ 85 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

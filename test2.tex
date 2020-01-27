@@ -1,0 +1,15 @@
+\documentclass{standalone}
+\usepackage{tikz,pgfplotstable,pgfplots}
+\pgfplotsset{compat=1.13}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[title=Trail Saving Running Time Per Instance,axis equal,ymin=0,xmin=0,
+width=11cm,height=11cm,xlabel=original time (s),ylabel=trail saving time (s),axis x line=bottom,axis y line=left,xlabel near ticks,ylabel near ticks]
+\addplot[only marks,mark size=1pt,mark=*,mark options={fill=black}]
+	table[x=original,y=trail]
+{test2.txt};
+\addplot [red,samples at={0,1}] {x};
+\draw [blue,dashed] (rel axis cs:0,0) -- (rel axis cs:1,1);
+\end{axis}
+\end{tikzpicture}
+\end{document}
