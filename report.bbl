@@ -1,0 +1,44 @@
+\begin{thebibliography}{1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\providecommand{\doi}[1]{https://doi.org/#1}
+
+\bibitem{DBLP:conf/sat/HickeyB19}
+Hickey, R., Bacchus, F.: Speeding up assumption-based {SAT}. In: Janota, M.,
+  Lynce, I. (eds.) Theory and Applications of Satisfiability Testing - {SAT}
+  2019 - 22nd International Conference, {SAT} 2019, Lisbon, Portugal, July
+  9-12, 2019, Proceedings. Lecture Notes in Computer Science, vol. 11628, pp.
+  164--182. Springer (2019). \doi{10.1007/978-3-030-24258-9\_11},
+  \url{https://doi.org/10.1007/978-3-030-24258-9\_11}
+
+\bibitem{DBLP:conf/lpar/2013}
+McMillan, K.L., Middeldorp, A., Voronkov, A. (eds.): Logic for Programming,
+  Artificial Intelligence, and Reasoning - 19th International Conference,
+  LPAR-19, Stellenbosch, South Africa, December 14-19, 2013. Proceedings,
+  Lecture Notes in Computer Science, vol.~8312. Springer (2013).
+  \doi{10.1007/978-3-642-45221-5},
+  \url{https://doi.org/10.1007/978-3-642-45221-5}
+
+\bibitem{DBLP:conf/sat/MohleB19}
+M{\"{o}}hle, S., Biere, A.: Backing backtracking. In: Janota, M., Lynce, I.
+  (eds.) Theory and Applications of Satisfiability Testing - {SAT} 2019 - 22nd
+  International Conference, {SAT} 2019, Lisbon, Portugal, July 9-12, 2019,
+  Proceedings. Lecture Notes in Computer Science, vol. 11628, pp. 250--266.
+  Springer (2019). \doi{10.1007/978-3-030-24258-9\_18},
+  \url{https://doi.org/10.1007/978-3-030-24258-9\_18}
+
+\bibitem{DBLP:conf/sat/NadelR18}
+Nadel, A., Ryvchin, V.: Chronological backtracking. In: Beyersdorff, O.,
+  Wintersteiger, C.M. (eds.) Theory and Applications of Satisfiability Testing
+  - {SAT} 2018 - 21st International Conference, {SAT} 2018, Held as Part of the
+  Federated Logic Conference, FloC 2018, Oxford, UK, July 9-12, 2018,
+  Proceedings. Lecture Notes in Computer Science, vol. 10929, pp. 111--121.
+  Springer (2018). \doi{10.1007/978-3-319-94144-8\_7},
+  \url{https://doi.org/10.1007/978-3-319-94144-8\_7}
+
+\bibitem{DBLP:series/faia/SilvaLM09}
+Silva, J.P.M., Lynce, I., Malik, S.: Conflict-driven clause learning {SAT}
+  solvers. In: Handbook of Satisfiability, pp. 131--153. IOS Press (2009),
+  \url{https://doi.org/10.3233/978-1-58603-929-5-131}
+
+\end{thebibliography}

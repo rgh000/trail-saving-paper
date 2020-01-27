@@ -1,0 +1,28 @@
+\documentclass{standalone}
+\title{}
+\date{}
+\author{}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage[noend]{algorithmic}
+\usepackage{tikz,pgfplotstable,pgfplots}
+\usetikzlibrary{arrows}
+\begin{document}
+
+\begin{tikzpicture}
+\begin{axis}[
+	xlabel={Instances Solved},
+	ylabel={Run Time (sec)},width=18cm,height=10cm,legend pos=north west,xmin=0,ymin=0,xmax=600,ymax=5500
+]
+
+\addplot table [x=index, y=original_time, col sep=comma] {results_maplelcmdist_data.csv};
+\addplot table [x=index, y=original_time, col sep=comma] {results_maplelcmdist_chrono_data.csv};
+\addplot table [x=index, y=original_time, col sep=comma] {results_maplelcmdist_trail_noforce_data.csv};
+\addplot table [x=index, y=original_time, col sep=comma] {results_maplelcmdist_chrono-dl_ncte-true-opt-1lvl_data.csv};
+
+\legend{maplelcmdist,maplelcmdist-chrono,maplelcmdist-trail,maplelcmdist-trail-enhanced}
+\end{axis}
+\end{tikzpicture}
+
+\end{document}

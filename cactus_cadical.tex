@@ -1,0 +1,28 @@
+\documentclass{standalone}
+\title{}
+\date{}
+\author{}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage[noend]{algorithmic}
+\usepackage{tikz,pgfplotstable,pgfplots}
+\usetikzlibrary{arrows}
+\begin{document}
+
+\begin{tikzpicture}
+\begin{axis}[
+	xlabel={Instances Solved},
+	ylabel={Run Time (sec)},width=18cm,height=10cm,legend pos=north west,xmin=0,ymin=0,xmax=600,ymax=5500
+]
+
+\addplot table [x=index, y=original_time, col sep=comma] {results_cadical-master_data.csv};
+\addplot table [x=index, y=original_time, col sep=comma] {results_cadical-master-chrono_data.csv};
+\addplot table [x=index, y=original_time, col sep=comma] {results_cadical-master-trail-working-version_data.csv};
+\addplot table [x=index, y=original_time, col sep=comma] {results_cadical-master-trail-1lvl-proper_data.csv};
+
+\legend{cadical,cadical-chrono,cadical-trail,cadical-trail-enhanced}
+\end{axis}
+\end{tikzpicture}
+
+\end{document}
