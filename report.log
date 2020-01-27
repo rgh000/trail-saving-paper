@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  27 JAN 2020 16:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  27 JAN 2020 17:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -94,27 +94,33 @@ Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
-(/usr/local/texlive/2017/texmf-dist/tex/latex/algorithms/algorithmic.sty
-Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
+(/usr/local/texlive/2017/texmf-dist/tex/latex/algorithmicx/algcompatible.sty
+Package: algcompatible 
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
-(/usr/local/texlive/2017/texmf-dist/tex/latex/graphics/keyval.sty
-Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks19
+(/usr/local/texlive/2017/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
+
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+\c@ALG@line=\count99
+\c@ALG@rem=\count100
+\c@ALG@nested=\count101
+\ALG@tlm=\skip46
+\ALG@thistlm=\skip47
+\c@ALG@Lnr=\count102
+\c@ALG@blocknr=\count103
+\c@ALG@storecount=\count104
+\c@ALG@tmpcounter=\count105
+\ALG@tmplength=\skip48
 )
-\c@ALC@unique=\count99
-\c@ALC@line=\count100
-\c@ALC@rem=\count101
-\c@ALC@depth=\count102
-\ALC@tlm=\skip46
-\algorithmicindent=\skip47
-)
-(/usr/local/texlive/2017/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
+Document Style - algorithmic compatible environments for the `algorithmicx' sty
+le
+) (/usr/local/texlive/2017/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
 Package: algorithm2e 2013/01/06 v5.00 algorithms environments
-\c@AlgoLine=\count103
-\algocf@hangindent=\skip48
+\c@AlgoLine=\count106
+\algocf@hangindent=\skip49
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/tools/xspace.sty
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
@@ -129,38 +135,38 @@ Package `algorithm2e' Release 5.1 -- october 19 2015 --
 subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 - Author: Christophe Fiorio (christophe.fiorio@umontpellier.fr)
 ********************************************************
-\skiptotal=\skip49
-\skiplinenumber=\skip50
-\skiprule=\skip51
-\skiphlne=\skip52
-\skiptext=\skip53
-\skiplength=\skip54
-\algomargin=\skip55
-\skipalgocfslide=\skip56
+\skiptotal=\skip50
+\skiplinenumber=\skip51
+\skiprule=\skip52
+\skiphlne=\skip53
+\skiptext=\skip54
+\skiplength=\skip55
+\algomargin=\skip56
+\skipalgocfslide=\skip57
 \algowidth=\dimen112
 \inoutsize=\dimen113
 \inoutindent=\dimen114
 \interspacetitleruled=\dimen115
 \interspacealgoruled=\dimen116
 \interspacetitleboxruled=\dimen117
-\algocf@ruledwidth=\skip57
+\algocf@ruledwidth=\skip58
 \algocf@inoutbox=\box28
 \algocf@inputbox=\box29
-\AlCapSkip=\skip58
-\AlCapHSkip=\skip59
-\algoskipindent=\skip60
+\AlCapSkip=\skip59
+\AlCapHSkip=\skip60
+\algoskipindent=\skip61
 \algocf@nlbox=\box30
 \algocf@hangingbox=\box31
 \algocf@untilbox=\box32
-\algocf@skipuntil=\skip61
+\algocf@skipuntil=\skip62
 \algocf@capbox=\box33
-\algoheightruledefault=\skip62
-\algoheightrule=\skip63
-\algotitleheightruledefault=\skip64
-\algotitleheightrule=\skip65
-\c@algocfline=\count104
-\c@algocfproc=\count105
-\c@algocf=\count106
+\algoheightruledefault=\skip63
+\algoheightrule=\skip64
+\algotitleheightruledefault=\skip65
+\algotitleheightrule=\skip66
+\c@algocfline=\count107
+\c@algocfproc=\count108
+\c@algocf=\count109
 \algocf@algoframe=\box34
 \algocf@algobox=\box35
 ) (/usr/local/texlive/2017/texmf-dist/tex/latex/url/url.sty
@@ -170,6 +176,10 @@ Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 (/usr/local/texlive/2017/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
 
+(/usr/local/texlive/2017/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks19
+)
 (/usr/local/texlive/2017/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2017/04/14 v1.1b Standard LaTeX Graphics (DPC,SPQR)
 
@@ -190,29 +200,29 @@ Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
 (/usr/local/texlive/2017/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
 Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
 )
-\Gread@gobject=\count107
+\Gread@gobject=\count110
 ))
 \Gin@req@height=\dimen118
 \Gin@req@width=\dimen119
 )
 (/usr/local/texlive/2017/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count108
+\lst@mode=\count111
 \lst@gtempboxa=\box36
 \lst@token=\toks20
-\lst@length=\count109
+\lst@length=\count112
 \lst@currlwidth=\dimen120
-\lst@column=\count110
-\lst@pos=\count111
+\lst@column=\count113
+\lst@pos=\count114
 \lst@lostspace=\dimen121
 \lst@width=\dimen122
-\lst@newlines=\count112
-\lst@lineno=\count113
+\lst@newlines=\count115
+\lst@lineno=\count116
 \lst@maxwidth=\dimen123
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
-\c@lstnumber=\count114
-\lst@skipnumbers=\count115
+\c@lstnumber=\count117
+\lst@skipnumbers=\count118
 \lst@framebox=\box37
 )
 (/usr/local/texlive/2017/texmf-dist/tex/latex/listings/listings.cfg
@@ -250,16 +260,16 @@ File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 (/usr/local/texlive/2017/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count116
+\scratchcounter=\count119
 \scratchdimen=\dimen124
 \scratchbox=\box38
-\nofMPsegments=\count117
-\nofMParguments=\count118
+\nofMPsegments=\count120
+\nofMParguments=\count121
 \everyMPshowfont=\toks21
-\MPscratchCnt=\count119
+\MPscratchCnt=\count122
 \MPscratchDim=\dimen125
-\MPnumerator=\count120
-\makeMPintoPDFobject=\count121
+\MPnumerator=\count123
+\makeMPintoPDFobject=\count124
 \everyMPtoPDFconversion=\toks22
 ) (/usr/local/texlive/2017/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2017/03/19 v0.25 Utility functions of pdfTeX for LuaTeX (HO
@@ -310,7 +320,7 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\c@lstlisting=\count122
+\c@lstlisting=\count125
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 19.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
@@ -319,74 +329,85 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
 [1
 
 {/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 35.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 36.
+LaTeX Font Info:    Try loading font information for U+msa on input line 39.
 
-Underfull \hbox (badness 10000) in paragraph at lines 39--40
-
- []
-
-LaTeX Font Info:    Try loading font information for U+msa on input line 41.
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 41.
+LaTeX Font Info:    Try loading font information for U+msb on input line 39.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 41--42
-
+Overfull \hbox (15.0pt too wide) detected at line 74
+[][] 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 45--46
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 77.
+
+Underfull \hbox (badness 10000) in paragraph at lines 81--82
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 51--52
+Underfull \hbox (badness 10000) in paragraph at lines 83--84
 
  []
 
-[3] [4]
-Overfull \hbox (7.76643pt too wide) in paragraph at lines 82--91
+
+Underfull \hbox (badness 10000) in paragraph at lines 87--88
+
+ []
+
+[3
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 93--94
+
+ []
+
+[4] [5]
+Overfull \hbox (7.76643pt too wide) in paragraph at lines 124--133
 [][] 
  []
 
-<cactus_cadical.pdf, id=24, 521.31364pt x 268.53624pt>
+<cactus_cadical.pdf, id=27, 521.31364pt x 268.53624pt>
 File: cactus_cadical.pdf Graphic file (type pdf)
 
 <use cactus_cadical.pdf>
-Package pdftex.def Info: cactus_cadical.pdf used on input line 93.
+Package pdftex.def Info: cactus_cadical.pdf used on input line 135.
 (pdftex.def)             Requested size: 417.05148pt x 214.82927pt.
 
-Overfull \hbox (72.05148pt too wide) in paragraph at lines 93--93
+Overfull \hbox (72.05148pt too wide) in paragraph at lines 135--135
 [][] 
  []
 
-<cactus_maple2.pdf, id=25, 521.31364pt x 268.53624pt>
+<cactus_maple2.pdf, id=28, 521.31364pt x 268.53624pt>
 File: cactus_maple2.pdf Graphic file (type pdf)
  <use cactus_maple2.pdf>
-Package pdftex.def Info: cactus_maple2.pdf used on input line 94.
+Package pdftex.def Info: cactus_maple2.pdf used on input line 136.
 (pdftex.def)             Requested size: 417.05148pt x 214.82927pt.
 
-Overfull \hbox (72.05148pt too wide) in paragraph at lines 94--94
+Overfull \hbox (72.05148pt too wide) in paragraph at lines 136--136
 [][] 
  []
 
-<test.pdf, id=26, 339.35483pt x 348.94565pt>
+<test.pdf, id=29, 339.35483pt x 348.94565pt>
 File: test.pdf Graphic file (type pdf)
  <use test.pdf>
-Package pdftex.def Info: test.pdf used on input line 95.
+Package pdftex.def Info: test.pdf used on input line 137.
 (pdftex.def)             Requested size: 271.48424pt x 279.15689pt.
 
-<test2.pdf, id=27, 316.82565pt x 323.99144pt>
+<test2.pdf, id=30, 316.82565pt x 323.99144pt>
 File: test2.pdf Graphic file (type pdf)
  <use test2.pdf>
-Package pdftex.def Info: test2.pdf used on input line 96.
+Package pdftex.def Info: test2.pdf used on input line 138.
 (pdftex.def)             Requested size: 253.46085pt x 259.1935pt.
- [5] [6 <./cactus_cadical.pdf> <./cactus_maple2.pdf>] [7 <./test.pdf>] [8 <./te
+ [6] [7 <./cactus_cadical.pdf> <./cactus_maple2.pdf>] [8 <./test.pdf>] [9 <./te
 st2.pdf>]
 (./report.bbl
 LaTeX Font Info:    Try loading font information for OT1+pcr on input line 11.
@@ -410,21 +431,21 @@ Underfull \hbox (badness 1400) in paragraph at lines 54--61
  as Part of
  []
 
-[9
+[10
 
-]) [10] (./report.aux) )
+]) [11] (./report.aux) )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 5246 strings out of 492995
- 76863 string characters out of 6132704
- 182296 words of memory out of 5000000
- 8716 multiletter control sequences out of 15000+600000
- 16600 words of font info for 38 fonts, out of 8000000 for 9000
+ 5614 strings out of 492995
+ 82266 string characters out of 6132704
+ 187432 words of memory out of 5000000
+ 9079 multiletter control sequences out of 15000+600000
+ 19811 words of font info for 42 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,8n,58p,978b,3381s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 39i,8n,58p,1059b,3555s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc
 }</usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
 </usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></
@@ -436,10 +457,10 @@ r/local/texlive/2017/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/
 texlive/2017/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/20
 17/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2017/texmf-d
 ist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on report.pdf (10 pages, 233998 bytes).
+Output written on report.pdf (11 pages, 236884 bytes).
 PDF statistics:
- 112 PDF objects out of 1000 (max. 8388607)
- 85 compressed objects within 1 object stream
+ 115 PDF objects out of 1000 (max. 8388607)
+ 87 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

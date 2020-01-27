@@ -2,7 +2,7 @@
 \usepackage{times}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{algorithmic}
+\usepackage[noend]{algcompatible}
 \usepackage[ruled,linesnumbered,noend,oldcommands]{algorithm2e}
 \usepackage[T1,hyphens]{url}
 \usepackage{xspace}
@@ -27,10 +27,52 @@ Chronological backtracking \cite{DBLP:conf/lpar/2013, DBLP:conf/sat/MohleB19, DB
 We propose an alternative method, "trail saving", where we cache the part of the trail that is unassigned during a backtrack and then attempt to restore implied parts of it as each new decision is made. Trail saving preserves the traditional invariants of the SAT solver and its basic version is very simple to implement. It also allows the search to choose the order of decisions, but helps make propagation faster. We explore the theoretical speedup that trail saving provides, develop some enhancements to make the idea more effective, and demonstrate experimentally that it speeds up state-of-the-art SAT solvers by a non-trivial factor.
 
 \section{Background}
-We will assume the reader is familiar with SAT solving and the basics of the CDCL algorithm \cite{DBLP:series/faia/SilvaLM09}. We will use the notion of a trail to represent a sequence of literals corresponding to the current partial assignment. The literals appear on the trail in the order in which they were assigned. Associated with every literal on the trail is a decision level. Decision level 0 represents all literals which are implied by the formula itself and subsequent decisions start the beginning of a new decision level. When a literal is made true by unit propagation, the literal is given its decision level and a reason clause, where the reason clause is the clause that was made unit by propagation in order to imply this literal. Most modern solvers use the two-literal watch scheme to make unit propagation more efficient.
+We will assume the reader is familiar with SAT solving and the basics of the CDCL algorithm \cite{DBLP:series/faia/SilvaLM09}. We will use the notion of a trail to represent a sequence of literals corresponding to the current partial assignment. The literals appear on the trail in the order in which they were assigned. Associated with every literal on the trail is a decision level. Decision level 0 represents all literals which are implied by the formula itself and subsequent decisions start the beginning of a new decision level. When a literal is made true by unit propagation, the literal is given its decision level and a reason clause, where the reason clause is the clause that was made unit by propagation in order to imply this literal. Most modern solvers use the two-literal watch scheme to make unit propagation more efficient, where each clause is watched by two non-false literals. When a watcher for a clause becomes false, a replacement is searched for in the clause. If no such replacement exists
 
 \section{Trail Saving}
 It can be observed that a SAT solver often repeats the same propagations over and over again during execution. Although no two descents down the trail will ever be identical because of clause learning, the solver will often propagate many of the same literals with the same reasons in a similar order to what it had done previously, especially since the order of the decisions usually remains similar. We plan to cache the part of the trail that we are backtracking over and use it to restore some of those literals without propagating them from scratch.
+
+	\begin{algorithm}
+  	\caption{propagate()}
+	\begin{algorithmic}[1]
+	\WHILE{queue not empty}
+	\STATE $l := $ next literal on queue
+	\\BEGIN CODE TO ADD FOR TRAIL SAVING
+	\IF{trail saving turned on}
+		\IF{val(top of trail cache) $=$ true}
+			\WHILE{trail cache not empty}
+				\STATE{move top of trail cache to next literal}
+				\STATE{let tc $=$ top of trail cache}
+				\IF{reason(tc) is null}
+					\STATE{break}
+				\ELSIF{val(tc) $=$ false}
+					\STATE{return conflict with reason(tc)}
+				\ELSIF{val(tc) $=$ unassigned}
+					\STATE{enqueue tc with reason reason(tc)}
+				\ENDIF
+			\ENDWHILE
+		\ENDIF
+	\ENDIF
+	\\END CODE TO ADD FOR TRAIL SAVING
+  	\FOR{each clause $c \in $ watchlist($\neg l$)}
+		\FOR{each literal $x \in c$}
+			\IF{$val($x$) \neq$ false and x is not already a watcher of c}
+				\STATE let $x$ be a watcher of $c$ and add $c$ to watchlist($\neg x$)
+				\STATE break
+			\ENDIF
+		\ENDFOR
+		\IF{no new watcher was found}
+			\IF{other watcher $x_2$ of $c = $ false}
+				\STATE return c as conflict
+			\ELSIF{other watcher $x_2$ of $c$ is unassigned}
+				\STATE enqueue $x_2$
+			\ENDIF
+		\ENDIF
+	\ENDFOR
+	\ENDWHILE
+	\end{algorithmic}
+	\end{algorithm}
+\clearpage
 
 \subsection{Storing the trail cache}
 The first step that is needed to use "trail saving" is to store the literals which are being unassigned during a backtrack, along with their respective reason clauses, in a "trail cache". Decisions should be marked with a null reason. The literals should appear in the same order on the trail cache as they had appeared on the trail. We will adopt the notation that the "top" of the trail cache is initially set to be the literal that appeared the earliest on the trail and will get updated as the trail cache gets used up. Note that initially the top of the trail cache is always a decison (i.e., the start of a new decision level). As the literals from the trail cache get restored (i.e., assigned), the top of the trail cache points to the next literal not yet restored.
