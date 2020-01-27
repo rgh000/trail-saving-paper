@@ -17,7 +17,7 @@ for i in intervals:
 	inter[i] = 0
 
 for l in lines[1:]:
-	a, b = (float)(l.split('\t')[0]), (float)(l.split('\t')[1])
+	a, b = (float)(l.split(',')[0]), (float)(l.split(',')[1])
 	data = math.log((a+1e-8) / (b+1e-8), 2.0)
 	if data >= intervals[0] - incr / 2.0 and data < intervals[len(intervals)-1] + incr / 2.0:
 		for i in intervals:

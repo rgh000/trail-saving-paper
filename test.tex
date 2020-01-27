@@ -1,0 +1,31 @@
+\documentclass{standalone}
+\title{}
+\date{}
+\author{}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage[noend]{algorithmic}
+\usepackage{tikz,pgfplotstable,pgfplots}
+\usetikzlibrary{arrows}
+\begin{document}
+
+\begin{tikzpicture}
+\begin{axis}[xlabel=Speedup or Slowdown Factor,ylabel=Frequency,width=12cm,height=12cm,
+ybar=0pt,title=Cadical Trail Saving Run Time Comparison,
+xticklabel style={/pgf/number format/fixed,/pgf/number format/precision=2},
+yticklabel style={/pgf/number format/fixed,/pgf/number format/precision=5},]
+\addplot table [x, y, col sep=tab] {2testdata};
+\addplot table [x, y, col sep=tab] {testdata};
+\legend{speedup, slowdown}
+\draw [<-] (axis cs:0.1,700)-- +(10pt,10pt) node[right] {5104 instances had speedup or slowdown factor $< 1.07$};
+\draw (axis cs:2.1,250) node[left] {34 instances had speedup factor $> 4$};
+\draw (axis cs:2.1,200) node[left] {32 instances had slowdown factor $> 4$};
+\iffalse
+\draw [blue] (rel axis cs:0.54,0) -- (rel axis cs:0.54,1);
+$\lvert log_2 \frac{\text{enqueue time}}{\text{trail saving time}} \rvert$
+\fi
+\end{axis}
+\end{tikzpicture}
+
+\end{document}

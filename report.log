@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  27 JAN 2020 07:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  27 JAN 2020 15:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -350,7 +350,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 51--52
  []
 
 [3] [4]
-Overfull \hbox (7.76643pt too wide) in paragraph at lines 78--87
+Overfull \hbox (7.76643pt too wide) in paragraph at lines 82--91
 [][] 
  []
 
@@ -358,61 +358,61 @@ Overfull \hbox (7.76643pt too wide) in paragraph at lines 78--87
 File: cactus_cadical.pdf Graphic file (type pdf)
 
 <use cactus_cadical.pdf>
-Package pdftex.def Info: cactus_cadical.pdf used on input line 89.
+Package pdftex.def Info: cactus_cadical.pdf used on input line 93.
 (pdftex.def)             Requested size: 417.05148pt x 214.82927pt.
 
-Overfull \hbox (72.05148pt too wide) in paragraph at lines 89--89
+Overfull \hbox (72.05148pt too wide) in paragraph at lines 93--93
 [][] 
  []
 
 <cactus_maple2.pdf, id=25, 521.31364pt x 268.53624pt>
 File: cactus_maple2.pdf Graphic file (type pdf)
  <use cactus_maple2.pdf>
-Package pdftex.def Info: cactus_maple2.pdf used on input line 90.
+Package pdftex.def Info: cactus_maple2.pdf used on input line 94.
 (pdftex.def)             Requested size: 417.05148pt x 214.82927pt.
 
-Overfull \hbox (72.05148pt too wide) in paragraph at lines 90--90
+Overfull \hbox (72.05148pt too wide) in paragraph at lines 94--94
 [][] 
  []
 
 [5] [6 <./cactus_cadical.pdf> <./cactus_maple2.pdf>] (./report.bbl
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 12.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 11.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-Underfull \hbox (badness 2213) in paragraph at lines 23--29
+Underfull \hbox (badness 2213) in paragraph at lines 39--45
 \OT1/ptm/m/n/10 (2019). https://doi.org/10.1007/978-3-030-24258-9[]18, $\OT1/pc
 r/m/n/10 https : / / doi . org /
  []
 
 
-Underfull \hbox (badness 1067) in paragraph at lines 31--38
+Underfull \hbox (badness 1067) in paragraph at lines 54--61
 []\OT1/ptm/m/n/10 Nadel, A., Ryvchin, V.: Chrono-log-i-cal back-track-ing. In: 
 Bey-ers-dorff, O.,
  []
 
 
-Underfull \hbox (badness 1400) in paragraph at lines 31--38
+Underfull \hbox (badness 1400) in paragraph at lines 54--61
 \OT1/ptm/m/n/10 - SAT 2018 - 21st In-ter-na-tional Con-fer-ence, SAT 2018, Held
  as Part of
  []
 
-) [7
+[7
 
-] (./report.aux) )
+]) [8] (./report.aux) )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 5234 strings out of 492995
- 76667 string characters out of 6132704
+ 5237 strings out of 492995
+ 76744 string characters out of 6132704
  181296 words of memory out of 5000000
- 8705 multiletter control sequences out of 15000+600000
+ 8708 multiletter control sequences out of 15000+600000
  16600 words of font info for 38 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,8n,58p,1734b,3381s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 39i,8n,58p,978b,3381s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc
 }</usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
 </usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></
@@ -424,10 +424,10 @@ r/local/texlive/2017/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/
 texlive/2017/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/20
 17/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2017/texmf-d
 ist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on report.pdf (7 pages, 181866 bytes).
+Output written on report.pdf (8 pages, 183692 bytes).
 PDF statistics:
- 87 PDF objects out of 1000 (max. 8388607)
- 65 compressed objects within 1 object stream
+ 90 PDF objects out of 1000 (max. 8388607)
+ 67 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
