@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  27 JAN 2020 17:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  10 FEB 2020 12:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -329,138 +329,103 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
 [1
 
 {/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 36.
-LaTeX Font Info:    Try loading font information for U+msa on input line 39.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 35.
 
-(/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsa.fd
+Underfull \hbox (badness 10000) in paragraph at lines 40--41
+
+ []
+
+[2]
+LaTeX Font Info:    Try loading font information for U+msa on input line 42.
+ (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 39.
+LaTeX Font Info:    Try loading font information for U+msb on input line 42.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (15.0pt too wide) detected at line 74
+Underfull \hbox (badness 10000) in paragraph at lines 46--47
+
+ []
+
+<trail_diagram.pdf, id=11, 234.56233pt x 355.41081pt>
+File: trail_diagram.pdf Graphic file (type pdf)
+ <use trail_diagram.pdf>
+Package pdftex.def Info: trail_diagram.pdf used on input line 54.
+(pdftex.def)             Requested size: 187.65012pt x 284.32903pt.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 57.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 57.
+
+Overfull \hbox (15.0pt too wide) detected at line 81
 [][] 
  []
 
-[2]
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 77.
 
-Underfull \hbox (badness 10000) in paragraph at lines 81--82
+Overfull \hbox (15.0pt too wide) detected at line 102
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 106--107
+
+ []
+
+[3] [4 <./trail_diagram.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 108--109
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 83--84
+Underfull \hbox (badness 10000) in paragraph at lines 112--113
 
  []
 
+[5] [6] [7] [8] (./report.bbl
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 9.
 
-Underfull \hbox (badness 10000) in paragraph at lines 87--88
-
- []
-
-[3
+(/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+) [9
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 93--94
-
+Underfull \hbox (badness 2213) in paragraph at lines 59--66
+\OT1/ptm/m/n/10 (2018). https://doi.org/10.1007/978-3-319-94144-8[]7, $\OT1/pcr
+/m/n/10 https : / / doi . org /
  []
 
-[4] [5]
-Overfull \hbox (7.76643pt too wide) in paragraph at lines 124--133
-[][] 
- []
-
-<cactus_cadical.pdf, id=27, 521.31364pt x 268.53624pt>
-File: cactus_cadical.pdf Graphic file (type pdf)
-
-<use cactus_cadical.pdf>
-Package pdftex.def Info: cactus_cadical.pdf used on input line 135.
-(pdftex.def)             Requested size: 417.05148pt x 214.82927pt.
-
-Overfull \hbox (72.05148pt too wide) in paragraph at lines 135--135
-[][] 
- []
-
-<cactus_maple2.pdf, id=28, 521.31364pt x 268.53624pt>
-File: cactus_maple2.pdf Graphic file (type pdf)
- <use cactus_maple2.pdf>
-Package pdftex.def Info: cactus_maple2.pdf used on input line 136.
-(pdftex.def)             Requested size: 417.05148pt x 214.82927pt.
-
-Overfull \hbox (72.05148pt too wide) in paragraph at lines 136--136
-[][] 
- []
-
-<test.pdf, id=29, 339.35483pt x 348.94565pt>
-File: test.pdf Graphic file (type pdf)
- <use test.pdf>
-Package pdftex.def Info: test.pdf used on input line 137.
-(pdftex.def)             Requested size: 271.48424pt x 279.15689pt.
-
-<test2.pdf, id=30, 316.82565pt x 323.99144pt>
-File: test2.pdf Graphic file (type pdf)
- <use test2.pdf>
-Package pdftex.def Info: test2.pdf used on input line 138.
-(pdftex.def)             Requested size: 253.46085pt x 259.1935pt.
- [6] [7 <./cactus_cadical.pdf> <./cactus_maple2.pdf>] [8 <./test.pdf>] [9 <./te
-st2.pdf>]
-(./report.bbl
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 11.
- (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/ot1pcr.fd
-File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-)
-Underfull \hbox (badness 2213) in paragraph at lines 39--45
-\OT1/ptm/m/n/10 (2019). https://doi.org/10.1007/978-3-030-24258-9[]18, $\OT1/pc
-r/m/n/10 https : / / doi . org /
- []
-
-
-Underfull \hbox (badness 1067) in paragraph at lines 54--61
-[]\OT1/ptm/m/n/10 Nadel, A., Ryvchin, V.: Chrono-log-i-cal back-track-ing. In: 
-Bey-ers-dorff, O.,
- []
-
-
-Underfull \hbox (badness 1400) in paragraph at lines 54--61
-\OT1/ptm/m/n/10 - SAT 2018 - 21st In-ter-na-tional Con-fer-ence, SAT 2018, Held
- as Part of
- []
-
-[10
-
-]) [11] (./report.aux) )
+) [10] (./report.aux) )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 5614 strings out of 492995
- 82266 string characters out of 6132704
- 187432 words of memory out of 5000000
- 9079 multiletter control sequences out of 15000+600000
- 19811 words of font info for 42 fonts, out of 8000000 for 9000
+ 5603 strings out of 492995
+ 82112 string characters out of 6132704
+ 192432 words of memory out of 5000000
+ 9070 multiletter control sequences out of 15000+600000
+ 20359 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,8n,58p,1059b,3555s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 39i,8n,58p,1603b,3559s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc
 }</usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
 </usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></
 usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></us
-r/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/l
-ocal/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/lo
-cal/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></us
-r/local/texlive/2017/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/
-texlive/2017/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/20
-17/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2017/texmf-d
-ist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on report.pdf (11 pages, 236884 bytes).
+r/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/l
+ocal/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/loca
+l/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local
+/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/l
+ocal/texlive/2017/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/tex
+live/2017/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2017/
+texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2017/texmf-dist
+/fonts/type1/urw/times/utmri8a.pfb>
+Output written on report.pdf (10 pages, 140020 bytes).
 PDF statistics:
- 115 PDF objects out of 1000 (max. 8388607)
- 87 compressed objects within 1 object stream
+ 102 PDF objects out of 1000 (max. 8388607)
+ 77 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

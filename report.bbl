@@ -1,7 +1,12 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\urlprefix}{URL }
 \providecommand{\doi}[1]{https://doi.org/#1}
+
+\bibitem{DBLP:journals/jair/Gent13}
+Gent, I.P.: Optimal implementation of watched literals and more general
+  techniques. J. Artif. Intell. Res.  \textbf{48},  231--251 (2013),
+  \url{https://doi.org/10.1613/jair.4016}
 
 \bibitem{DBLP:conf/sat/2015}
 Heule, M., Weaver, S.A. (eds.): Theory and Applications of Satisfiability
@@ -63,5 +68,10 @@ Nadel, A., Ryvchin, V.: Chronological backtracking. In: Beyersdorff, O.,
 Silva, J.P.M., Lynce, I., Malik, S.: Conflict-driven clause learning {SAT}
   solvers. In: Handbook of Satisfiability, pp. 131--153. IOS Press (2009),
   \url{https://doi.org/10.3233/978-1-58603-929-5-131}
+
+\bibitem{DBLP:journals/jsat/TakRH11}
+van~der Tak, P., Ramos, A., Heule, M.: Reusing the assignment trail in {CDCL}
+  solvers. {JSAT}  \textbf{7}(4),  133--138 (2011),
+  \url{https://satassociation.org/jsat/index.php/jsat/article/view/89}
 
 \end{thebibliography}
