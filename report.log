@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  10 FEB 2020 12:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  13 FEB 2020 05:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -332,29 +332,31 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 35.
 
-Underfull \hbox (badness 10000) in paragraph at lines 40--41
+<trail_diagram.pdf, id=8, 234.56233pt x 355.41081pt>
+File: trail_diagram.pdf Graphic file (type pdf)
+ <use trail_diagram.pdf>
+Package pdftex.def Info: trail_diagram.pdf used on input line 39.
+(pdftex.def)             Requested size: 164.1925pt x 248.78587pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 42--43
 
  []
 
 [2]
-LaTeX Font Info:    Try loading font information for U+msa on input line 42.
+LaTeX Font Info:    Try loading font information for U+msa on input line 44.
  (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 42.
+LaTeX Font Info:    Try loading font information for U+msb on input line 44.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 46--47
+Underfull \hbox (badness 10000) in paragraph at lines 48--49
 
  []
 
-<trail_diagram.pdf, id=11, 234.56233pt x 355.41081pt>
-File: trail_diagram.pdf Graphic file (type pdf)
- <use trail_diagram.pdf>
-Package pdftex.def Info: trail_diagram.pdf used on input line 54.
-(pdftex.def)             Requested size: 187.65012pt x 284.32903pt.
+[3 <./trail_diagram.pdf>]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 57.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
@@ -374,7 +376,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 106--107
 
  []
 
-[3] [4 <./trail_diagram.pdf>]
+[4]
 Underfull \hbox (badness 10000) in paragraph at lines 108--109
 
  []
@@ -405,11 +407,11 @@ Underfull \hbox (badness 2213) in paragraph at lines 59--66
 Here is how much of TeX's memory you used:
  5603 strings out of 492995
  82112 string characters out of 6132704
- 192432 words of memory out of 5000000
+ 189432 words of memory out of 5000000
  9070 multiletter control sequences out of 15000+600000
  20359 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,8n,58p,1603b,3559s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 39i,8n,58p,1563b,3559s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc
 }</usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
 </usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></
@@ -422,7 +424,7 @@ ocal/texlive/2017/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/tex
 live/2017/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2017/
 texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2017/texmf-dist
 /fonts/type1/urw/times/utmri8a.pfb>
-Output written on report.pdf (10 pages, 140040 bytes).
+Output written on report.pdf (10 pages, 140450 bytes).
 PDF statistics:
  102 PDF objects out of 1000 (max. 8388607)
  77 compressed objects within 1 object stream
