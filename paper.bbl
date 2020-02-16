@@ -12,15 +12,14 @@ Gent, I.P.: Optimal implementation of watched literals and more general
 Heule, M., Weaver, S.A. (eds.): Theory and Applications of Satisfiability
   Testing - {SAT} 2015 - 18th International Conference, Austin, TX, USA,
   September 24-27, 2015, Proceedings, Lecture Notes in Computer Science,
-  vol.~9340. Springer (2015). \doi{10.1007/978-3-319-24318-4},
-  \url{https://doi.org/10.1007/978-3-319-24318-4}
+  vol.~9340. Springer (2015), \url{https://doi.org/10.1007/978-3-319-24318-4}
 
 \bibitem{DBLP:conf/sat/HickeyB19}
 Hickey, R., Bacchus, F.: Speeding up assumption-based {SAT}. In: Janota, M.,
   Lynce, I. (eds.) Theory and Applications of Satisfiability Testing - {SAT}
   2019 - 22nd International Conference, {SAT} 2019, Lisbon, Portugal, July
   9-12, 2019, Proceedings. Lecture Notes in Computer Science, vol. 11628, pp.
-  164--182. Springer (2019). \doi{10.1007/978-3-030-24258-9\_11},
+  164--182. Springer (2019),
   \url{https://doi.org/10.1007/978-3-030-24258-9\_11}
 
 \bibitem{DBLP:conf/sat/LiangGPC16}
@@ -28,16 +27,14 @@ Liang, J.H., Ganesh, V., Poupart, P., Czarnecki, K.: Learning rate based
   branching heuristic for {SAT} solvers. In: Creignou, N., Berre, D.L. (eds.)
   Theory and Applications of Satisfiability Testing - {SAT} 2016 - 19th
   International Conference, Bordeaux, France, July 5-8, 2016, Proceedings.
-  Lecture Notes in Computer Science, vol.~9710, pp. 123--140. Springer (2016).
-  \doi{10.1007/978-3-319-40970-2\_9},
+  Lecture Notes in Computer Science, vol.~9710, pp. 123--140. Springer (2016),
   \url{https://doi.org/10.1007/978-3-319-40970-2\_9}
 
 \bibitem{DBLP:conf/lpar/2013}
 McMillan, K.L., Middeldorp, A., Voronkov, A. (eds.): Logic for Programming,
   Artificial Intelligence, and Reasoning - 19th International Conference,
   LPAR-19, Stellenbosch, South Africa, December 14-19, 2013. Proceedings,
-  Lecture Notes in Computer Science, vol.~8312. Springer (2013).
-  \doi{10.1007/978-3-642-45221-5},
+  Lecture Notes in Computer Science, vol.~8312. Springer (2013),
   \url{https://doi.org/10.1007/978-3-642-45221-5}
 
 \bibitem{DBLP:conf/sat/MohleB19}
@@ -45,15 +42,13 @@ M{\"{o}}hle, S., Biere, A.: Backing backtracking. In: Janota, M., Lynce, I.
   (eds.) Theory and Applications of Satisfiability Testing - {SAT} 2019 - 22nd
   International Conference, {SAT} 2019, Lisbon, Portugal, July 9-12, 2019,
   Proceedings. Lecture Notes in Computer Science, vol. 11628, pp. 250--266.
-  Springer (2019). \doi{10.1007/978-3-030-24258-9\_18},
-  \url{https://doi.org/10.1007/978-3-030-24258-9\_18}
+  Springer (2019), \url{https://doi.org/10.1007/978-3-030-24258-9\_18}
 
 \bibitem{DBLP:conf/dac/MoskewiczMZZM01}
 Moskewicz, M.W., Madigan, C.F., Zhao, Y., Zhang, L., Malik, S.: Chaff:
   Engineering an efficient {SAT} solver. In: Proceedings of the 38th Design
   Automation Conference, {DAC} 2001, Las Vegas, NV, USA, June 18-22, 2001. pp.
-  530--535. {ACM} (2001). \doi{10.1145/378239.379017},
-  \url{https://doi.org/10.1145/378239.379017}
+  530--535. {ACM} (2001), \url{https://doi.org/10.1145/378239.379017}
 
 \bibitem{DBLP:conf/sat/NadelR18}
 Nadel, A., Ryvchin, V.: Chronological backtracking. In: Beyersdorff, O.,
@@ -61,8 +56,7 @@ Nadel, A., Ryvchin, V.: Chronological backtracking. In: Beyersdorff, O.,
   - {SAT} 2018 - 21st International Conference, {SAT} 2018, Held as Part of the
   Federated Logic Conference, FloC 2018, Oxford, UK, July 9-12, 2018,
   Proceedings. Lecture Notes in Computer Science, vol. 10929, pp. 111--121.
-  Springer (2018). \doi{10.1007/978-3-319-94144-8\_7},
-  \url{https://doi.org/10.1007/978-3-319-94144-8\_7}
+  Springer (2018), \url{https://doi.org/10.1007/978-3-319-94144-8\_7}
 
 \bibitem{DBLP:series/faia/SilvaLM09}
 Silva, J.P.M., Lynce, I., Malik, S.: Conflict-driven clause learning {SAT}
