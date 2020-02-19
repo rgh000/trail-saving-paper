@@ -29,8 +29,46 @@
 \end{abstract}
 
 \section{Introduction}
+\textbf{Overall message of the paper.}
+\begin{enumerate}
+\item Formalism for understanding a more general form of trail savings
+    which caches a copy of the trail that is backtracked over, and
+    verifying how it exploited soundly.
+
+\item Potential advantages over chronological backtracking.  Literals
+    remain at the correct level, supports the solver having more
+    freedom in its decisions.
+
+\item Potential advantages of techique (1) increase in efficiency of
+    propagation, (2) the new uses of the cached information. 
+
+\item Potential disadvantage. Reasons are recycled, in some circumstances
+    new reasons might be better. We show in a simple experiment that
+    this effect can occur.
+
+\item Techique captures most of the positive effects of
+    non-chronological backtracking in a simpler to implement way. It
+    also preserves the simpler standard structure of CDCL
+    solvers. Already provides some advantages for current SAT
+    solvers. The ideas also have the potential for further
+    exploitation. Lookahead for conflicts seems to be beneficial, and
+    potentially if better discrimatory measures could be developed for
+    reason clauses we could also better determine whether or not to
+    use the cached information.. 
+\end{enumerate}
+
 \note{Fix later---also \cite{DBLP:journals/jsat/TakRH11} can't be
   first use of trail savings?}
+
+\note{Reusing the Assignment Trail in CDCL Solvers: restart to level
+  $i$ where the next decision has a higher score than the decision at
+  level $i$ and a lower score than all decisions at level $j$ for
+  $j< i$.
+
+  They argum changes to reason clauses don't make much difference, but
+  that was with minisat, before metrics for clause quality were in place in sat solvers.
+
+  The savings for Luby-100 (used in minisat) were about 1\%}
 
 The vast majority of modern SAT solvers that are used to solve
 real-world problems are based on the conflict-driven clause learning
