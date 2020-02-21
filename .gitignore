@@ -2,3 +2,6 @@ paper.aux
 paper.log
 paper.pdf
 paper.synctex.gz
+#*
+.#*
+_*_.tex
