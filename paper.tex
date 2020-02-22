@@ -67,8 +67,8 @@
     A CDCL \sat solver can backtrack a large distance when it learns a
     new clause, e.g, when the new learnt clause is a unit clause the
     solver has to backtrack to level zero. When the length of the
-    backtrack is large the solver can end up reproducing many of the
-    same decisions and propagations when it redescent the search
+    backtrack is large, the solver can end up reproducing many of the
+    same decisions and propagations when it redescends the search
     tree. Motivated by this potential redundancy, partial backtracking
     (chronological backtracking) has been proposed. This technique
     allows the solver to reduce the length of its backtrack, e.g.,
@@ -79,7 +79,7 @@
     that makes a copy of the part of the trail that was backtracked
     over. This saved copy can then be used to improve the efficiency
     of the solver's subsequent redescent. Although our technique does
-    not save as much work as chronological backtracking it also does
+    not save as much work as chronological backtracking, it also does
     not have chronological backtracking's shortcomings. Furthermore,
     the saved trail also provides the solver the ability to look ahead
     along the previous trail. This can be exploited to improve its
