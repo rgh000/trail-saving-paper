@@ -11,12 +11,14 @@
 \usepackage{xspace}
 \usepackage{graphicx}
 \usepackage{listings}
-\usepackage{xcolor}
+\usepackage[table]{xcolor}
 \usepackage{theorem}
+
 \algrenewcommand\algorithmicprocedure{}
 \algrenewcommand\algorithmicthen{}
 \algrenewcommand\algorithmicdo{}
-
+\definecolor{linen}{rgb}{0.98, 0.94, 0.9}
+\definecolor{lightcyan}{rgb}{0.88, 1.0, 1.0}
 
 \lstset { %
   language=C++,
@@ -48,17 +50,20 @@
 \newcommand{\btL}{L_{\textit{back}}}
 \newcommand{\cbt}{C-bt\xspace}
 \newcommand{\trailsave}{\trail_{\mathit{save}}}
+\newcommand{\bt}{\textsc{backtrack}\xspace}
+\newcommand{\ust}{\textsc{useSavedTrail}\xspace}
 
 \newtheorem{Obs}{Observation}
 \newtheorem{Cor}{Corollary}
 \newtheorem{defn}{Definition}
 \newtheorem{thm}{Theorem}
+\newtheorem{prop}{Proposition}
 \newtheorem{ex}{Example}
 \newcommand{\whitebox}{\raisebox{.5ex}{\fbox{\hspace*{.2ex}}}}
 
 \title{Trail Saving on Backtrack}
 \author{Randy Hickey \and Fahiem Bacchus}
-\institute{Department of Computer Science, University of Toronto, Canada, 
+\institute{Department of Computer Science, University of Toronto, Canada\\
   \email{rgh000@gmail.com, fbacchus@cs.toronto.edu}}
 
 \begin{document}
@@ -81,53 +86,54 @@
     of the solver's subsequent redescent. Although our technique does
     not save as much work as chronological backtracking it also does
     not have chronological backtracking's shortcomings. Furthermore,
-    the saved trail also provides the solver the ability to look ahead
-    along the previous trail. This can be exploited to improve its
-    efficiency. Our empirical results show that our technique often
-    yields superior performance over chronological backtracking, and
-    that is is able to improve the performance of state of the art
+    the saved trail also provides the solver with the ability to look
+    ahead along the previous trail. This can be exploited to improve
+    its efficiency. Our empirical results show that our technique
+    often yields superior performance over chronological backtracking,
+    and that is is able to improve the performance of state of the art
     solvers.
 
 \end{abstract}
 
 \section{Introduction}
 \textbf{Overall message of the paper.}
-\begin{enumerate}
-\item Formalism for understanding a more general form of trail savings
-    which caches a copy of the trail that is backtracked over, and
-    verifying how it exploited soundly.
 
-\item Potential advantages over chronological backtracking.  Literals
-    remain at the correct level, supports the solver having more
-    freedom in its decisions.
+% \begin{enumerate}
+% \item Formalism for understanding a more general form of trail savings
+%     which caches a copy of the trail that is backtracked over, and
+%     verifying how it exploited soundly.
 
-\item Potential advantages of techique (1) increase in efficiency of
-    propagation, (2) the new uses of the cached information. 
+% \item Potential advantages over chronological backtracking.  Literals
+%     remain at the correct level, supports the solver having more
+%     freedom in its decisions.
 
-\item Potential disadvantage. Reasons are recycled, in some circumstances
-    new reasons might be better. We show in a simple experiment that
-    this effect can occur.
+% \item Potential advantages of technique (1) increase in efficiency of
+%     propagation, (2) the new uses of the cached information. 
 
-\item Techique captures most of the positive effects of
-    non-chronological backtracking in a simpler to implement way. It
-    also preserves the simpler standard structure of CDCL
-    solvers. Already provides some advantages for current SAT
-    solvers. The ideas also have the potential for further
-    exploitation. Lookahead for conflicts seems to be beneficial, and
-    potentially if better discrimatory measures could be developed for
-    reason clauses we could also better determine whether or not to
-    use the cached information.. 
-\end{enumerate}
+% \item Potential disadvantage. Reasons are recycled, in some circumstances
+%     new reasons might be better. We show in a simple experiment that
+%     this effect can occur.
 
-\note{Reusing the Assignment Trail in CDCL Solvers: restart to level
-  $i$ where the next decision has a higher score than the decision at
-  level $i$ and a lower score than all decisions at level $j$ for
-  $j< i$.
+% \item Technique captures most of the positive effects of
+%     non-chronological backtracking in a simpler to implement way. It
+%     also preserves the simpler standard structure of CDCL
+%     solvers. Already provides some advantages for current SAT
+%     solvers. The ideas also have the potential for further
+%     exploitation. Lookahead for conflicts seems to be beneficial, and
+%     potentially if better discrimatory measures could be developed for
+%     reason clauses we could also better determine whether or not to
+%     use the cached information.. 
+% \end{enumerate}
 
-  They argum changes to reason clauses don't make much difference, but
-  that was with minisat, before metrics for clause quality were in place in sat solvers.
+% \note{Reusing the Assignment Trail in CDCL Solvers: restart to level
+%   $i$ where the next decision has a higher score than the decision at
+%   level $i$ and a lower score than all decisions at level $j$ for
+%   $j< i$.
 
-  The savings for Luby-100 (used in minisat) were about 1\%}
+%   They argum changes to reason clauses don't make much difference, but
+%   that was with minisat, before metrics for clause quality were in place in sat solvers.
+
+%   The savings for Luby-100 (used in minisat) were about 1\%}
 
 The vast majority of modern SAT solvers that are used to solve
 real-world problems are based on the conflict-driven clause learning
@@ -139,94 +145,93 @@ backtrack non-chronologically to the conflict level, which is the
 second highest decision level remaining in the conflict clause after
 conflict analysis has resolved away all but one literal from the
 current decision level \cite{DBLP:conf/dac/MoskewiczMZZM01}. Recently,
-however, it has been shown that backtracking chronologically
-\cite{DBLP:conf/lpar/JiangZ13} (i.e. backtracking one level only after
-conflict analysis)
+however, it has been shown that partial backtracking
+\cite{DBLP:conf/lpar/JiangZ13} or chronological backtracking, \cbt,
+(i.e. backtracking one level only after conflict analysis)
 \cite{DBLP:conf/sat/NadelR18,DBLP:conf/sat/MohleB19} can be effective
 on many instances and was implemented in solvers that won the last two
 SAT competitions. Although chronological backtracking breaks some of
 the conventional invariants of CDCL solvers, it has been formalized
 and proven correct \cite{DBLP:conf/sat/MohleB19}.
 
-There are at least two possible side-effects of chronological
-backtracking which may explain its effectiveness. It has been observed
-that when a solver backtracks non-chronologically after a conflict,
-many of the literals that are unassigned during the backtrack will be
-re-assigned again in roughly the same order when the solver
-continues. By using chronological backtracking, the solver keeps a lot
-more of its partial assignment intact and saves from having to
-reconstruct a lot of the trail via propagation that it otherwise would
-have. Saving from having to reconstruct portions of the trail after
-backtracking was first introduced in the context of restarts by van
-der Tak et al. \cite{DBLP:journals/jsat/TakRH112}. The second
-side-effect of chronological backtracking is that it forces the solver
-to stay in the same local neighbourhood during search, since it
-unassigns less of the partial assignment and one could argue that this
-might lead to finding additional conflicts more quickly or reaching a
-satisfying assignment (if one exists) more quickly. However, this
-second side-effect also leads to less search flexibility, since the
-solver does not jump out of local neighbourhoods as often and does not
-obey the variable selection heuristic. We will argue that it is the
-first side-effect that leads to the effectiveness of chronological
-backtracking and not the second by developing a technique which also
-saves from having to repeat propagations, but allows the search to
-remain flexible and obey the variable selection heuristic.
+The motivation for using \cbt is the observation that when a solver
+backtracks across many levels, many of the literals that are
+unassigned during the backtrack will be re-assigned again in roughly
+the same order when the solver redescends. This observation was first
+made in the context of restarts by van der Tak et
+al. \cite{DBLP:journals/jsat/TakRH11}. Their technique backtracks to
+the minimum change level, i.e., the first level at which the solver's
+trail can change on redescent. However, their technique cannot be used
+when backtracking from a conflict: the solver's trail is going to be
+changed at the backtrack level so the minimum change level is the same
+as the backtrack level. 
 
-Our alternative method is "trail saving", where we cache the part of
-the trail that is unassigned during a backtrack and then attempt to
-restore implied parts of it as each new decision is made. Trail saving
-preserves the traditional invariants of the SAT solver and its basic
-version is very simple to implement. It also allows the search to
-choose the order of decisions, but helps make propagation faster. We
-explore the theoretical speedup that trail saving provides, develop
-some enhancements to make the idea more effective, and demonstrate
-experimentally that it performs similarly well as chronological
-backtracking without suffering from some of the aforementioned
-drawbacks.
+Chronological backtracking or partial backtracking instead allows a
+reduction in the length of the backtrack by placing literals on the
+trail out of decision level order. By reducing the length of the
+backtrack the solver can keep more of its assignment trail
+intact. This can save it from the work involved in reconstructing a
+lot of its trail. Using \cbt is not a panacea however. Its application
+must be limited for peak effectiveness. This indicates that it is
+sometimes beneficial for the solver backtrack fully and redo its
+trail, even if this takes more work. We will expand on why this might
+be case below.
+
+In this paper we present an alternative ``trail savings'' method where
+by we save the backtracked part of the solver's trail and attempt to
+use that information to make the solver's redescent more
+efficient. Trail saving preserves the traditional invariants of the
+SAT solver and its basic version is very simple to implement. It
+allows the search to retain complete control over the order of
+decisions, but helps make propagation faster. We develop some
+enhancements to make the idea more effective, and demonstrate
+experimentally that it performs as well as and sometimes better than
+chronological backtracking. We also show that with the enhancements we
+are able to improve the performance of state of the art solvers. 
 
 \section{Background}
-A propositional formula $\formula$ expressed in Conjunctive Normal
-Form (CNF), contains a set of variables $V$. A literal is a variable
-$v\in V$ or its negation $\lnot v$, and for a literal $l$ we let
-$\var(l)$ denote its underlying variable. A CNF consists of a
-conjunction of clauses, each of which is a disjunction of literals. We
-often view a clause as being a set of literals and employ set
-notation, e.g., $\ell\in C$ and $C'\subset C$.
-
-We assume the reader is familiar with the basic operations of CDCL
-\sat solvers. A good source for this background is
-\cite{DBLP:series/faia/SilvaLM09}.
+\label{sec:background}
+\sat solvers determine the satisfiability of a propositional formula
+$\formula$ expressed in Conjunctive Normal Form (CNF). $\formula$
+contains a set of variables $V$. A literal is a variable $v\in V$ or
+its negation $\lnot v$, and for a literal $l$ we let $\var(l)$ denote
+its underlying variable. A CNF consists of a conjunction of clauses,
+each of which is a disjunction of literals. We often view a clause as
+being a set of literals and employ set notation, e.g., $\ell\in C$ and
+$C'\subset C$. We will assume that the reader is familiar with the
+basic operations of CDCL \sat solvers. A good source for this
+background is \cite{DBLP:series/faia/SilvaLM09}.
 
 \paragraph{Trails.}
 CDCL \sat solvers maintain a trail which is the sequence of literals
 that have currently been assigned \true by the solver. During its
 operation a \sat solver will add newly assigned literals to the end of
-the trail, and on backtrack remove literals from the end of the trail
-(unassigning them as they are removed).
+the trail, and on backtrack remove literals from the end of the
+trail. For convenience, we will regard \emph{literals as having been
+  assigned \true if and only if they are on the trail}. So
+removing/adding a literal to the trail is equivalent to
+unassigning/assigning the literal $\true$.
 
-A \sat solver's trail satisfies a number of conditions that we will
-discuss below. However, in we will need some additional flexibility in
-our definitions, as we will be sometimes be working with trails that
-would never be constructed by a \sat solver. Hence, we define a
-\emph{trail} to be a sequence of literals each of which is either a
-\emph{decision} literal or an \emph{implied} literal, and each of
-which has a \emph{reason}. These two types of literals are
-distinguished by their \emph{reasons}. Decision literals $d$ have a
-null reason, $\reason{d} = \varnothing$. Implied literals $l$ have as
-a reason a clause of the formula $\formula$,
-$\reason{l} = C\in\formula$. ($\reason{l}$ can be a learnt clause that
-has been added to $\formula$).
+A \sat solver's trail satisfies a number of conditions. However, in
+this work we will need some additional flexibility in our definitions,
+as we will be sometimes be working with trails that would never be
+constructed by a \sat solver. Hence, we define a \emph{trail} to be a
+sequence of literals each of which is either a \emph{decision} literal
+or an \emph{implied} literal, and each of which has a
+\emph{reason}. These two types of literals are distinguished by their
+\emph{reasons}. Decision literals $d$ have a null reason,
+$\reason{d} = \varnothing$. Implied literals $l$ have as a reason a
+clause of the formula $\formula$, $\reason{l} =
+C\in\formula$. (The clause $\reason{l}$ can be a learnt clause that has been
+added to $\formula$).
 
 If literal $\ell$ is on the trail $\trail$ let
 $\trailIdxT{\trail}{\ell}$ denote its index on the trail, i.e,
-$\trail[\trailIdxT{\trail}{\ell}] = \ell$. For convenience, we also let
-$\trailIdxT{\trail}{\ell} = \trailIdxT{\trail}{\lnot \ell} =
-\trailIdxT{\trail}{\var(\ell)}$ even though neither $\lnot \ell$ nor
-$\var(\ell)$ are actually on $\trail$. If $x$ and $y$ are both on the
-trail and $\trailIdxT{\trail}{x} < \trailIdxT{\trail}{y}$ we say that
-\textit{$x$ appears before $y$ on the trail}. For convenience, when
-the trail being discussed in clear from context we simply write
-$\trailIdx{}$ instead of $\trailIdxT{\trail}{}$.
+$\trail[\trailIdxT{\trail}{\ell}] = \ell$. If $x$ and $y$ are both on
+the trail and $\trailIdxT{\trail}{x} < \trailIdxT{\trail}{y}$ we say
+that \textit{$x$ appears before $y$ on the trail}. For convenience,
+when the trail being discussed is clear from context we simply write
+$\iota$ instead of $\iota_{\trail}$.
 
 Each literal $\ell\in\trail$ has a decision level $\dlevel{\ell}$
 which is equal to the number of decision literals appearing before
@@ -236,39 +241,44 @@ have the same decision level forms a \emph{contiguous}
 subsequence\footnote{Our approach uses standard trails in which the
   decision levels are contiguous. Chronological backtracking
   \cite{DBLP:conf/lpar/JiangZ13,DBLP:conf/sat/NadelR18,DBLP:conf/sat/MohleB19}
-  generates trails with non-contigous decision levels} that starts
+  generates trails with non-contiguous decision levels} that starts
 with a decision literal $d_i$ and ends just before the next decision
 literal $d_{i+1}$. We will often need to refer to different decision
 level subsequences of $\trail$. Hence, we let $\trail[[i]]$ denote the
 subsequence of literals at decision level $i$; and let
 $\trail[[\range{i}{j}]]$ denote the subsequence of literals at
-decision levels $k$ for $i\leq k\leq j$. Now we define the
-following properties that a trail $\trail$ can have.
+decision levels $k$ for $i\leq k\leq j$. 
+\begin{defn}
+    A clause $C$ has \textbf{been made unit by $\trail$ implying $l$}
+    when
+    $l\in C \land \bigl(\forall x\in C. x\neq l \implies \lnot x \in
+    \trail\bigr)$. That is, all literals in $C$ except $l$ must have
+    been falsified by $\trail$
+\end{defn}
+
+Now we define the following properties that a trail $\trail$ can have.
 \begin{description}
 \item[non-contradictory:] A variable cannot appear in both polarities
     in the trail: $l\in \trail\implies \lnot l \not \in \trail$.
 \item[non-redundant:] A literal can only appear once on $\trail$.
 \item[reason-sound:] For each implied literal $l\in\trail$ we have
-    that it reason clause has \emph{been made unit by $\trail$
-      implying $l$}. This means that the reason clause contains $l$
-    and the negation all of its other literals are on $\trail$ before
-    $l$:
+    that its reason clause $\reason{l}=C$ has been made unit by
+    $\trail$ implying $l$, and for each $x\in C$ with $x\neq l$ we
+    that $\lnot x$ appears before $l$ on $\trail$:
     $\forall l\in\trail.\, \reason{l}\neq \varnothing \implies
     l\in\reason{l} \land \bigl(\forall x\in\reason{l}.\, x\neq l
     \implies \lnot x \in \trail \land \trailIdx{\lnot x} <
     \trailIdx{l}\bigr)$.
-\item[propagation-complete:] Unit propgation has been run to
+\item[propagation-complete:] Unit propagation has been run to
     completion at all decisions levels of $\trail$. This means that
     literals appear on $\trail$ at the first decision level they were
     unit implied. Formally, this can be captured by the condition:
     $\forall i \in \{\dlevel{l}\,|\,l\in \trail\}. \bigl(\exists
     C\in\formula. \mbox{$C$ is made unit by $\trail[[\range{0}{i}]]$
-      implying $l$}\bigr) \implies l\in \trail[[\range{0}{i}]]$. With
-    non-redundancy $l$ will appear only at the first decision level it
-    was implied, without non-redundancy, $l$ might appear more than
-    once. Note that this also implies that $\reason{l}$ must contain
-    at least one other literal $y\neq l$ with
-    $\dlevel{y} = \dlevel{l}$.
+      implying $l$}\bigr) \implies l\in \trail[[\range{0}{i}]]$. Note
+    that propagation completeness implies that
+    $\reason{l}\neq \varnothing$ must contain at least one other
+    literal $y\neq l$ with $\dlevel{y} = \dlevel{l}$.
 \item[conflict free:] No clause of $F$ is falsified by
     $\trail$. Clauses $C\in F$ falsified by $\trail$ are typically
     called \emph{conflicts}.
@@ -300,14 +310,14 @@ $\deepestLvl$). Hence, the new clause $\uipcls$ will contain one
 literal $\deepestLit$ at level $\deepestLvl$ and have all of its other
 literals a levels less than $\deepestLvl$. The solver then backtracks
 to $\btL$ the second deepest level in $\uipcls$. This involves
-changing $\trail$ to its prefix $\trail[[\range{0}{\btL}]]$
-(unassigning all literals removed from $\trail$). The new clause
-$\uipcls$ is made unit by $\trail[[\range{0}{\btL}]]$ implying
-$\deepestLit$, so the solver then adds $\deepestLit$ to the trail and
-executes another round of unit propagation at level $\btL$, after
-which it continues by once again growing the trail with new decisions
-and unit implied literals until a new conflict or a satisfying
-assignment is found.
+changing $\trail$ to its prefix $\trail[[\range{0}{\btL}]]$ (by our
+convention all literals removed from $\trail$ are now unassigned). The
+new clause $\uipcls$ is made unit by $\trail[[\range{0}{\btL}]]$
+implying $\deepestLit$, so the solver then adds $\deepestLit$ to the
+trail and executes another round of unit propagation at level $\btL$,
+after which it continues by once again growing the trail with new
+decisions and unit implied literals until a new conflict or a
+satisfying assignment is found.
 
 In standard backtracking, the difference between the backtrack level,
 $\btL$ and the current deepest level $\deepestLvl$ can be very
@@ -323,41 +333,42 @@ computing a new deeper backtrack level $M> 0$ for which it is known
 that on redescent the first $M+1$ levels of the trail will be
 unchanged (except perhaps for the ordering of the literals). This
 technique removes the redundant work of reproducing the first $M$
-trail levels. Unfortunately, with backtracking the trail will be
-changed at level $\btL$ ($\deepestLit$ will be newly inserted at this
-level). Thus there seems to be no choice but to backtrack to
-$\btL$. In this paper we will show that although we have to backtrack
-to $\btL$ we can make the subsequent redescent much more efficient.
+trail levels. When backtracking from a conflict, however, the trail
+will be changed at level $\btL$ ($\deepestLit$ will be newly inserted
+at this level). Hence this technique cannot reduce the length of the
+backtrack. In this paper we will show that although we have to
+backtrack to $\btL$ we can make the subsequent redescent much more
+efficient.
 
 \paragraph{Chronological Backtracking.}
-Chronological bactracking (\cbt) is a technique originally propsed by
+Chronological bactracking (\cbt) is a technique originally proposed by
 Jiang and Zhang \cite{DBLP:conf/lpar/JiangZ13} under the name
 \textit{partial backtracking}. Its aim is to reduce the redundant work
 that might be done by the \sat solver on its redescent from the
 backtrack level $\btL$. The original paper proposed a technique for
 backtracking to any level $j$ in the range
 $\btL \leq j \leq \deepestLvl{-}1$ (where $\deepestLvl$ is the level
-the conflict was discovered. Nadel and Ryvchin
+the conflict was discovered). Nadel and Ryvchin
 \cite{DBLP:conf/sat/NadelR18} proposed to always backtrack to
 $\deepestLvl{-}1$ while M{\"{o}}hle and Biere
 \cite{DBLP:conf/sat/MohleB19} returned to the original proposal of
-flexibly backtracking any level in the allowed range. Note that the
+flexibly backtracking to any level in the allowed range. Note that the
 new 1-UIP clause $\uipcls$ is made unit at every level in this
 range. So after backtracking to level $j$ the newly implied literal
-$\deepestLit$ is added to the trail with
+$\deepestLit$ can be added to the trail with
 $\reason{\deepestLit}=\uipcls$, and $\dlevel{\deepestLit}$ is set to
 $\btL$ (the second deepest level in $\uipcls$.
 
 This means that the decision levels on the trail are no longer
 contiguous, as $\deepestLit$ has a different level than the other
 literals at level $j$ (if $j\neq \btL$). This change has a number of
-consequences on the \sat solvers operation, all of which were
+consequences for the \sat solver's operation, all of which were
 described in the original paper \cite{DBLP:conf/lpar/JiangZ13}. In
 \cite{DBLP:conf/sat/NadelR18} some more practical implementation
 methods were developed to overcome this issues, and in
 \cite{DBLP:conf/sat/MohleB19} a formal framework for \cbt was
 developed under which the changes required to the \sat solver could be
-shown to be successful. We refer the reader to the cited papers for
+shown to be sound. We refer the reader to the cited papers for
 more details.
 
 \section{Potential Drawbacks of Chronological Backtracking}
@@ -374,19 +385,19 @@ obvious evidence for this statement is that in both
 \cite{DBLP:conf/sat/NadelR18} and \cite{DBLP:conf/sat/MohleB19} it was
 found that it was not optimal to always apply \cbt. In
 \cite{DBLP:conf/sat/NadelR18} \cbt was applied only when the length of
-the standard backtrack, $\btL-\deepestLvl$ was greater than a
-given threshold $T$. In their experiments they found that $T=100$ was
-the best value, i.e., \cbt is done only on longer backtracks. In
-practice, this meant that \cbt was \emph{hardly ever done}; in our
-measurements with their solver only about 3\% of the solver backtracks
-were \cbt backtracks. In \cite{DBLP:conf/sat/MohleB19} the value
-$T=100$ was also applied. However, they introduced an additional
-technique to add some applications of \cbt when the length of the
-backtrack is less than $T$. This allowed to utilize \cbt in \%15 of
-the backtracks. Nevertheless, the fact \cbt has to be used in a
-controlled fashion, indicates that can be benefits in the \sat solver
-employing standard backtracking; it cannot be the case that every
-redescent is only doing redundant work.
+the standard backtrack, $\btL-\deepestLvl$ was greater than a given
+threshold $T$. In their experiments they found that $T=100$ was the
+best value, i.e., \cbt is done only on longer backtracks. In practice,
+this meant that \cbt was \emph{hardly ever done}; in our measurements
+with their solver only about 3\% of the solver backtracks were \cbt
+backtracks. In \cite{DBLP:conf/sat/MohleB19} the value $T=100$ was
+also applied. However, they introduced an additional technique to add
+some applications of \cbt when the length of the backtrack is less
+than $T$. This allowed \cite{DBLP:conf/sat/MohleB19} to utilize \cbt
+in about \%15 of the backtracks. Nevertheless, the fact \cbt has to be used
+in a controlled fashion, indicates that there can be benefits in the \sat
+solver employing standard backtracking; it cannot be the case that
+every redescent is only doing redundant work.
 
 What is this non-redundant work? With standard backtracking the
 literal $\deepestLit$ is placed on the trail at the end of $\btL$ and
@@ -396,9 +407,9 @@ levels. This could include decision literals becoming forced which
 might compress some decision levels together. Second, different
 decisions might be made due to changes in the variable scores arising
 from the newly learnt clause. And third, literals might be unit
-implied with different reasons. These changes could be sometimes be
-major, and they could have a large impact on future
-clauses. Unfortunately, it seems difficult to predict when these
+implied with different reasons. These changes could have a major
+impact on the future learnt clauses, and thus on the solver's
+efficiency. Unfortunately, it seems difficult to predict when these
 impacts might be large.
 
 The second impact, changing variable scores, is partially addressed in
@@ -411,9 +422,9 @@ argument is also given in \cite{DBLP:journals/jsat/TakRH11} that the
 third impact, changing literal reasons, is not significant. However,
 the experiments in \cite{DBLP:journals/jsat/TakRH11} were run before
 good notions of clause quality were known
-\cite{DBLP:conf/ijcai/AudemardS09}. Our empirical results contradict
-this, indicating that the literal reasons can have a significant
-impact.
+\cite{DBLP:conf/ijcai/AudemardS09}. Our empirical results indicate
+that once clause quality is accounted for changing the literal reasons
+can have a significant impact.
 
 The first impact is worth discussing since it was mentioned in the
 original \cbt paper \cite{DBLP:conf/lpar/JiangZ13} but not in the
@@ -437,74 +448,79 @@ earlier on the trail.
     contain $\lnot x$, and thus have level $2$ added to their set of
     levels (potentially changing their LBD score). Only when backtrack
     past level $2$ occurs would $x$ be restored to its correct level
-    $0$, and it would require inprocessing simplications to remove $x$
+    $0$, and it would require inprocessing simplifications to remove $x$
     from the learnt clauses.
 \end{example}
 
 In sum, although these impacts of \cbt might or might not be harmful
-to the \sat solver, they exist. Hence, one unappealing aspect of \cbt
-is that introduces additional inter-dependencies between components of
-the solver. For example, the second impact means that heuristics for
-choosing decision variables might work differently in the presence of
-\cbt; and the first impact means that different ways of computing
-clause quality using decision levels in the clauses might also work
-differently in the presence of \cbt. So although there are bound to be
-cases where \cbt is superior, we would like to have a method that
-addresses the original motivation of reducing redundant work while not
-changing the operation of standard backtracking. We present our
-proposal for such a method next.
+to the \sat solver, they exist. Hence, perhaps the most unappealing
+aspect of \cbt is that introduces additional inter-dependencies
+between components of the solver. For example, the second impact means
+that heuristics for choosing decision variables might work differently
+in the presence of \cbt; and the first impact means that different
+ways of computing clause quality using the decision levels in the
+clauses might also work differently in the presence of \cbt. So
+although there are bound to be cases where \cbt is superior, we would
+like to have a method that addresses the original motivation of
+reducing redundant work while not changing the operation of standard
+backtracking. We present our proposal for such a method next.
 
 \section{Trail Saving}
-Our approach is to save the trail, $\trail$, on backtrack, and to use
-the saved trail $\trailsave$ when the solver redesends to improve the
-effiency of propagations without affecting the decisions the solver
+Our approach is to save the trail $\trail$ on backtrack, and to use
+the saved trail $\trailsave$ when the solver redescends to improve the
+efficiency of propagations without affecting the decisions the solver
 wants to make. The saved trail $\trailsave$ also provides a secondary
 ``lookahead mechanism'' that the \sat solver can exploit as it
 redescends.
 
 Say that the solver is at $\deepestLvl$ where it has encountered a
-conflict. From the 1-UIP clause it learns,, $\uipcls$, it now has to
-backtrack to $\btL$. This is accomplished by calling the following
-subroutine with argument $\btL$.
-\begin{algorithmic}[1]
-    \Procedure{backtrack}{$\btL$}
-    \State $\forall \ell\in\trail[[\range{\btL{+}1}{\deepestLvl}]]$ unassign($\ell$)
-    \State $\forall \ell\in\trail[[\range{\btL{+}1}{\deepestLvl{-}1}]]$ $\reasonsave{\ell} = \reason{\ell}$
-    \State $\trailsave = \trail[[\range{\btL{+}1}{\deepestLvl{-}1}]]$
-    \State $\trail = \trail[[\range{0}{\btL}]]$
-    \EndProcedure
-\end{algorithmic}
+conflict. From the 1-UIP clause it learns, $\uipcls$, it now has to
+backtrack to $\btL$. This is accomplished by calling
+\textsc{backtrack($\btL$)}, shown in Figure~\ref{fig:trailUse}, which
+saves the backtracked portion of the trail.
 
-Note that we do not save the deepest level of $\trail$. The full
+Note that \bt does not save the deepest level of $\trail$. The full
 $\trail$ contains a conflict (at its deepest level). Hence the solver
 will never reproduce all the same levels, and it would be useless to
 save all of them. Note also that in addition to saving the literals in
 $\trailsave$ we also save the clause reason of the unit implied
-literals in a $\mathit{reason}_{save}$ vector. Finally, we see that
-the first literal on $\trailsave$ must be a decision literal: it is
-the first literal of $\trail$ at decision level $\btL+1$.
+literals in a separate $\mathit{reason_{save}}$ vector. Finally, we
+see that after backtrack the first literal on $\trailsave$ is a
+decision literal: it is the first literal of $\trail$ at decision
+level $\btL+1$. Literals will be removed from $\trailsave$ during its
+use, but always in units of complete decision levels. So
+$\trailsave[0]$ will always be a (previous) decision literal.
 
-\paragraph{Using $\trailsave$ for more efficient unit propagations.}
 After backtrack the solver will add $\deepestLit$ to the end of the
-updated $\trail$ with $\reason(\deepestLit)=\uipcls$ and then invoke
-unit propagation which will add more literals to
-$\trail$. $\trailsave$ is exploited during propagation by calling the
-following version of propagation with the argument
-$\trailIdx(\deepestLit)$ (i.e., the trail index of the newly added
-implicant.
+updated $\trail$ with $\reason{\deepestLit}$ $\mbox{}=\uipcls$ and
+then invoke unit propagation. $\trailsave$ is exploited during
+propagation by the version of \textsc{propagate} shown in
+Figure~\ref{fig:trailUse}, which will initially be invoked with the
+argument $\trailIdx{\deepestLit}$ (i.e., the trail index of the newly
+added implicant). The saved trail be continually consulted during the
+solver's descent whenever unit propagation is performed. When
+backtrack occurs $\trailsave$ will be overwritten to store the new
+backtracked portion of $\trail$.
 
-\begin{algorithm}[t]
+\begin{figure}[!t]
 \begin{algorithmic}[1]
-    \Procedure{unitPropagate}{idx}
+    \Procedure{backtrack}{$\btL$}
+    \State $\forall \ell\in\trail[[\range{\btL{+}1}{\deepestLvl{-}1}]]$ $\reasonsave{\ell} = \reason{\ell}$
+    \State $\trailsave = \trail[[\range{\btL{+}1}{\deepestLvl{-}1}]]$\label{ln:btsave}
+    \State $\trail = \trail[[\range{0}{\btL}]]$
+    \EndProcedure
+\end{algorithmic}
+
+\begin{algorithmic}[1]
+    \Procedure{propagate}{idx}
     \While{idx $\mbox{} < \trail.\mathrm{size}$()}
-        \State $c\gets\mbox{}$ \textsc{useSavedTrail}()
+        \State $c\gets\mbox{}$ \ust()
         \If{($c\neq \varnothing$)} \textbf{return} $c$ \Comment{Found conflict from $\trailsave$}
         \EndIf
         \State $\ell \gets \trail[idx]$
         \For{each clause $c\in$ watchlist($\lnot \ell$)}
             \If{($c$ is unit implying $x$)}
-                 \State $\trail.\mathrm{addToEnd}(x)$
-                 \State $\reason{x} \gets c$            
+                 \State $\trail.\mathrm{addToEnd}(x)$; \; $\reason{x} \gets c$            
             \ElsIf{($c$ is falsified)}\:
                  \textbf{return} $c$ \Comment{Found conflict from unit prop.}
             \Else\:
@@ -516,321 +532,472 @@ implicant.
     \EndProcedure
     \Statex
     \Procedure{useSavedTrail}{\mbox{}}
-    \State $idx\gets 0$; $\litsave\gets \trailsave[idx]$
-    \State \qquad Stop at decision literal on $\trailsave$ not yet assigned \true in $\trail$
-    \While{($\reasonsave{\litsave} \neq \varnothing \lor \litsave \in \trail$)}
-          \If{($\lnot \litsave\in\trail$)}\: \textbf{return} $\reasonsave{\litsave}$ 
-                \Comment{Conflict: $\litsave$ already \false}
-          \ElsIf{($\litsave \not\in\trail$)} \Comment{$\litsave$ unassigned}
-              \State $\trail.\mathrm{addToEnd(\litsave)}$
-              \State $\reason{\litsave}\gets \reasonsave{\litsave}$
-          \EndIf
-          \State $idx$++
-    \EndWhile
+    \State $idx\gets 0$; $c\gets \varnothing$
+    \For{( ; $idx < \trailsave.\mathrm{size}()$; $idx$++)}
+        \State $\litsave\gets \trailsave[idx]$
+        \If{($\reasonsave{\litsave} = \varnothing$)} \Comment{Decision on $\trailsave$}
+            \If{($\litsave\in\trail$)}\: \textbf{continue} \Comment{\true in solver, we can use its implied lits}
+            \Else{}\: \textbf{break} \Comment{Only solver can set decisions, so we stop here}\label{ln:decnottrue}
+            \EndIf
+        \Else{} \Comment{Implied Literal on $\trailsave$}
+             \If{($\litsave \in \trail$)}\: \textbf{continue}  \Comment{ignore redundant lits}\label{ln:skip}
+             \ElsIf{($\lnot \litsave \in \trail$)} 
+                \Comment{contradiction, return conflict and reset $idx$}\label{ln:conflict}
+                 \State $c\gets\reasonsave{\litsave}$; $idx\gets 0$; \textbf{break}
+             \Else{} \Comment{unset in solver, add to solver's trail}
+                  \State $\trail.\mathrm{addToEnd(\litsave)}$\label{ln:addToTrail}
+                  \State $\reason{\litsave}\gets \reasonsave{\litsave}$\label{ln:addToTrailNext}
+              \EndIf
+        \EndIf
+    \EndFor
+    \For{($i \gets 0$; $i < idx$; $i$++)} \Comment{$\trailsave$ is unchanged when $idx=0$}
+        \State $\trailsave.\mathrm{removeFront()}$\label{ln:popfront}
+    \EndFor
+    \State \textbf{return} $c$
     \EndProcedure
 \end{algorithmic}
 
-\caption{Using $\trailsave$ to enhance unit propagation and conflict
-  detection}
-\end{algorithm}
+\caption{Using $\trailsave$ in unit propagation and conflict
+  detection} \label{fig:trailUse}
+\end{figure}
 
-\note{
-  \begin{enumerate}
-  \item Use simple backtrack and save to motivate and state the
-      invariant. 
-  \item Introduce notation for concatenating two trails.
-  \item Name and state the invariant in text (e.g. a
-      defn)---concenating the cached trail with the current trail
-      yields a trail that is always reason valid, but not necessarily
-      non-contradictory, non-conflicting, nor propagation complete).
-  \item Proof (simple) that the invariant holds for caching on
-      backtrack.
-  \item On backtrack at least the asserted literal and any new
-      propagants at the backtrack level are added.
-  \item Prove that the invariant holds (???do we need an invariant or
-      simply a property of the augmented trail) for trails with extras
-      inbeween.
-      $T_{\mathit{old}} + T_{\mathit{newlyAdded}} +
-      T_{\mathit{saved}}$ also satisfies the invariant
-  \item re-acheving propagation completeness for the augmented trail
-      (a) only add one level of the cached trail at a time, and do
-      unit prop after (b) only add non-contradicted decision from the
-      old trail. Also note that conflicts are valid and can be learnt
-      from even if the augmented trail is not propagation complete. 
-  \item Finally figure out a way to formalize the extra technique of
-      storing on top after repeated backtracking. 
-  \item Explain how freedom for the search is maintained by makeing
-      decisions then consulting the trail.
-  \item 
-  \end{enumerate}
-}
+$\trailsave$ is consulted in the procedure $\ust$
+(Figure~\ref{fig:trailUse}). This procedure tries to add saved implied
+literals and their reasons to the solver's trail, when these
+implications are valid. We will show below that those implications
+that are added are in fact valid. We do not interfere with the
+solver's variable decisions. Instead we opportunistically test to see
+if literals implied on $\trailsave$ are valid implications for the
+solver given the solver's current decisions.
 
-It can be observed that a SAT solver often repeats the same
-propagations over and over again during execution. Although no two
-descents down the trail will ever be identical because of clause
-learning, the solver will often propagate many of the same literals
-with the same reasons in a similar order to what it had done
-previously, especially since the order of the decisions usually
-remains similar. We plan to cache the part of the trail that we are
-backtracking over and use it to restore some of those literals without
-propagating them from scratch.
+$\trailsave[0]$ is always a (previous) decision literal $d$ with
+$\reasonsave{d}=\varnothing$. Note that, since new literals (e.g.,
+$\deepestLit$) have been added to $\trail$, $d$ might now be an
+implied literal on $\trail$ (i.e., $\reason{d}\neq\varnothing$) even
+though before the backtrack it was previously a decision (i.e.,
+$\reasonsave{d}=\varnothing$). If $d$ has not been assigned $\true$ by
+the solver (i.e., $\lnot d \in \trail$), we cannot add any implied
+literals below it on $\trailsave$ to $\trail$ as these implied
+literals depend on $d$ being assigned $\true$. In this case we stop
+looking for more literals to add to $\trail$
+(line~\ref{ln:decnottrue}).
 
-\subsection{Storing the trail cache}
+On the other hand if $d$ has been made \true by the solver we can
+continue to add all of the implied literals below it (up to but not
+including the next decision literal on $\trailsave$) to $\trail$
+(line~\ref{ln:addToTrail}), reusing their saved reasons. Any literals
+that have already been made true by the solver can be skipped
+(line~\ref{ln:skip}). Finally, if we encounter a literal that has
+already been falsified by the solver, then its saved reason clause
+must be falsified by the solver and we can return it as a conflict
+(line~\ref{ln:conflict}). If a conflict is encountered we leave
+$\trailsave$ unchanged by resetting $idx$ to zero. Otherwise, $idx$
+will be the number of literals at the front of $\trailsave$ that have
+been moved to $\trail$ (or skipped over since they are already on
+$\trail$). We then remove the first $idx$ literals from $\trailsave$
+(line~\ref{ln:popfront}), and return the conflict (equal to
+$\varnothing$ if no conflict was found).
 
-The first step that is needed to use "trail saving" is to store all of
-the literals which are being unassigned during a backtrack, along with
-their respective reason clauses, in a "trail cache". Decisions should
-be marked with a null reason. The literals should appear in the same
-order on the trail cache as they had appeared on the trail. We will
-keep a pointer, which we will refer to as the "top" of the trail
-cache, and initially set it to be the literal which had appeared the
-earliest on the trail. Note that initially the top of the trail cache
-always has a null reason (i.e., it was the start of a new decision
-level on the previous trail). As the literals from the trail cache get
-restored (i.e., assigned), the top of the trail cache will be updated
-to the next literal not yet restored.
+\begin{figure}[!t]
+\begin{tabular}{l
+  >{\raggedleft}p{4.75ex}>{\raggedleft}p{4.75ex}>{\raggedleft}p{4.75ex}>{\raggedleft}p{4.75ex}
+  >{\raggedleft}p{4.75ex}>{\raggedleft}p{4.75ex}>{\raggedleft}p{4.75ex}>{\raggedleft}p{4.75ex}
+  >{\raggedleft}p{4.75ex}>{\raggedleft}p{4.75ex}>{\raggedleft}p{4.75ex}>{\raggedleft}p{4.75ex}
+  >{\raggedleft}p{4.75ex}>{\raggedleft}p{4.75ex}}
+      $\trail$ 
+      & $l_1^{1*}$ & $l_2^1$ & $l_3^{2*}$ & $l_4^2$
+      & $l_5^{3*}$ & $l_6^3$ & $l_7^{4*}$ & $l_8^4$
+      & $l_9^{5*}$ & $l_{10}^5$ & $l_{11}^5$ & $l_{12}^{6*}$
+      & $l_{13}^6$ & $l_{14}^6$  \tabularnewline
+     $\trailsave$
+      &  &  &  & 
+      &  &  &  &  
+      &  &  &  &  
+      &  & \tabularnewline
+      \rowcolor{linen}
+      \multicolumn{15}{l}{1-UIP ($\lnot l_1$, $\lnot l_3$, $\lnot l_{12}$) and backtrack 2 ($\btL$)}\tabularnewline
+      $\trail$ 
+      & $l_1^{1*}$ & $l_2^1$ & $l_3^{2*}$ & $l_4^2$
+      &         &       &         &      
+      &         &       &         &           
+      &         &         \tabularnewline
+      $\trailsave$
+      &         &       &         &                     
+      & $l_5^*$ & $l_6$ & $l_7^*$ & $l_8$
+      & $l_9^*$ & $l_{10}$ & $l_{11}$ & 
+      &         & 
+      \tabularnewline
+      \rowcolor{linen}
+      \multicolumn{15}{l}{Unit Prop $\lnot l_{12}$ ($\deepestLit$), $\trailsave$ not yet helpful}\tabularnewline
+      $\trail$ 
+      & $l_1^{1*}$ & $l_2^1$ & $l_3^{2*}$ & $l_4^2$
+      & $\smash{\lnot} l_{12}^2$  & $l_7^2$  & $l_9^2$    &      
+      &         &       &         &           
+      &         &         \tabularnewline
+      $\trailsave$
+      &         &       &         &                     
+      & $l_5^*$ & $l_6$ & $l_7^*$ & $l_8$
+      & $l_9^*$ & $l_{10}$ & $l_{11}$ &
+      &         & 
+      \tabularnewline
+      \rowcolor{linen}
+      \multicolumn{15}{l}{Make decision}\tabularnewline
+      $\trail$ 
+      & $l_1^{1*}$ & $l_2^1$ & $l_3^{2*}$ & $l_4^2$
+      & $\smash{\lnot} l_{12}^2$  & $l_7^2$  & $l_9^2$ 
+      & $l_5^{3*}$  &       &         &           
+      &         &         \tabularnewline
+      $\trailsave$
+      &         &       &         &                     
+      & $l_5^*$ & $l_6$ & $l_7^*$ & $l_8$
+      & $l_9^*$ & $l_{10}$ & $l_{11}$ & 
+      &         & 
+      \tabularnewline
+      \rowcolor{linen}
+      \multicolumn{15}{l}{Now $\trailsave$ can be used to augment trail}\tabularnewline
+      $\trail$ 
+      & $l_1^{1*}$ & $l_2^1$ & $l_3^{2*}$ & $l_4^2$
+      & $\lnot l_{12}^2$ \hfill & $l_7^2$  & $l_9^2$      
+      & $l_5^{3*}$  & $l_6^{3}$  & $l_8^3$  & $l_{10}^3$          
+      & $l_{11}^3$  &         \tabularnewline
+      $\trailsave$
+      &         &       &         &      
+      &         &       &                              
+      &         &       &         & 
+      &         &       & 
+    \end{tabular}
+    \caption{Use of $\trailsave$ from
+      Example~\ref{ex:trailsave}\label{fig:trailsave}. The literals
+      decision level is indicated in its superscript, and a $\mbox{}^*$
+      superscript indicates that the literal is a decision.}
+\end{figure}
 
-\begin{figure}\center\includegraphics[scale=0.7]{figures/trail_diagram.pdf}\caption{Storing into a trail cache after backtracking.}\end{figure}
+\begin{example}
+    \label{ex:trailsave} Figure~\ref{fig:trailsave} provides an
+    example of how $\trailsave$ is used. Initially the literals $l_1$
+    to $l_{14}$ are on the solvers $\trail$, and $\trailsave$ is
+    empty. This is shown in the first two lines of the figure. In the
+    figure the superscript on the literals indicates their decision
+    level, and a superscripted $*$ indicates that the literal is a
+    decision. Hence $l_1^{1*}$ indicates that $\dlevel{l_1}=1$ and
+    that $l_1$ is a decision.
 
-\subsection{Restoring the trail cache}
-We will base trail saving on the following critical invariant. If the
-top of the trail cache becomes true at any point, even after an
-arbitrary number of decisions and propagations have been made since
-the last backtrack, the set of literals on the trail cache after the
-top and up to but excluding the next literal with a null reason is
-still implied by the current trail. The top of the trail cache can
-become true either by decision or unit propagation, and this invariant
-still holds.\newline
+    Then a conflict is found at level $6$ and the 1-UIP clause
+    $(\lnot l_1, \lnot l_3, \lnot l_{12})$ is learnt. Thus the solver
+    will backtrack to level $2$, where it will add $\lnot l_{12}$ as a
+    unit implicant. The next two lines shows $\trail$ and $\trailsave$
+    right after the backtrack to level $2$: the backtracked levels
+    have been copied into $\trailsave$ omitting the conflict level $6$. 
 
-\textit{Proof 1} We will refer to the set of literals that become
-unassigned during the backtrack after conflict analysis has taken
-place as $L_u$, and will refer to the rest of the trail that remains
-assigned as $L_0$. We will refer to all of the literals that get
-placed on the trail after $L_0$ during subsequent propagations and
-decisions as $L_1$. We will refer to the current trail $L_0 \cup L_1$
-as $L_T$. The trail cache will contain the literals in $L_u$ ordered
-by their appearance on the old trail. Let $L_c[i]$ denote the set of
-the first i literals on the trail cache. Let $L_c[top]$ be the top of
-the old trail, which gets updated as parts of the trail cache get
-restored.
+    The new unit $\lnot l_{12}$ is now added to $\trail$ and unit
+    propagation performed adding $l_7$ and $l_9$ to level 2. Since the
+    first literal on $\trailsave$, $l_5$, has
+    $\reasonsave{l_5}=\varnothing$ ($l_5$ was a decision on $\trail$
+    at the time backtrack occurred) and is not yet $\true$,
+    $\trailsave$ is not helpful at this stage. The status of $\trail$
+    and $\trailsave$ at this point is shown in the figure.
+    
+    After unit propagation is finished the solver makes a new
+    decision, which happens to be (but is not forced to be) $l_5$. Now
+    $\trailsave$ can be used: $l_5$ is \true so it is removed, $l_6$
+    is unassigned so it is added to $\trail$, $l_7$ is \true and so
+    removed, $l_8$ is unassigned so it is added to $\trail$, $l_9$ is
+    \true and removed, and finally $l_{10}$ and $l_{11}$ are
+    unassigned and so are added to $\trail$. In this example,
+    $\trailsave$ is emptied, and cannot contribute more to $\trail$.
 
-The $i$th literal on the trail cache is implied by
-$L_0 \cup L_c[i-1]$, as long as the $i$th literal has a non-null
-reason, since $L_0 \cup L_c[i-1]$ had forced $L_c[i]$ on the previous
-trail. $L_0 \subseteq L_T$, since $L_T = L_0 \cup L_1$. Therefore, the
-$i$th literal on the trail cache is also implied by
-$L_T \cup L_c[i-1]$.
+    All of these units are added to $\trail$ before the solver starts
+    to unit propagate $l_5$. Since, new literals have been added to
+    $\trail$ before $l_5$ the solver must propagate $l_5$ and all of
+    the literals that follow it before making its next
+    decision. 
+\end{example}
 
-Assume $L_c[top]$ is true, which means that
-$L_c[0], ..., L_C[top] \subseteq L_1 \subseteq L_T$. Then, from above,
-every literal on the trail cache up to but excluding the next literal
-with a nun-null reason would be implied. $\blacksquare$\newline
+As noted in the previous example unit propagation has to be rerun on
+all saved literals added to $\trail$ from $\trailsave$. Thus our
+technique, unlike \cbt, does not completely remove the overhead of
+reproducing the trail on the solver's redescent. Nevertheless, trail
+savings improves the efficiency of this redescent in three different
+ways. First, by adding more forced literals to the trail before
+continuing propagating the next literal, propagation can potentially
+gain a quadratic speedup
+\cite{DBLP:conf/sat/HickeyB19,DBLP:journals/jair/Gent13}. Second,
+propagation does not need to examine the reason clause of the added
+literals. If these literals were not added by \ust, propagation would
+have to traverse each of these reason clauses to determine that they
+are have in fact become unit. Third, when a conflict is returned by
+\ust all further propagations can be halted. The added literals and
+their reasons will be sufficient to perform clause learning from the
+conflict returned by \ust. Since trail saving can sometimes save
+hundreds or thousands of literals at a time these savings can in sum
+be significant.
 
-Once the backtrack has been completed and the solver resumes with
-decisions and propagations, we will attempt to restore parts of the
-trail cache automatically during propagation to make it faster by
-using the invariant stated above. Each time the propagation routine is
-about to propagate a new literal, we first check the top of the trail
-cache to determine its truth value. If that literal's truth value is
-already true, we assign all of the literals that come after it on the
-trail cache to be true up until (and excluding) the next literal with
-a null reason.
+% \note{
+%   \begin{enumerate}
+%   \item Use simple backtrack and save to motivate and state the
+%       invariant. 
+%   \item Introduce notation for concatenating two trails.
+%   \item Name and state the invariant in text (e.g. a
+%       defn)---concenating the cached trail with the current trail
+%       yields a trail that is always reason valid, but not necessarily
+%       non-contradictory, non-conflicting, nor propagation complete).
+%   \item Proof (simple) that the invariant holds for caching on
+%       backtrack.
+%   \item On backtrack at least the asserted literal and any new
+%       propagants at the backtrack level are added.
+%   \item Prove that the invariant holds (???do we need an invariant or
+%       simply a property of the augmented trail) for trails with extras
+%       inbeween.
+%       $T_{\mathit{old}} + T_{\mathit{newlyAdded}} +
+%       T_{\mathit{saved}}$ also satisfies the invariant
+%   \item re-acheving propagation completeness for the augmented trail
+%       (a) only add one level of the cached trail at a time, and do
+%       unit prop after (b) only add non-contradicted decision from the
+%       old trail. Also note that conflicts are valid and can be learnt
+%       from even if the augmented trail is not propagation complete. 
+%   \item Finally figure out a way to formalize the extra technique of
+%       storing on top after repeated backtracking. 
+%   \item Explain how freedom for the search is maintained by makeing
+%       decisions then consulting the trail.
+%   \item 
+%   \end{enumerate}
+% }
 
-A potentially quadratic speedup can be realized during the propagation
-of these literals since they are being propagated as a set, rather
-than one at a time, as argued in \cite{DBLP:conf/sat/HickeyB19,DBLP:journals/jair/Gent13}. Restoring literals from the trail cache
-automatically not only leads to quicker propagation of future
-literals, but also means that the propagation routine has less work to
-do as it searches for new watchers in clauses on watchlists. All of
-the reasons attached to these literals that are automatically restored
-will now be satisfied, thus the propagation routine can skip over them
-rather than having to access each of them potentially multiple times
-to find they are unit.
+\subsection{Correctness}
+Now we will prove that our use of $\trailsave$ preserves the \sat
+solver's soundness. In particular, $\trailsave$ is only used in the
+procedure \ust, in which it either adds new literals
+to the solver's trail, or returns conflict clauses to the solver.
+Hence, we only need to show that these new literals are in fact unit
+implied and the conflicts are in fact falsified by the solver's trail.
+\
+Since both $\trail$ and $\trailsave$ are sequences of literals (with
+associated reasons) we can consider their concatenation denoted as
+$\trail + \trailsave$.
+\begin{theorem}
+    \label{thm:sound}
+    If $\trail + \trailsave$ is \textbf{reason sound}
+    (Section~\ref{sec:background}) then the following holds.  If the
+    first $i$ literals on $\trailsave$ are all in $\trail$
+    ($\forall j. 0\leq j< i. \trailsave[i]\in \trail$) and
+    $\trailsave[i]=l$ is an implied literal with $\reasonsave{l} = C$,
+    then $C$ has been made unit by $\trail$ implying $l$.
+\end{theorem}
+\noindent\emph{Proof:}
+Since $\trail + \trailsave$ is reason sound, every literal in $C$
+other than $l$ appears negated before $l$ in the sequence
+$\trail + \trailsave$. Thus for $x\in C$ we have $\lnot x \in \trail$
+or $\lnot x \in \trailsave[0]\ldots\trailsave[i-1]$. But in the later
+case we also $\lnot x \in \trail$. 
+\whitebox
 
-If at any time the top of the trail cache is a literal $l$ with a
-non-null reason whose truth value is already false, we determine a
-conflict has occurred with the conflict clause being $l$'s reason from
-the trail cache. This is because we know from Proof 1 that $l$ is
-implied to be true at this point by the reason on the trail cache
-(i.e., the reason on the trail cache is unit), but $\lnot l$ was also
-previously assigned to be true, therefore we have a conflict. This
-leads to a third potential speed up, since a conflict has been
-detected and none of the pending propagations have to be
-completed. Since trail saving can sometimes save hundreds or thousands
-of literals at a time, the number of propagations required to detect a
-conflict could be very costly.
+This theorem shows that \ust's processing is
+sound. In this procedure, an implied literal from $\trailsave$ is added
+to $\trail$ (line~\ref{ln:addToTrail}) only when all prior literals on
+$\trailsave$ are already on $\trail$ (i.e., previously on $\trail$ or
+already added to $\trail$). Thus each new addition is sound given the
+inductive soundness of the previous additions, with the base case
+covered by Theorem~\ref{thm:sound}. If $l$ is to be added, the theorem
+shows that every other literal in $\reasonsave{l}$ has been falsified
+by $\trail$. Hence if $l$ is also falsified by $\trail$ then
+$\reasonsave{l}$ is a clause that is falsified by $\trail$, thus it is
+a sound conflict for the solver.
 
-% \begin{algorithm}
-%   	\TitleOfAlgo{propagate()}
-% 	\begin{algorithmic}[1]
-%         \While{queue not empty}
-%         \Statex
-%         \State restoreTrailCache()
-%         \Statex
-%         \State $l := $ next literal on queue
-%         \For{each clause $c \in $ watchlist($\neg l$)}
-% 		\For{each literal $x \in c$}
-%         \If{$val($x$) \neq$ false and x is not already a watcher of c}
-%         \State let $x$ be a watcher of $c$ and add $c$ to watchlist($\neg x$)
-%         \State break
-%         \EndIf
-% 		\EndFor
-% 		\If{no new watcher was found}
-%         \If{other watcher $x_2$ of $c = $ false}
-%         \State return c as conflict
-%         \ElsIf{other watcher $x_2$ of $c$ is unassigned}
-%         \State enqueue $x_2$
-%         \EndIf
-% 		\EndIf
-%         \EndFor
-%         \EndWhile
-% 	\end{algorithmic}
-% \end{algorithm}
+Now we only have to show that $\trail+\trailsave$ is always
+\textbf{reason sound} during the operation of the solver.
+\begin{prop}
+    \label{prop:sound}
+    If $\trail+\trailsave$ is reason sound then $\trail'+\trailsave'$
+    is reason sound in all of the following cases.
+    \begin{enumerate}
+    \item $\trailsave[0]\in \trail$, $\trail'=\trail$, and
+        $\trailsave' = \trailsave.\mathrm{removeFront()}$.
+    \item $\trail' = \trail+\trailsave[0]$ and
+        $\trailsave' = \trailsave.\mathrm{removeFront()}$.
+    \item $\trail' = \trail + \trail_{\mathit{new}}$ and
+        $\trailsave' = \trailsave'$ and $\trail'$ is reason sound.
+    \end{enumerate}
+    4. We also have that $\trail$ is reason sound if $\trail$ was
+    generated by the solver.
+\end{prop}
+\noindent \emph{Proof:} (1) $\trailsave[0]$ already appears earlier in
+the $\trail$ so it can be removed without affecting the soundness of
+any reason following it. (2) is obvious as the sequence is
+unchanged. (3) the reasons in $\trail+\trail_{\mathit{new}}$ are sound
+by assumption. Those in $\trailsave$ remain sound as they depend only
+on the literals in $\trail$ and prior literals on $\trailsave$, both
+of which are unchanged. (4) is obvious from the operation of unit
+propagation in the solver.  \whitebox
 
-% \begin{algorithm}
-%   	\TitleOfAlgo{restoreTrailCache()}
-% 	\begin{algorithmic}[1]
-%         \If{trail saving turned on}
-% 		\State{let tc $=$ top of trail cache}
-% 		\If{val(top of trail cache) $=$ true}
-%         \While{trail cache not empty}
-%         \State{move top of trail cache (tc) to next literal}
-%         \If{reason(tc) is null}
-%         \State{break}
-%         \ElsIf{val(tc) $=$ false}
-%         \State{return conflict with reason(tc)}
-%         \ElsIf{val(tc) $=$ unassigned}
-%         \State{enqueue tc with reason reason(tc)}
-%         \EndIf
-%         \EndWhile
-% 		\EndIf
-%         \EndIf
-% 	\end{algorithmic}
-% \end{algorithm}
+\begin{theorem}
+    \label{thm:rsound}
+    $\trail+\trailsave$ is always reason sound during the operation of
+    the solver.
+\end{theorem}
+\noindent \emph{Proof:} $\trailsave$ starts off being empty, so
+$\trail+\trailsave = \trail$ is reason sound as it was generated by
+the solver (4). In procedure \bt $\trail+\trailsave$ is
+set to a trail that was previously generated by solver (4). The solver
+can add to $\trail$ by decisions and propagations with out using
+$\trailsave$. In this case $\trail' = \trail+\trail_{\mathit{new}}$,
+and $\trail'$ is reason sound by (4), thus the new
+$\trail'+\trailsave$ is reason sound by (3). Finally, in procedure
+\ust either (a) literals at the front of
+$\trailsave$ are discarded since they already appear on $\trail$, or
+(b) literals are moved from $\trailsave$ to $\trail$. Under both of
+these changes $\trail+\trailsave$ remains reason sound by (1) and (2).
+\whitebox
 
 \subsection{Enhancements}
+We developed three enhancements of the base trail saving method
+described above. In this section we present these enhancements.
 
-In the standard version of trail saving outlined above, the trail
-cache needs to be deleted after each backtrack in order to make room
-for the new backtracked literals to be cached. The first enhancement
-to trail saving is to keep the trail cache intact instead of clearing
-it before each backtrack, and to add the literals that will be
-backtracked over to the beginning of the already existing trail
-cache. In order to preserve soundness, we must add the literals from
-the current backtrack to the beginning of the trail cache, such that
-the trail cache has as its prefix the literals which are being
-backtracked over, and as its suffix the previous trail cache. \newline
+\paragraph{Saving the trail over multiple backtracks.}
+It can often be the case that when the solver finds a conflict and
+backtracks to $\btL$ it might immediately find a another conflict at
+$\btL$ causing a further backtrack. In the procedure \bt every
+backtrack causes $\trailsave$ to be overwritten. Hence, in these cases
+most of the trail will not be saved---only the portion from the last
+backtrack. Our first extension addresses this potential issue and also
+provides more general trail savings in other contexts as well.
 
-\textit{Proof 2} We will use all of the same set names as Proof 1 and
-also refer to the set of literals on our previous trail cache as
-$L_{pc}$. We concatenate the literals in $L_{pc}$ to the end of $L_c$
-to get $L_{sc}$. We know that $L_{pc}$ is a valid trail cache for
-$L_0 \cup L_u$. If we reach the end of $L_c$ without any conflicts, we
-know that $L_u \subseteq L_T$. Since $L_0 \subseteq L_T$, then
-$L_u \cup L_0 \subseteq L_T$ and therefore $L_{pc}$ is a valid trail
-cache for $L_T$. $\blacksquare$\newline
+This extension is simply to add the latest backtrack to the front of
+$\trailsave$ leaving all of the previous contents of $\trailsave$
+intact. Specifically, we replace line~\ref{ln:btsave} of \bt by the new line:\\
+\hspace*{3em}3. \qquad $\trailsave = \trail[[\range{\btL{+}1}{\deepestLvl{-}1}]] + \trailsave$\\
+It is not difficult to show that this change preserves soundness. Only
+Theorem~\ref{thm:rsound} is potentially affected. However, we know
+that $\trailsave$ is unchanged at the level at which a conflict
+occurs: either the conflict is detected without consulting
+$\trailsave$ or if the conflict comes from $\trailsave$ then \ust
+leaves $\trailsave$ unchanged (line~\ref{ln:conflict}). Hence, at the
+level before the conflict occurred we have inductively that
+$\trail[[\range{0}{\deepestLvl{-}1}]]+\trailsave$ was reason sound,
+and hence so is $\trail'+\trailsave'$ with
+$\trail' = \trail[[\range{0}{\btL}]]$ and
+$\trailsave' = \trail[[\range{\btL{+}1}{\deepestLvl{-}1}]] +
+\trailsave$.
 
-In order for the previous trail cache to be of any use, one must
-actually never store the last level of the current trail to the trail
-cache at all, since a learnt clause prevents the last level from being
-duplicated in the future. If any part of the previous trail cache was
-used to construct this last level, it must also be discarded from the
-previous trail cache before the previous trail cache is concatenated
-to the end.
+When adding to the front of $\trailsave$ in this manner $\trailsave$
+can grow indefinitely. So we prune $\trailsave$ when it gets too large
+by (a) removing $\trailsave[i]$ if $\trailsave[i] = \trailsave[j]$ for
+some $j<i$ ($\trailsave[i]$ is redundant), and (b) removing the suffix
+of $\trailsave$ starting at $\trailsave[i]$ when
+$\trailsave[j] = \lnot \trailsave[i]$ for some $j<i$ ($\trailsave[i]$
+will never be useful as its negation, $\trailsave[j]$, would have to be
+added to $\trail$ first). In this way $\trailsave$ need never become
+larger than the number of variables in $\formula$.
 
-When concatenating trail caches together as above, it is important to
-note that the running trail cache can grow indefinitely. The trail
-cache can be trimmed periodically in the following way. Traverse down
-the trail cache and whenever a literal appears more than once, delete
-its entry in the trail cache. Whenever a literal $x$ appears whose
-complement $\lnot x$ has already appeared on the trail cache, $x$
-should be deleted and everything remaining until the end of the trail
-cache should be deleted (in order to keep the trail cache free of
-conflicts).  We decided to trim the trail cache whenever its size
-exceeded twice the total number of variables in the SAT instance, as
-that is what worked best in preliminary experiments.\newline
+\paragraph{Lookahead for Conflicts.}
+In \ust we stop adding literals from $\trailsave$ to $\trail$ once we
+reach a decision literal $d$ on $\trailsave$ that is not yet on
+$\trail$ (line~\ref{ln:decnottrue} of \ust). This is done so that the
+solver has full control over variable decisions without interference
+from the trail saving mechanism (unlike the case with \cbt). However,
+another option would be to force the solver to use $d$ as its next
+decision literal, which would then allow us to further add all of
+$d$'s implied literals on $\trailsave$ onto $\trail$. This can be done
+for the first $k$ decisions on $\trailsave$ for any $k$. But in
+general, we do not want to remove the solver's autonomy by forcing it
+to made potentially different decisions than it might have wanted to.
 
-The next enhancement to trail saving is to scan the trail cache to
-check if there is a literal that is already assigned false within some
-limit. The limit we found worked best is to scan the trail until the
-third null reason is found (i.e. "looking ahead 2 decisions"). If a
-literal that is already assigned false is found, we know that we are
-guaranteed to have a conflict in the near future, and we force the SAT
-solver's subsequent decisions to come from the trail cache instead of
-using the regular variable selection heuristic.
+However, if there is a literal $l\in\trailsave$ for which
+$\lnot l\in \trail$, we can observe that forcing the solver to make
+all of the decisions of $\trailsave$ that lie above $l$ will
+immediately generate a conflict in the solver: $\reasonsave{l}$ will
+be falsified. In fact, in this situation we would not even need to
+perform unit propagation over the literals added from $\trailsave$;
+the literals and their reasons obtained from $\trailsave$ would be
+sufficient to perform 1-UIP learning from $\reasonsave{l}$.
 
-Sometimes using trail saving to automatically restore literals with
-their previous reasons will lead to a literal getting a reason that is
-"worse" (in terms of number of literals, but one could use a different
-metric) than the reason it would have ended up with under normal
-propagation (i.e. without trail saving). The last enhancement we made
-to trail saving was to stop restoring literals from the old trail as
-soon as we hit a reason that we suspected might be "bad". For this, we
-kept a running mean and standard deviation of the length of all
-reasons used in the solver so far, and decided to stop restoring from
-the trail whenever we hit a reason that was greater in length than two
-standard deviations above the mean length. This way, when normal
-propagation resumes, we give it a chance to find a better reason than
-the one that trail saving had stored from the last descent down the
-trail.
+We experimented with this ``lookahead for conflicts'' idea using
+various values of $k$. We found that $k=2$, i.e., forcing up to two
+decisions from $\trailsave$ to be made by the solver if this yields a
+conflict, often enhanced the solver's performance. Limiting the lookahead to
+only one decision level of $\trailsave$ was not as good, and looking
+ahead more than 2 decisions of $\trailsave$ also degraded
+performance. This is provides some evidence that taking too much
+control away from the solver and forcing it to make too many decisions
+from $\trailsave$ can lead to conflicts that are not as useful to the
+solver.
 
-Another potential enhancement one could use is to use the trail cache
-to try to learn a second clause automatically when the solver reaches
-a conflict. However, we did not find a way to implement this to make
-it beneficial and the number of levels we have to scan for a second
-conflict would have to be more than the number of levels we already
-look ahead on each decision (when the solver is not under conflict).
+\paragraph{Reason quality.}
+The saved trail can be thought of as remembering the solver's recent
+trajectory. Sometimes we want to follow the past trajectory, but
+perhaps sometimes we don't. In particular, when adding literals from
+$\trailsave{}$ to $\trail$ we can examine the quality of the saved
+reasons to see if they are worth using. Once we encounter a literal
+with a low quality saved reason we stop adding literals from
+$\trailsave$ to the solver's trail. In particular, we can change
+lines~\ref{ln:addToTrail} and \ref{ln:addToTrailNext} of \ust
+to the following:\\
+\begin{tabular}[t]{l}
+23.5 \qquad \textbf{if} (lowQuality($\reasonsave{\litsave}$)) \textbf{break}\\
+24.  \qquad $\trail.\mathrm{addToEnd(\litsave)}$\\
+25.  \qquad $\reason{\litsave}\gets \reasonsave{\litsave}$
+\end{tabular}
 
-\section{Related Work}
-\subsection{Trail Saving for Assumption-Based SAT}
-Trail saving was briefly introduced in the context of assumption-based
-SAT \cite{DBLP:conf/sat/HickeyB19} in order to speed up the
-propagation of the assumptions each time the solver backtracked past
-the assumption levels. Note that the process is the same, but it only
-works to restore the propagants and implicants of the assumptions and
-only after a learnt unit clause. Becuase the number of propagants and
-implicants of the assumptions tends to become dominated by the number
-of assumptions in the applications it was tested on, the technique did
-not yield a significant improvement. It would be interesting to
-combine the extended version of trail saving outlined in this paper
-with trail saving over the assumptions to see if that could produce
-better results.
+Note that the solver will still set the un-added literals as they are
+unit implied by $\trail$, but it might be able to find better reasons
+for these implicants. There is of course no guarantee that better
+reasons will be found, but our empirical results show that sometimes
+this does happen. We experimented with two quality metrics, clause
+size and clause LBD, obtaining positive results with both. These
+results also provides evidence against the argument given in
+\cite{DBLP:journals/jsat/TakRH11} that changing literal reasons is not
+impactful. With an appropriate clause quality metric the changing literal
+reasons can have an impact.
 
-\subsection{Comparison to Chronological Backtracking}
-As mentioned earlier, chronological backtracking also achieves some of
-the theoretical speedups that trail saving achieves. One advantage of
-chronological backtracking is that it does not require any caching of
-the trail or accessing such a cache during propagation; it simply
-leaves a vast portion of the trail intact rather than backtracking all
-the way to the conflict level. Chronological backtracking will also
-speed up propagations slightly more than trail saving, because it
-leaves more literals assigned at once which leads to clauses being
-detected as unit more quickly.
+% \section{Related Work}
+% \subsection{Trail Saving for Assumption-Based SAT}
+% Trail saving was briefly introduced in the context of assumption-based
+% SAT \cite{DBLP:conf/sat/HickeyB19} in order to speed up the
+% propagation of the assumptions each time the solver backtracked past
+% the assumption levels. Note that the process is the same, but it only
+% works to restore the propagants and implicants of the assumptions and
+% only after a learnt unit clause. Becuase the number of propagants and
+% implicants of the assumptions tends to become dominated by the number
+% of assumptions in the applications it was tested on, the technique did
+% not yield a significant improvement. It would be interesting to
+% combine the extended version of trail saving outlined in this paper
+% with trail saving over the assumptions to see if that could produce
+% better results.
 
-One disadvantage that chronological backtracking has compared to trail
-saving is that it doesn't allow the search as much flexibility to jump
-out of local neighbourhoods, as the common variable selection
-heuristics tend to depend on
-\cite{DBLP:conf/dac/MoskewiczMZZM01,DBLP:conf/sat/2015,DBLP:conf/sat/LiangGPC16}. Because
-chronological backtracking leaves a large portion of the trail
-assigned, it will behave similarly to how the solver would behave if
-it was to force the decisions that do occur within this large portion
-of literals, whereas trail saving does not force any decisions. As
-variable selection heuristics become more refined, it is likely that
-adhering to them will become more crucial to performance.
+% \subsection{Comparison to Chronological Backtracking}
+% As mentioned earlier, chronological backtracking also achieves some of
+% the theoretical speedups that trail saving achieves. One advantage of
+% chronological backtracking is that it does not require any caching of
+% the trail or accessing such a cache during propagation; it simply
+% leaves a vast portion of the trail intact rather than backtracking all
+% the way to the conflict level. Chronological backtracking will also
+% speed up propagations slightly more than trail saving, because it
+% leaves more literals assigned at once which leads to clauses being
+% detected as unit more quickly.
 
-Another disadvantage is that, because propagation is not performed at
-every decision level, literals that remain assigned during
-chronological backtracking (but otherwise would have been unassigned)
-do not have a chance to move their decision levels up. An example of
-this is when the solver was supposed to backtrack over a literal that
-would end up being unit propagated at level 0, but stays assigned at
-its current decision level when chronological backtracking is
-used. This could potentially effect the lbd score or length of the
-learnt clause that gets generated at the next conflict. Additionally,
-chronological backtracking breaks the invarant that all literals
-appear on the trail in monotonically increasing order by decision
-level, which makes its implementation slightly more complicated.
+% One disadvantage that chronological backtracking has compared to trail
+% saving is that it doesn't allow the search as much flexibility to jump
+% out of local neighbourhoods, as the common variable selection
+% heuristics tend to depend on
+% \cite{DBLP:conf/dac/MoskewiczMZZM01,DBLP:conf/sat/2015,DBLP:conf/sat/LiangGPC16}. Because
+% chronological backtracking leaves a large portion of the trail
+% assigned, it will behave similarly to how the solver would behave if
+% it was to force the decisions that do occur within this large portion
+% of literals, whereas trail saving does not force any decisions. As
+% variable selection heuristics become more refined, it is likely that
+% adhering to them will become more crucial to performance.
+
+% Another disadvantage is that, because propagation is not performed at
+% every decision level, literals that remain assigned during
+% chronological backtracking (but otherwise would have been unassigned)
+% do not have a chance to move their decision levels up. An example of
+% this is when the solver was supposed to backtrack over a literal that
+% would end up being unit propagated at level 0, but stays assigned at
+% its current decision level when chronological backtracking is
+% used. This could potentially effect the lbd score or length of the
+% learnt clause that gets generated at the next conflict. Additionally,
+% chronological backtracking breaks the invarant that all literals
+% appear on the trail in monotonically increasing order by decision
+% level, which makes its implementation slightly more complicated.
 
 \section{Experiments and Results}
 For the version of cadical published in
@@ -952,7 +1119,7 @@ With trail saving, $x2, ... x_n$ are all assigned to be true as soon
 as $x_1$ is made true, so immediately the values of literals
 $\lnot x_1, ..., \lnot x_n$ in c are false. During propagation, a new
 watcher is searched for to replace $\lnot x_2$, n literals are
-saerched over without finding any, thus c is detected as unit and $l$
+searched over without finding any, thus c is detected as unit and $l$
 becomes forced to be true. This propagation took $O(n)$ searches
 through clause c. $\blacksquare$\newline \fi
 

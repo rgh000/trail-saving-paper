@@ -1,18 +1,19 @@
-\begin{thebibliography}{10}
+\begin{thebibliography}{1}
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\urlprefix}{URL }
 \providecommand{\doi}[1]{https://doi.org/#1}
+
+\bibitem{DBLP:conf/ijcai/AudemardS09}
+Audemard, G., Simon, L.: Predicting learnt clauses quality in modern {SAT}
+  solvers. In: Boutilier, C. (ed.) {IJCAI} 2009, Proceedings of the 21st
+  International Joint Conference on Artificial Intelligence, Pasadena,
+  California, USA, July 11-17, 2009. pp. 399--404 (2009),
+  \url{http://ijcai.org/Proceedings/09/Papers/074.pdf}
 
 \bibitem{DBLP:journals/jair/Gent13}
 Gent, I.P.: Optimal implementation of watched literals and more general
   techniques. J. Artif. Intell. Res.  \textbf{48},  231--251 (2013),
   \url{https://doi.org/10.1613/jair.4016}
-
-\bibitem{DBLP:conf/sat/2015}
-Heule, M., Weaver, S.A. (eds.): Theory and Applications of Satisfiability
-  Testing - {SAT} 2015 - 18th International Conference, Austin, TX, USA,
-  September 24-27, 2015, Proceedings, Lecture Notes in Computer Science,
-  vol.~9340. Springer (2015), \url{https://doi.org/10.1007/978-3-319-24318-4}
 
 \bibitem{DBLP:conf/sat/HickeyB19}
 Hickey, R., Bacchus, F.: Speeding up assumption-based {SAT}. In: Janota, M.,
@@ -22,20 +23,13 @@ Hickey, R., Bacchus, F.: Speeding up assumption-based {SAT}. In: Janota, M.,
   164--182. Springer (2019),
   \url{https://doi.org/10.1007/978-3-030-24258-9\_11}
 
-\bibitem{DBLP:conf/sat/LiangGPC16}
-Liang, J.H., Ganesh, V., Poupart, P., Czarnecki, K.: Learning rate based
-  branching heuristic for {SAT} solvers. In: Creignou, N., Berre, D.L. (eds.)
-  Theory and Applications of Satisfiability Testing - {SAT} 2016 - 19th
-  International Conference, Bordeaux, France, July 5-8, 2016, Proceedings.
-  Lecture Notes in Computer Science, vol.~9710, pp. 123--140. Springer (2016),
-  \url{https://doi.org/10.1007/978-3-319-40970-2\_9}
-
-\bibitem{DBLP:conf/lpar/2013}
-McMillan, K.L., Middeldorp, A., Voronkov, A. (eds.): Logic for Programming,
-  Artificial Intelligence, and Reasoning - 19th International Conference,
-  LPAR-19, Stellenbosch, South Africa, December 14-19, 2013. Proceedings,
-  Lecture Notes in Computer Science, vol.~8312. Springer (2013),
-  \url{https://doi.org/10.1007/978-3-642-45221-5}
+\bibitem{DBLP:conf/lpar/JiangZ13}
+Jiang, C., Zhang, T.: Partial backtracking in {CDCL} solvers. In: McMillan,
+  K.L., Middeldorp, A., Voronkov, A. (eds.) Logic for Programming, Artificial
+  Intelligence, and Reasoning - 19th International Conference, LPAR-19,
+  Stellenbosch, South Africa, December 14-19, 2013. Proceedings. Lecture Notes
+  in Computer Science, vol.~8312, pp. 490--502. Springer (2013),
+  \url{https://doi.org/10.1007/978-3-642-45221-5\_33}
 
 \bibitem{DBLP:conf/sat/MohleB19}
 M{\"{o}}hle, S., Biere, A.: Backing backtracking. In: Janota, M., Lynce, I.
