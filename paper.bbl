@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\urlprefix}{URL }
 \providecommand{\doi}[1]{https://doi.org/#1}
@@ -14,6 +14,10 @@ Audemard, G., Simon, L.: Predicting learnt clauses quality in modern {SAT}
 Gent, I.P.: Optimal implementation of watched literals and more general
   techniques. J. Artif. Intell. Res.  \textbf{48},  231--251 (2013),
   \url{https://doi.org/10.1613/jair.4016}
+
+\bibitem{Heule2019ProceedingsOS}
+Heule, M.J.H., J{\"a}rvisalo, M.: Proceedings of sat race 2019 solver and
+  benchmark descriptions (2019)
 
 \bibitem{DBLP:conf/sat/HickeyB19}
 Hickey, R., Bacchus, F.: Speeding up assumption-based {SAT}. In: Janota, M.,
