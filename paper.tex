@@ -1011,11 +1011,10 @@ In Figure 3, we use the newest version of cadical (downloaded as of January 1, 2
 Interestingly, \cbt makes the solver perform worse than the baseline. However, after implementing trail saving and all enhancements, the solver outperforms the baseline by a decent margin. The key enhancement for this solver seems to be the last one where we stop using the saved trail once we detect a reason of "poor" quality. We tried both clause size and lbd to act as a measure of clause quality, and both yielded a positive gain, with clause size being slightly more effective. \newline
 
 In Figure 4, we use the version of cadical published in
-\cite{DBLP:conf/sat/MohleB19} as a baseline, since we know it is a version of cadical that \cbt works particularly well on. When
-adding trail saving and all enhancements to the baseline, it solves the same number of instances as
-\cbt. Both \cbt and trail saving boost this solver's performance significantly. MapleLCMDist is another solver we know \cbt works well on, and in Figure 5 we use it as the baseline solver. \cbt and trail saving both make a significant improvement on this solver, but trail saving performs slightly better than \cbt in terms of total instances solved and Par-2 score.\newline
+\cite{DBLP:conf/sat/MohleB19} as a baseline, since we know it is a version of cadical that \cbt works particularly well on. When adding trail saving and all enhancements to the baseline, it solves the same number of instances as
+\cbt. Both \cbt and trail saving boost this solver's performance significantly. MapleLCMDist is another solver we know \cbt works well on, and in Figure 5 we show the result of implementing trail saving into that solver. \cbt and trail saving both make a significant improvement to MapleLCMDist, but trail saving performs slightly better than \cbt in terms of total instances solved and Par-2 score.\newline
 
-In Figure 6 we plot the propagations per second for each instance with and without trail saving. With trail saving about 1.87 million literals per second are propagated on average, and without trail saving about 1.80 million literals per second are propagated on average. The graph further illustrates that the majority of the time trail saving will propagate literals faster than a solver without trail saving, as we argued earlier in the paper.
+In Figure 6 we plot the propagations per second for each instance with and without trail saving enabled in cadical. With trail saving enabled about 1.87 million propagations per second occur, and without trail saving about 1.80 million propagations per second occur. The graph further illustrates that the majority of the time cadical with trail saving enabled will propagate literals faster than cadical without trail saving enabled, as we predicted would be the case earlier in the paper.
 
 \begin{figure}
 \centering
