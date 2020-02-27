@@ -177,7 +177,7 @@ sometimes beneficial for the solver to backtrack fully and redo its
 trail, even if this takes more work. We will expand on why this might
 be the case below.
 
-In this paper we present an alternative ``trail savings'' method whereby
+In this paper we present an alternative ``trail saving'' method whereby
 we save the backtracked part of the solver's trail and attempt to
 use that information to make the solver's redescent more
 efficient. Trail saving preserves the traditional invariants of the
@@ -234,8 +234,8 @@ when the trail being discussed is clear from context we simply write
 $\iota$ instead of $\iota_{\trail}$.
 
 Each literal $\ell\in\trail$ has a decision level $\dlevel{\ell}$
-which is equal to the number of decision literals appearing before
-$\ell$ on the trail plus one; hence, $\dlevel{d}=1$ for the first
+which is equal to the number of decision literals appearing on the trail
+up to and including $\ell$; hence, $\dlevel{d}=1$ for the first
 decision literal $d\in\trail$. The set of literals on $\trail$ that
 have the same decision level forms a \emph{contiguous}
 subsequence\footnote{Our approach uses standard trails in which the
@@ -264,7 +264,7 @@ Now we define the following properties that a trail $\trail$ can have.
 \item[reason-sound:] For each implied literal $l\in\trail$ we have
     that its reason clause $\reason{l}=C$ has been made unit by
     $\trail$ implying $l$, and for each $x\in C$ with $x\neq l$ we
-    that $\lnot x$ appears before $l$ on $\trail$:
+    have that $\lnot x$ appears before $l$ on $\trail$:
     $\forall l\in\trail.\, \reason{l}\neq \varnothing \implies
     l\in\reason{l} \land \bigl(\forall x\in\reason{l}.\, x\neq l
     \implies \lnot x \in \trail \land \trailIdx{\lnot x} <
@@ -279,7 +279,7 @@ Now we define the following properties that a trail $\trail$ can have.
     that propagation completeness implies that
     $\reason{l}\neq \varnothing$ must contain at least one other
     literal $y\neq l$ with $\dlevel{y} = \dlevel{l}$.
-\item[conflict free:] No clause of $F$ is falsified by
+\item[conflict-free:] No clause of $F$ is falsified by
     $\trail$. Clauses $C\in F$ falsified by $\trail$ are typically
     called \emph{conflicts}.
 \end{description}
@@ -435,7 +435,7 @@ does not go backwards to change the decisions levels of literals
 earlier on the trail.
 
 \begin{example}
-    For example, say that $(x, \lnot y)\in \formula$, the literal $x$
+    For example, suppose that $(x, \lnot y)\in \formula$, the literal $x$
     is a decision literal on the trail with $\dlevel{x}=2$, and that
     the solver is currently at level $150$ where it encounters a
     conflict. If this conflict yields the unit clause $(y)$, standard
@@ -454,7 +454,7 @@ earlier on the trail.
 
 In sum, although these impacts of \cbt might or might not be harmful
 to the \sat solver, they exist. Hence, perhaps the most unappealing
-aspect of \cbt is that introduces additional inter-dependencies
+aspect of \cbt is that it introduces additional interdependencies
 between components of the solver. For example, the second impact means
 that heuristics for choosing decision variables might work differently
 in the presence of \cbt; and the first impact means that different
@@ -473,7 +473,7 @@ wants to make. The saved trail $\trailsave$ also provides a secondary
 ``lookahead mechanism'' that the \sat solver can exploit as it
 redescends.
 
-Say that the solver is at $\deepestLvl$ where it has encountered a
+Suppose that the solver is at $\deepestLvl$ where it has encountered a
 conflict. From the 1-UIP clause it learns, $\uipcls$, it now has to
 backtrack to $\btL$. This is accomplished by calling
 \textsc{backtrack($\btL$)}, shown in Figure~\ref{fig:trailUse}, which
@@ -497,7 +497,7 @@ then invoke unit propagation. $\trailsave$ is exploited during
 propagation by the version of \textsc{propagate} shown in
 Figure~\ref{fig:trailUse}, which will initially be invoked with the
 argument $\trailIdx{\deepestLit}$ (i.e., the trail index of the newly
-added implicant). The saved trail be continually consulted during the
+added implicant). The saved trail will be continually consulted during the
 solver's descent whenever unit propagation is performed. When
 backtrack occurs $\trailsave$ will be overwritten to store the new
 backtracked portion of $\trail$.
@@ -667,7 +667,7 @@ $\varnothing$ if no conflict was found).
       &         &       & 
     \end{tabular}
     \caption{Use of $\trailsave$ from
-      Example~\ref{ex:trailsave}\label{fig:trailsave}. The literals
+      Example~\ref{ex:trailsave}\label{fig:trailsave}. The literal's
       decision level is indicated in its superscript, and a $\mbox{}^*$
       superscript indicates that the literal is a decision.}
 \end{figure}
@@ -675,7 +675,7 @@ $\varnothing$ if no conflict was found).
 \begin{example}
     \label{ex:trailsave} Figure~\ref{fig:trailsave} provides an
     example of how $\trailsave$ is used. Initially the literals $l_1$
-    to $l_{14}$ are on the solvers $\trail$, and $\trailsave$ is
+    to $l_{14}$ are on the solver's $\trail$, and $\trailsave$ is
     empty. This is shown in the first two lines of the figure. In the
     figure the superscript on the literals indicates their decision
     level, and a superscripted $*$ indicates that the literal is a
@@ -685,7 +685,7 @@ $\varnothing$ if no conflict was found).
     Then a conflict is found at level $6$ and the 1-UIP clause
     $(\lnot l_1, \lnot l_3, \lnot l_{12})$ is learnt. Thus the solver
     will backtrack to level $2$, where it will add $\lnot l_{12}$ as a
-    unit implicant. The next two lines shows $\trail$ and $\trailsave$
+    unit implicant. The next two lines show $\trail$ and $\trailsave$
     right after the backtrack to level $2$: the backtracked levels
     have been copied into $\trailsave$ omitting the conflict level $6$. 
 
@@ -717,7 +717,7 @@ As noted in the previous example unit propagation has to be rerun on
 all saved literals added to $\trail$ from $\trailsave$. Thus our
 technique, unlike \cbt, does not completely remove the overhead of
 reproducing the trail on the solver's redescent. Nevertheless, trail
-savings improves the efficiency of this redescent in three different
+saving improves the efficiency of this redescent in three different
 ways. First, by adding more forced literals to the trail before
 continuing propagating the next literal, propagation can potentially
 gain a quadratic speedup
@@ -725,7 +725,7 @@ gain a quadratic speedup
 propagation does not need to examine the reason clause of the added
 literals. If these literals were not added by \ust, propagation would
 have to traverse each of these reason clauses to determine that they
-are have in fact become unit. Third, when a conflict is returned by
+have in fact become unit. Third, when a conflict is returned by
 \ust all further propagations can be halted. The added literals and
 their reasons will be sufficient to perform clause learning from the
 conflict returned by \ust. Since trail saving can sometimes save
@@ -779,7 +779,7 @@ $\trail + \trailsave$.
     If $\trail + \trailsave$ is \textbf{reason sound}
     (Section~\ref{sec:background}) then the following holds.  If the
     first $i$ literals on $\trailsave$ are all in $\trail$
-    ($\forall j. 0\leq j< i. \trailsave[i]\in \trail$) and
+    ($\forall j. 0\leq j< i. \trailsave[j]\in \trail$) and
     $\trailsave[i]=l$ is an implied literal with $\reasonsave{l} = C$,
     then $C$ has been made unit by $\trail$ implying $l$.
 \end{theorem}
@@ -788,7 +788,7 @@ Since $\trail + \trailsave$ is reason sound, every literal in $C$
 other than $l$ appears negated before $l$ in the sequence
 $\trail + \trailsave$. Thus for $x\in C$ we have $\lnot x \in \trail$
 or $\lnot x \in \trailsave[0]\ldots\trailsave[i-1]$. But in the later
-case we also $\lnot x \in \trail$. 
+case we also have $\lnot x \in \trail$. 
 \whitebox
 
 This theorem shows that \ust's processing is
@@ -837,8 +837,8 @@ propagation in the solver.  \whitebox
 \noindent \emph{Proof:} $\trailsave$ starts off being empty, so
 $\trail+\trailsave = \trail$ is reason sound as it was generated by
 the solver (4). In procedure \bt $\trail+\trailsave$ is
-set to a trail that was previously generated by solver (4). The solver
-can add to $\trail$ by decisions and propagations with out using
+set to a trail that was previously generated by the solver (4). The solver
+can add to $\trail$ by decisions and propagations without using
 $\trailsave$. In this case $\trail' = \trail+\trail_{\mathit{new}}$,
 and $\trail'$ is reason sound by (4), thus the new
 $\trail'+\trailsave$ is reason sound by (3). Finally, in procedure
@@ -859,7 +859,7 @@ $\btL$ causing a further backtrack. In the procedure \bt every
 backtrack causes $\trailsave$ to be overwritten. Hence, in these cases
 most of the trail will not be saved---only the portion from the last
 backtrack. Our first extension addresses this potential issue and also
-provides more general trail savings in other contexts as well.
+provides more general trail saving in other contexts as well.
 
 This extension is simply to add the latest backtrack to the front of
 $\trailsave$ leaving all of the previous contents of $\trailsave$
@@ -899,7 +899,7 @@ decision literal, which would then allow us to further add all of
 $d$'s implied literals on $\trailsave$ onto $\trail$. This can be done
 for the first $k$ decisions on $\trailsave$ for any $k$. But in
 general, we do not want to remove the solver's autonomy by forcing it
-to made potentially different decisions than it might have wanted to.
+to make potentially different decisions than it might have wanted to.
 
 However, if there is a literal $l\in\trailsave$ for which
 $\lnot l\in \trail$, we can observe that forcing the solver to make
@@ -916,7 +916,7 @@ decisions from $\trailsave$ to be made by the solver if this yields a
 conflict, often enhanced the solver's performance. Limiting the lookahead to
 only one decision level of $\trailsave$ was not as good, and looking
 ahead more than 2 decisions of $\trailsave$ also degraded
-performance. This is provides some evidence that taking too much
+performance. This provides some evidence that taking too much
 control away from the solver and forcing it to make too many decisions
 from $\trailsave$ can lead to conflicts that are not as useful to the
 solver.
@@ -924,7 +924,7 @@ solver.
 \paragraph{Reason quality.}
 The saved trail can be thought of as remembering the solver's recent
 trajectory. Sometimes we want to follow the past trajectory, but
-perhaps sometimes we don't. In particular, when adding literals from
+perhaps sometimes we do not. In particular, when adding literals from
 $\trailsave{}$ to $\trail$ we can examine the quality of the saved
 reasons to see if they are worth using. Once we encounter a literal
 with a low quality saved reason we stop adding literals from
@@ -945,7 +945,7 @@ this does happen. We experimented with two quality metrics, clause
 size and clause LBD, obtaining positive results with both. These
 results also provides evidence against the argument given in
 \cite{DBLP:journals/jsat/TakRH11} that changing literal reasons is not
-impactful. With an appropriate clause quality metric the changing literal
+impactful. With an appropriate clause quality metric the changing of literal
 reasons can have an impact.
 
 % \section{Related Work}
@@ -1055,8 +1055,8 @@ In Figure~\ref{fig:props} we plotted the propagations per second for each instan
       maple           & 458          & 259 &  199  & 4746                             \\ \hline
       maple-chrono   & 470          & 271 &  199  & 4613                             \\ \hline
       maple-trail    & 472          & 271 &  \textbf{201}  & 4618                \\ \hline
-      maple-trail-multipleBT-lookahead & \textbf{473} & \textbf{277} &  195  & \textbf{4584} \\ \hline
-      maple-trail-multipleBT-lookahead-reason & 999 & 999 & 999 & 9999 \\ \hline
+      maple-trail-multipleBT-lookahead & \textbf{473} & \textbf{278} &  195  & \textbf{4584} \\ \hline
+      maple-trail-multipleBT-lookahead-reason & 467 & 273 & 194 & 4668 \\ \hline
     \end{tabular}
     \caption{Table of results for MapleLCMDist.}
     \label{fig:maple}
@@ -1065,7 +1065,7 @@ In Figure~\ref{fig:props} we plotted the propagations per second for each instan
 \begin{figure} \centering \includegraphics[scale=0.7]{figures/scatter.pdf}\caption{Comparing propagations per second with and without trail saving in Cadical.}\label{fig:props}\end{figure}
 
 \section{Conclusion}
-We have shown that our method "trail savings" can speed up two
+We have shown that our method trail saving can speed up two
 state-of-the-art \sat solvers, cadical and MapleSAT, about as well as
 chronological backtracking can without breaking the conventional invariants
 of CDCL \sat solvers. We also introduced three enhancements one can
