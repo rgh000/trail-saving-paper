@@ -3,46 +3,51 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: paper.aux
 The style file: splncs04.bst
 Database file #1: sat.bib
+Warning--to sort, need author or key in Heule2018ProceedingsOS
+Warning--to sort, need author or key in Heule2019ProceedingsOS
+Warning--empty author in Heule2018ProceedingsOS
+Warning--empty booktitle in Heule2018ProceedingsOS
+Warning--empty author in Heule2019ProceedingsOS
 Warning--empty booktitle in Heule2019ProceedingsOS
-You've used 10 entries,
+You've used 12 entries,
             2850 wiz_defined-function locations,
-            679 strings with 7378 characters,
-and the built_in function-call counts, 6723 in all, are:
-= -- 583
-> -- 175
-< -- 15
-+ -- 68
-- -- 58
-* -- 444
-:= -- 825
-add.period$ -- 21
-call.type$ -- 10
-change.case$ -- 68
+            695 strings with 7995 characters,
+and the built_in function-call counts, 7751 in all, are:
+= -- 664
+> -- 192
+< -- 18
++ -- 76
+- -- 64
+* -- 515
+:= -- 925
+add.period$ -- 26
+call.type$ -- 12
+change.case$ -- 77
 chr.to.int$ -- 0
-cite$ -- 11
-duplicate$ -- 596
-empty$ -- 611
-format.name$ -- 71
-if$ -- 1500
+cite$ -- 18
+duplicate$ -- 702
+empty$ -- 718
+format.name$ -- 77
+if$ -- 1733
 int.to.chr$ -- 0
-int.to.str$ -- 10
-missing$ -- 118
-newline$ -- 36
+int.to.str$ -- 12
+missing$ -- 142
+newline$ -- 42
 num.names$ -- 30
-pop$ -- 213
+pop$ -- 261
 preamble$ -- 1
-purify$ -- 44
+purify$ -- 51
 quote$ -- 0
-skip$ -- 201
+skip$ -- 231
 stack$ -- 0
-substring$ -- 418
-swap$ -- 345
-text.length$ -- 15
+substring$ -- 468
+swap$ -- 401
+text.length$ -- 18
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 40
-warning$ -- 1
-while$ -- 62
-width$ -- 12
-write$ -- 121
-(There was 1 warning)
+type$ -- 48
+warning$ -- 6
+while$ -- 67
+width$ -- 14
+write$ -- 142
+(There were 6 warnings)

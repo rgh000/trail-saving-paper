@@ -3,6 +3,16 @@
 \providecommand{\urlprefix}{URL }
 \providecommand{\doi}[1]{https://doi.org/#1}
 
+\bibitem{Heule2018ProceedingsOS}
+Proceedings of sat competition 2018: Solver and benchmark descriptions.
+  Department of Computer Science Series of Publications B, vol. B-2018-1.
+  Department of Computer Science, University of Helsinki, Finland (2018)
+
+\bibitem{Heule2019ProceedingsOS}
+Proceedings of sat race 2019: Solver and benchmark descriptions. Department of
+  Computer Science Report Series B, vol. B-2019-1. Department of Computer
+  Science, University of Helsinki, Finland (2019)
+
 \bibitem{DBLP:conf/ijcai/AudemardS09}
 Audemard, G., Simon, L.: Predicting learnt clauses quality in modern {SAT}
   solvers. In: Boutilier, C. (ed.) {IJCAI} 2009, Proceedings of the 21st
@@ -14,10 +24,6 @@ Audemard, G., Simon, L.: Predicting learnt clauses quality in modern {SAT}
 Gent, I.P.: Optimal implementation of watched literals and more general
   techniques. J. Artif. Intell. Res.  \textbf{48},  231--251 (2013),
   \url{https://doi.org/10.1613/jair.4016}
-
-\bibitem{Heule2019ProceedingsOS}
-Heule, M.J.H., J{\"a}rvisalo, M.: Proceedings of sat race 2019 solver and
-  benchmark descriptions (2019)
 
 \bibitem{DBLP:conf/sat/HickeyB19}
 Hickey, R., Bacchus, F.: Speeding up assumption-based {SAT}. In: Janota, M.,
@@ -65,5 +71,10 @@ Silva, J.P.M., Lynce, I., Malik, S.: Conflict-driven clause learning {SAT}
 van~der Tak, P., Ramos, A., Heule, M.: Reusing the assignment trail in {CDCL}
   solvers. {JSAT}  \textbf{7}(4),  133--138 (2011),
   \url{https://satassociation.org/jsat/index.php/jsat/article/view/89}
+
+\bibitem{xiao2017maplelrb}
+Xiao, F., Luo, M., Li, C.M., Manya, F., L{\"u}, Z.: Maplelrb lcm, maple lcm,
+  maple lcm dist, maplelrb lcmoccrestart and glucose-3.0+ width in sat
+  competition 2017. Proc. of SAT Competition pp. 22--23 (2017)
 
 \end{thebibliography}
