@@ -90,7 +90,7 @@
     ahead along the previous trail. This can be exploited to improve
     its efficiency. Our empirical results show that our technique
     often yields superior performance over chronological backtracking,
-    and that is is able to improve the performance of state of the art
+    and that is is able to improve the performance of state-of-the-art
     solvers.
 
 \end{abstract}
@@ -1062,21 +1062,25 @@ In Figure~\ref{fig:props} we plotted the propagations per second for each instan
     \label{fig:maple}
 \end{figure}
 
-\begin{figure} \centering \includegraphics[scale=0.7]{figures/scatter.pdf}\caption{Comparing propagations per second with and without trail saving in Cadical.}\label{fig:props}\end{figure}
+\begin{figure}\centering\includegraphics[scale=0.65]{figures/cactus_cadical_new.pdf}\caption{\small{Cactus plot for the newest version of cadical comparing standard non-chronological backtracking to \cbt and various configurations of trail saving. The first 400 problems were solved in less than 1200 seconds, so that part of the plot is truncated.}}\label{fig:cactus_cadical}\end{figure}
+
+\begin{figure}\centering\includegraphics[scale=0.7]{figures/scatter.pdf}\caption{Comparing propagations per second with and without trail saving in Cadical.}\label{fig:props}\end{figure}
 
 \section{Conclusion}
 We have shown that our method trail saving can speed up two
 state-of-the-art \sat solvers, cadical and MapleSAT, about as well as
 chronological backtracking can without breaking the conventional invariants
-of CDCL \sat solvers. We also introduced three enhancements one can
-implement if they are using a saved trail and demonstrated experimentally
-that these enhancements can sometimes improve the performance by a significant
-amount. Future work could include tuning the parameters of the enhancements 
-to work optimally or introducing further enhancements, such as using the saved
-trail to help make inprocessing techniques faster or
+of CDCL. We also introduced three enhancements one can
+implement when using a saved trail and demonstrated experimentally
+that these enhancements can sometimes improve a solver's performance by a significant
+amount. We have shown that trail saving and all enhancements we proposed are sound.
+A line of future work might include introducing further enhancements,
+such as using the saved trail to help make inprocessing techniques faster or
 using the saved trail to learn a second learnt clause from a single conflict.
-Lastly, it might be possible to combine trail saving with chronological
-backtracking and figure out when each is most beneficial.
+It is also possible to combine trail saving with chronological
+backtracking if one is willing to break the traditional invariants of CDCL,
+but we leave it to future work to determine whether or not this would be
+useful and how to best approach it.
 
 
 %\section{Future Work}

@@ -1,0 +1,29 @@
+\documentclass{standalone}
+\title{}
+\date{}
+\author{}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage[noend]{algorithmic}
+\usepackage{tikz,pgfplotstable,pgfplots}
+\usetikzlibrary{arrows}
+\begin{document}
+
+\begin{tikzpicture}
+\begin{axis}[
+	xlabel={Instances Solved},
+	ylabel={Run Time (sec)},width=18cm,height=12cm,legend pos=north west,xmin=400,ymin=1000,xmax=540,ymax=5100
+]
+
+\addplot[red,mark=x] table [x=index, y=original_time, col sep=comma] {results_cadical_nochrono_data.csv};
+\addplot[green,mark=o] table [x=index, y=original_time, col sep=comma] {results_cadical_chrono_data.csv};
+\addplot[blue,mark=+] table [x=index, y=original_time, col sep=comma] {results_cadical_nochrono_trail_data.csv};
+\addplot[cyan,mark=square] table [x=index, y=original_time, col sep=comma] {results_cadical_nochrono_trail_1lvl_data.csv};
+\addplot[gray,mark=triangle] table [x=index, y=original_time, col sep=comma] {results_cadical_nochrono_trail_1lvl_10reason_data.csv};
+
+\legend{cadical,cadical-chrono,cadical-trail,cadical-trail-multipleBT-lookahead, cadical-trail-multipleBT-lookahead-reason}
+\end{axis}
+\end{tikzpicture}
+
+\end{document}
