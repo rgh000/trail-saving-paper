@@ -1,11 +1,11 @@
 # Fdb version 3
-["bibtex paper"] 1582881804 "paper.aux" "paper.bbl" "paper" 1582882665
+["bibtex paper"] 1582933057 "paper.aux" "paper.bbl" "paper" 1582979165
   "./splncs04.bst" 1582055469 32146 ee21ae2a29028dc8ad842a97200982c7 ""
-  "paper.aux" 1582882665 7768 756484510991570cd347c2ca56003c49 ""
+  "paper.aux" 1582979165 8802 3ee83744c18dc267f31ce8d2f3cc7a08 ""
   "sat.bib" 1582764855 9270 80560e652383a706560fc1f9b4f667ba ""
   (generated)
-  "paper.blg"
   "paper.bbl"
+  "paper.blg"
 ["latex"] 1582517045 "paper.tex" "paper.dvi" "paper" 1582517046
   "/usr/local/texlive/2017/texmf-dist/fonts/map/fontname/texfonts.map" 1480098670 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/adobe/courier/pcrr8t.tfm" 1480098688 1384 4632f5e54900a7dadbb83f555bc61e56 ""
@@ -96,11 +96,11 @@
   "paper.out" 1582517045 60 cf08ba50ceb329fde3eb5f208f7cd1a7 ""
   "paper.tex" 1582517011 62389 b446da012c3f8b0d086bc93119dd55bc ""
   (generated)
-  "paper.dvi"
   "paper.out"
-  "paper.log"
   "paper.aux"
-["pdflatex"] 1582882664 "paper.tex" "paper.pdf" "paper" 1582882665
+  "paper.dvi"
+  "paper.log"
+["pdflatex"] 1582979164 "paper.tex" "paper.pdf" "paper" 1582979165
   "/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc" 1480098666 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2017/texmf-dist/fonts/map/fontname/texfonts.map" 1480098670 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/adobe/courier/pcrr8r.tfm" 1480098688 1292 bd42be2f344128bff6d35d98474adfe3 ""
@@ -221,15 +221,16 @@
   "/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1495593472 2350277 a699055bee05bf8a40b0504752487295 ""
   "/usr/local/texlive/2017/texmf-var/web2c/pdftex/pdflatex.fmt" 1495593487 4129592 0e6cfee100d68e6d96b92c0258f2ff73 ""
   "/usr/local/texlive/2017/texmf.cnf" 1495593465 577 2b71d4d888f9e5560b2e99985915a9fa ""
-  "figures/cactus_cadical_new.pdf" 1582881842 70201 8dbc2dc7d7b9e3c81541689c9f7e63c7 ""
-  "figures/scatter.pdf" 1582878604 38113 16a7172a9d9e74bce674bcadac3880af ""
+  "figures/cactus_cadical_new.pdf" 1582916478 70201 b5cae40049cd08b44e6680673f271874 ""
+  "figures/cactus_maple_new.pdf" 1582979160 75562 add5a934e04b155e76451a58ab1eb293 ""
+  "figures/scatter.pdf" 1582925289 46487 c6f74ea00a01b241f5c3d25110e1c3d3 ""
   "llncs.cls" 1582055469 42249 b08ec23e994470d7d8fc268d245cf555 ""
-  "paper.aux" 1582882665 7768 756484510991570cd347c2ca56003c49 ""
-  "paper.bbl" 1582881804 4083 e99fe0e9ab11f8cf8e50e87137616e17 "bibtex paper"
-  "paper.out" 1582882665 60 cf08ba50ceb329fde3eb5f208f7cd1a7 ""
-  "paper.tex" 1582882660 66671 86ad4bf5749d01d903b27c36a63b5daf ""
+  "paper.aux" 1582979165 8802 3ee83744c18dc267f31ce8d2f3cc7a08 ""
+  "paper.bbl" 1582933058 4083 e99fe0e9ab11f8cf8e50e87137616e17 "bibtex paper"
+  "paper.out" 1582979165 60 cf08ba50ceb329fde3eb5f208f7cd1a7 ""
+  "paper.tex" 1582936196 67493 7f88f17b7e5b4c06dc7643756f64451c ""
   (generated)
   "paper.pdf"
-  "paper.out"
   "paper.aux"
+  "paper.out"
   "paper.log"

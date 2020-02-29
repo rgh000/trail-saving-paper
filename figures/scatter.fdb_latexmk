@@ -1,6 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1582878603 "scatter.tex" "scatter.pdf" "scatter" 1582881842
-  "/dev/null" 1582881627 0 d41d8cd98f00b204e9800998ecf8427e ""
+["pdflatex"] 1582925288 "scatter.tex" "scatter.pdf" "scatter" 1582979160
+  "/dev/null" 1582979134 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "/usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1480098733 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
   "/usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1480098733 35752 024fb6c41858982481f6968b5fc26508 ""
   "/usr/local/texlive/2017/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1480098806 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/local/texlive/2017/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1480098815 1458 43ab4710dc82f3edeabecd0d099626b2 ""
@@ -143,10 +144,10 @@
   "/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1495593472 2350277 a699055bee05bf8a40b0504752487295 ""
   "/usr/local/texlive/2017/texmf-var/web2c/pdftex/pdflatex.fmt" 1495593487 4129592 0e6cfee100d68e6d96b92c0258f2ff73 ""
   "/usr/local/texlive/2017/texmf.cnf" 1495593465 577 2b71d4d888f9e5560b2e99985915a9fa ""
-  "scatter.aux" 1582878604 8 a94a2480d3289e625eea47cd1b285758 ""
-  "scatter.tex" 1582632488 628 bda86b94d58b426a6cb5a4aa6b1f7bb4 ""
+  "scatter.aux" 1582925289 8 a94a2480d3289e625eea47cd1b285758 ""
+  "scatter.tex" 1582925282 846 a086b88089ecf3962a941acec09d16aa ""
   "scatter.txt" 1582632113 4374 78c99f839c3241476104df17039e0eef ""
   (generated)
-  "scatter.log"
   "scatter.pdf"
   "scatter.aux"
+  "scatter.log"

@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1582039207 "cactus_cadical.tex" "cactus_cadical.pdf" "cactus_cadical" 1582979158
+["pdflatex"] 1582979159 "cactus_maple_new.tex" "cactus_maple_new.pdf" "cactus_maple_new" 1582979160
   "/dev/null" 1582979134 0 d41d8cd98f00b204e9800998ecf8427e ""
   "/usr/local/texlive/2017/texmf-dist/fonts/map/fontname/texfonts.map" 1480098670 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1480098698 1004 54797486969f23fa377b128694d548df ""
@@ -9,6 +9,8 @@
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm" 1480098698 908 2921f8a10601f252058503cc6570e581 ""
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm" 1480098698 940 75ac932a52f80982a9f8ea75d03a34cf ""
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm" 1480098698 940 228d6584342e91276bf566bcf9716b83 ""
+  "/usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1480098733 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
+  "/usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1480098733 35752 024fb6c41858982481f6968b5fc26508 ""
   "/usr/local/texlive/2017/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1480098806 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/local/texlive/2017/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1480098815 1458 43ab4710dc82f3edeabecd0d099626b2 ""
   "/usr/local/texlive/2017/texmf-dist/tex/generic/oberdiek/etexcmds.sty" 1480098815 7612 729a8cc22a1ee0029997c7f74717ae05 ""
@@ -162,11 +164,17 @@
   "/usr/local/texlive/2017/texmf-dist/tex/latex/xcolor/xcolor.sty" 1480098843 55589 34128738f682d033422ca125f82e5d62 ""
   "/usr/local/texlive/2017/texmf-dist/tex/latex/xkeyval/xkeyval.sty" 1480098843 4962 9c1069474ff71dbc47d5006555e352d3 ""
   "/usr/local/texlive/2017/texmf-dist/web2c/texmf.cnf" 1494087824 32646 eadc4ca26cdbe7105ac7c593aa8c4f72 ""
+  "/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1495593472 2350277 a699055bee05bf8a40b0504752487295 ""
   "/usr/local/texlive/2017/texmf-var/web2c/pdftex/pdflatex.fmt" 1495593487 4129592 0e6cfee100d68e6d96b92c0258f2ff73 ""
   "/usr/local/texlive/2017/texmf.cnf" 1495593465 577 2b71d4d888f9e5560b2e99985915a9fa ""
-  "cactus_cadical.aux" 1582055469 8 a94a2480d3289e625eea47cd1b285758 ""
-  "cactus_cadical.tex" 1582055469 931 4bc577f9919a8a33fb1c20560fd3b48f ""
+  "cactus_maple_new.aux" 1582979160 8 a94a2480d3289e625eea47cd1b285758 ""
+  "cactus_maple_new.tex" 1582917906 1153 f303b1209d4be627d476254666d1e414 ""
+  "results_maplelcmdist_chrono_data.csv" 1582915720 5580 6c0e6d7240166538dc518d97f5f81743 ""
+  "results_maplelcmdist_data.csv" 1582915720 5436 0a8a7583295408bda7f9257c57e6de6b ""
+  "results_maplelcmdist_trail_1lvl_5lbdreason_data.csv" 1582915720 5548 a1d44d7d9b22e80ab142e821fc2b29cb ""
+  "results_maplelcmdist_trail_noforce_1lvl_data.csv" 1582979128 6031 c400f6f220c3b9fed684f389a8b415b4 ""
+  "results_maplelcmdist_trail_noforce_data.csv" 1582915720 5614 29873d7312a6e72db2f9271819aa9953 ""
   (generated)
-  "cactus_cadical.aux"
-  "cactus_cadical.log"
-  "cactus_cadical.pdf"
+  "cactus_maple_new.aux"
+  "cactus_maple_new.log"
+  "cactus_maple_new.pdf"
