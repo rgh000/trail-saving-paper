@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1583143645 "cactus_maple_new.tex" "cactus_maple_new.pdf" "cactus_maple_new" 1583143646
-  "/dev/null" 1583143637 0 d41d8cd98f00b204e9800998ecf8427e ""
+["pdflatex"] 1583186252 "cactus_maple_new.tex" "cactus_maple_new.pdf" "cactus_maple_new" 1583186716
+  "/dev/null" 1583186557 0 d41d8cd98f00b204e9800998ecf8427e ""
   "/usr/local/texlive/2017/texmf-dist/fonts/map/fontname/texfonts.map" 1480098670 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1480098698 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1480098698 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -167,14 +167,14 @@
   "/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1495593472 2350277 a699055bee05bf8a40b0504752487295 ""
   "/usr/local/texlive/2017/texmf-var/web2c/pdftex/pdflatex.fmt" 1495593487 4129592 0e6cfee100d68e6d96b92c0258f2ff73 ""
   "/usr/local/texlive/2017/texmf.cnf" 1495593465 577 2b71d4d888f9e5560b2e99985915a9fa ""
-  "cactus_maple_new.aux" 1583143646 8 a94a2480d3289e625eea47cd1b285758 ""
-  "cactus_maple_new.tex" 1583143642 1160 b5649934aadb1b8f8b4569511c326d60 ""
+  "cactus_maple_new.aux" 1583186253 8 a94a2480d3289e625eea47cd1b285758 ""
+  "cactus_maple_new.tex" 1583186251 1309 48d34ec99044385c691019ade3983c64 ""
   "results_maplelcmdist_chrono_data.csv" 1582915720 5580 6c0e6d7240166538dc518d97f5f81743 ""
   "results_maplelcmdist_data.csv" 1582915720 5436 0a8a7583295408bda7f9257c57e6de6b ""
-  "results_maplelcmdist_trail_1lvl_5lbdreason_data.csv" 1582915720 5548 a1d44d7d9b22e80ab142e821fc2b29cb ""
+  "results_maplelcmdist_trail_noforce_1lvl_again__5lbdreasons_data.csv" 1583186160 5575 f7adc1704daf61b705af25deb17dd924 ""
   "results_maplelcmdist_trail_noforce_1lvl_again__data.csv" 1583133283 5604 a8e02007ebbefa33d1db374fa589f737 ""
   "results_maplelcmdist_trail_noforce_data.csv" 1582915720 5614 29873d7312a6e72db2f9271819aa9953 ""
   (generated)
-  "cactus_maple_new.log"
   "cactus_maple_new.aux"
   "cactus_maple_new.pdf"
+  "cactus_maple_new.log"

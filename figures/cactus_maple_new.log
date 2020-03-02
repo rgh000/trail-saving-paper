@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  2 MAR 2020 05:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  2 MAR 2020 16:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -694,12 +694,13 @@ PGFPlots: reading {results_maplelcmdist_data.csv}
 PGFPlots: reading {results_maplelcmdist_chrono_data.csv}
 PGFPlots: reading {results_maplelcmdist_trail_noforce_data.csv}
 PGFPlots: reading {results_maplelcmdist_trail_noforce_1lvl_again__data.csv}
-PGFPlots: reading {results_maplelcmdist_trail_1lvl_5lbdreason_data.csv}
-LaTeX Font Info:    Try loading font information for U+msa on input line 26.
+PGFPlots: reading {results_maplelcmdist_trail_noforce_1lvl_again__5lbdreasons_d
+ata.csv}
+LaTeX Font Info:    Try loading font information for U+msa on input line 27.
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 26.
+LaTeX Font Info:    Try loading font information for U+msb on input line 27.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -709,8 +710,8 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 (./cactus_maple_new.aux) ) 
 Here is how much of TeX's memory you used:
  24046 strings out of 492995
- 626232 string characters out of 6132704
- 1084749 words of memory out of 5000000
+ 626280 string characters out of 6132704
+ 1085238 words of memory out of 5000000
  27176 multiletter control sequences out of 15000+600000
  5339 words of font info for 22 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -718,7 +719,7 @@ Here is how much of TeX's memory you used:
 </usr/local/texlive/2017/texmf-dist/fonts/type1/publi
 c/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmr10.pfb>
-Output written on cactus_maple_new.pdf (1 page, 75728 bytes).
+Output written on cactus_maple_new.pdf (1 page, 75575 bytes).
 PDF statistics:
  19 PDF objects out of 1000 (max. 8388607)
  13 compressed objects within 1 object stream
