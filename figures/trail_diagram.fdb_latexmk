@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1582039236 "trail_diagram.tex" "trail_diagram.pdf" "trail_diagram" 1582979160
-  "/dev/null" 1582979134 0 d41d8cd98f00b204e9800998ecf8427e ""
+["pdflatex"] 1582039236 "trail_diagram.tex" "trail_diagram.pdf" "trail_diagram" 1583143647
+  "/dev/null" 1583143637 0 d41d8cd98f00b204e9800998ecf8427e ""
   "/usr/local/texlive/2017/texmf-dist/fonts/map/fontname/texfonts.map" 1480098670 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1480098698 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1480098698 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -130,6 +130,6 @@
   "trail_diagram.aux" 1582055469 8 a94a2480d3289e625eea47cd1b285758 ""
   "trail_diagram.tex" 1582055469 2620 5e472176899f7fba22dc19791b83fb56 ""
   (generated)
+  "trail_diagram.log"
   "trail_diagram.aux"
   "trail_diagram.pdf"
-  "trail_diagram.log"

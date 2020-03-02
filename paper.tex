@@ -13,6 +13,7 @@
 \usepackage{listings}
 \usepackage[table]{xcolor}
 \usepackage{theorem}
+\usepackage{float}
 
 \algrenewcommand\algorithmicprocedure{}
 \algrenewcommand\algorithmicthen{}
@@ -1032,7 +1033,7 @@ first enhancement of saving over multiple backtracks,
 for conflicts by 2 decision levels, and
 "-trail-multipleBT-lookahead-reason" also adds the final enhancement
 to cease trail saving once a reason of "low quality" is reached. For
-more details on the enhancments, please see section 4.2.
+more details on the enhancements, please see section 4.2.
 
 Interestingly, \cbt made the newest version of cadical perform worse
 than the baseline (Figure~\ref{fig:cadicalNew}). This demonstrates
@@ -1046,7 +1047,7 @@ tried both clause size and lbd as the clause quality metric, and both
 yielded a positive gain, with clause size being slightly more
 effective.
 
-\begin{figure}[t]
+\begin{figure}[H]
 \centering
     \begin{tabular}{|l|l|l|l|l|l|}
       \hline
@@ -1061,6 +1062,8 @@ effective.
     \caption{Table of results for cadical, version pulled from github as of January 1, 2020.}
     \label{fig:cadicalNew}
 \end{figure}
+
+\begin{figure}\centering\includegraphics[scale=0.65]{figures/cactus_cadical_new.pdf}\caption{\small{Cactus plot for the newest version of cadical comparing standard non-chronological backtracking to \cbt and various configurations of trail saving. The first 400 problems were solved in less than 1200 seconds, so that part of the plot is truncated.}}\label{fig:cactus_cadical}\end{figure}
 
 The version of cadical used in Figure~\ref{fig:cadicalOld} did show
 benefits from \cbt in agreement with previously published results
@@ -1086,10 +1089,10 @@ in the Par-2 score.
 \end{figure}
 
 MapleLCMDist (in Figure~\ref{fig:maple}) is another solver that
-benefited from \cbt. In this solver trail saving alone solved more
+benefited from \cbt. In this solver trail saving alone solved two more
 instances than the solver with \cbt did. Adding the first two
-enhancements on top of trail saving resulted in solving three more
-instances and yielding a better Par-2 score than the solver with
+enhancements on top of trail saving resulted in solving only one more
+instance but yielded a better Par-2 score than the solver with
 \cbt. Adding the last enhancement of ceasing trail saving on a "low
 quality" reason made the performance worse, whether clause size or lbd
 was used as the clause quality metric. This suggests that the
@@ -1103,15 +1106,15 @@ solvers.
       & Total & SAT & UNSAT & Avg. Par-2 \\ \hline
       maple           & 458          & 259 &  199  & 4746                             \\ \hline
       maple-chrono   & 470          & 271 &  199  & 4613                             \\ \hline
-      maple-trail    & 472          & 271 &  \textbf{201}  & 4618                \\ \hline
-      maple-trail-multipleBT-lookahead & \textbf{473} & \textbf{278} &  195  & \textbf{4584} \\ \hline
-      maple-trail-multipleBT-lookahead-reason & 467 & 273 & 194 & 4668 \\ \hline
+      maple-trail    & \textbf{472}          & 271 &  \textbf{201}  & 4618                \\ \hline
+      maple-trail-multipleBT-lookahead & 471 & 272 &  199  & \textbf{4597}        \\ \hline
+      maple-trail-multipleBT-lookahead-reason & 467 & \textbf{273} & 194 & 4668 \\ \hline
     \end{tabular}
     \caption{Table of results for MapleLCMDist.}
     \label{fig:maple}
 \end{figure}
 
-
+\begin{figure}\centering\includegraphics[scale=0.65]{figures/cactus_maple_new.pdf}\caption{\small{Cactus plot for MapleLCMDist comparing standard non-chronological backtracking to \cbt and various configurations of trail saving. The first 300 problems were solved in less than 600 seconds, so that part of the plot is truncated.}}\label{fig:cactus_maple}\end{figure}
 
 In Figure~\ref{fig:props} we plotted the propagations per second for
 each instance with and without trail saving enabled in cadical (rounded
@@ -1125,11 +1128,6 @@ graph illustrates that the majority of the time
 cadical with trail saving enabled propagated literals faster than
 cadical without trail saving enabled, as we predicted would be the
 case earlier in this paper.
-
-
-\begin{figure}\centering\includegraphics[scale=0.65]{figures/cactus_cadical_new.pdf}\caption{\small{Cactus plot for the newest version of cadical comparing standard non-chronological backtracking to \cbt and various configurations of trail saving. The first 400 problems were solved in less than 1200 seconds, so that part of the plot is truncated.}}\label{fig:cactus_cadical}\end{figure}
-
-\begin{figure}\centering\includegraphics[scale=0.65]{figures/cactus_maple_new.pdf}\caption{\small{Cactus plot for MapleLCMDist comparing standard non-chronological backtracking to \cbt and various configurations of trail saving. The first 300 problems were solved in less than 600 seconds, so that part of the plot is truncated.}}\label{fig:cactus_maple}\end{figure}
 
 \begin{figure}\centering\includegraphics[scale=0.7]{figures/scatter.pdf}\caption{Comparing propagations per second with and without trail saving in Cadical.}\label{fig:props}\end{figure}
 

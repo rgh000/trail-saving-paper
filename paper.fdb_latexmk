@@ -1,7 +1,7 @@
 # Fdb version 3
-["bibtex paper"] 1582933057 "paper.aux" "paper.bbl" "paper" 1582979165
+["bibtex paper"] 1583144840 "paper.aux" "paper.bbl" "paper" 1583144841
   "./splncs04.bst" 1582055469 32146 ee21ae2a29028dc8ad842a97200982c7 ""
-  "paper.aux" 1582979165 8802 3ee83744c18dc267f31ce8d2f3cc7a08 ""
+  "paper.aux" 1583144841 8802 d2dd45f9220889c5695353d51a534cc2 ""
   "sat.bib" 1582764855 9270 80560e652383a706560fc1f9b4f667ba ""
   (generated)
   "paper.bbl"
@@ -96,11 +96,11 @@
   "paper.out" 1582517045 60 cf08ba50ceb329fde3eb5f208f7cd1a7 ""
   "paper.tex" 1582517011 62389 b446da012c3f8b0d086bc93119dd55bc ""
   (generated)
-  "paper.out"
   "paper.aux"
   "paper.dvi"
   "paper.log"
-["pdflatex"] 1582979164 "paper.tex" "paper.pdf" "paper" 1582979165
+  "paper.out"
+["pdflatex"] 1583144841 "paper.tex" "paper.pdf" "paper" 1583144841
   "/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc" 1480098666 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2017/texmf-dist/fonts/map/fontname/texfonts.map" 1480098670 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/adobe/courier/pcrr8r.tfm" 1480098688 1292 bd42be2f344128bff6d35d98474adfe3 ""
@@ -222,15 +222,15 @@
   "/usr/local/texlive/2017/texmf-var/web2c/pdftex/pdflatex.fmt" 1495593487 4129592 0e6cfee100d68e6d96b92c0258f2ff73 ""
   "/usr/local/texlive/2017/texmf.cnf" 1495593465 577 2b71d4d888f9e5560b2e99985915a9fa ""
   "figures/cactus_cadical_new.pdf" 1582916478 70201 b5cae40049cd08b44e6680673f271874 ""
-  "figures/cactus_maple_new.pdf" 1582979160 75562 add5a934e04b155e76451a58ab1eb293 ""
+  "figures/cactus_maple_new.pdf" 1583143646 75728 5ab3462d23013e9ebecab38a4550fe61 ""
   "figures/scatter.pdf" 1582925289 46487 c6f74ea00a01b241f5c3d25110e1c3d3 ""
   "llncs.cls" 1582055469 42249 b08ec23e994470d7d8fc268d245cf555 ""
-  "paper.aux" 1582979165 8802 3ee83744c18dc267f31ce8d2f3cc7a08 ""
-  "paper.bbl" 1582933058 4083 e99fe0e9ab11f8cf8e50e87137616e17 "bibtex paper"
-  "paper.out" 1582979165 60 cf08ba50ceb329fde3eb5f208f7cd1a7 ""
-  "paper.tex" 1582936196 67493 7f88f17b7e5b4c06dc7643756f64451c ""
+  "paper.aux" 1583144841 8802 d2dd45f9220889c5695353d51a534cc2 ""
+  "paper.bbl" 1583144841 4083 e99fe0e9ab11f8cf8e50e87137616e17 "bibtex paper"
+  "paper.out" 1583144841 60 cf08ba50ceb329fde3eb5f208f7cd1a7 ""
+  "paper.tex" 1583144838 67522 f4b740df6a0ec7075027d3beef348f36 ""
   (generated)
-  "paper.pdf"
   "paper.aux"
-  "paper.out"
+  "paper.pdf"
   "paper.log"
+  "paper.out"
