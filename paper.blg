@@ -1,53 +1,48 @@
-This is BibTeX, Version 0.99d (TeX Live 2017)
+This is BibTeX, Version 0.99d (TeX Live 2019)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: paper.aux
 The style file: splncs04.bst
 Database file #1: sat.bib
-Warning--to sort, need author or key in Heule2018ProceedingsOS
-Warning--to sort, need author or key in Heule2019ProceedingsOS
-Warning--empty author in Heule2018ProceedingsOS
-Warning--empty booktitle in Heule2018ProceedingsOS
-Warning--empty author in Heule2019ProceedingsOS
-Warning--empty booktitle in Heule2019ProceedingsOS
-You've used 12 entries,
+Warning--I didn't find a database entry for "DBLP:conf/satt/MohleB19"
+You've used 15 entries,
             2850 wiz_defined-function locations,
-            695 strings with 7995 characters,
-and the built_in function-call counts, 7751 in all, are:
-= -- 664
-> -- 192
-< -- 18
-+ -- 76
-- -- 64
-* -- 515
-:= -- 925
-add.period$ -- 26
-call.type$ -- 12
-change.case$ -- 77
+            720 strings with 8906 characters,
+and the built_in function-call counts, 9795 in all, are:
+= -- 834
+> -- 291
+< -- 19
++ -- 114
+- -- 98
+* -- 660
+:= -- 1225
+add.period$ -- 31
+call.type$ -- 15
+change.case$ -- 102
 chr.to.int$ -- 0
-cite$ -- 18
-duplicate$ -- 702
-empty$ -- 718
-format.name$ -- 77
-if$ -- 1733
+cite$ -- 15
+duplicate$ -- 858
+empty$ -- 879
+format.name$ -- 116
+if$ -- 2167
 int.to.chr$ -- 0
-int.to.str$ -- 12
-missing$ -- 142
-newline$ -- 42
-num.names$ -- 30
-pop$ -- 261
+int.to.str$ -- 15
+missing$ -- 173
+newline$ -- 51
+num.names$ -- 46
+pop$ -- 318
 preamble$ -- 1
-purify$ -- 51
+purify$ -- 72
 quote$ -- 0
-skip$ -- 231
+skip$ -- 267
 stack$ -- 0
-substring$ -- 468
-swap$ -- 401
-text.length$ -- 18
+substring$ -- 572
+swap$ -- 497
+text.length$ -- 19
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 48
-warning$ -- 6
-while$ -- 67
-width$ -- 14
-write$ -- 142
-(There were 6 warnings)
+type$ -- 58
+warning$ -- 0
+while$ -- 88
+width$ -- 17
+write$ -- 177
+(There was 1 warning)

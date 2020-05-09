@@ -1,0 +1,299 @@
+----------------------------------------------------------------------
+Review 1
+
+Overall evaluation: The paper introduces a new technique, called Trail
+Saving (TS below), targeted to improve the performance of modern CDCL
+SAT solvers. The idea is to save the trail along with the "reason"
+clauses during backtracking and then to reuse it during the upcoming
+descent. In particular, any literals in the saved trail, which were
+assigned to true by the SAT solver, can be associated with their
+reason clause from the saved trail without actually re-visiting the
+clause database. Also, conflicts can be discovered without visiting
+the clause database. Several enhancements to the basic TS are also
+proposed. The paper presents TS as an alternative to Chronological
+Backtracking (CB). In particular, the current TS algorithm is
+presented as incompatible with CB. In the experimental results
+section, TS is implemented in two versions of Cadical and a version of
+Maple, which won SC'18. The most impressive result is the improvement
+in the performance of the default newest Cadical. TS is on par with CB
+in the older Cadical and is slightly better than CB in Maple.
+
+***************************
+
+I like the proposed technique, especially in the light of the fact
+that it improves the performance of the latest Cadical. Saving the
+reasons of implied literals is a nice trick.
+
+***************************
+
+Unfortunately, the mindset of the authors to criticize CB and to
+present TS as its alternative makes the paper significantly less
+convincing than it might have been for the following reasons.
+
+1. Designing a CDCL algorithm incompatible with CB is not a strength,
+but a weakness. This is because the ability of a SAT solver to
+backtrack chronologically can make a conceptual difference beyond
+plain SAT solving. It has already been shown as an enabler for new
+model counting algorithms (see Sibylle Möhle, Armin Biere: Combining
+Conflict-Driven Clause Learning and Chronological Backtracking for
+Propositional Model Counting. GCAI 2019: 113-126). Moreover, it is
+expected to be useful in the context of the DPLL(T) approach to SMT
+solving, where propagation is substantially more expensive than in
+SAT.
+
+2. I fail to see why TS is not compatible with CB. Actually, I believe
+that the two techniques are orthogonal. Even a SAT solver implementing
+full CB eventually makes long backjumps. For example, it might
+identify a conflict, say, at decision level 100, where the literal
+with the highest decision level in the new conflict clause is assigned
+at level 50. In this case, the SAT solver will backtrack to the end of
+decision level 50 and continue exactly as a standard solver with
+Non-Chronological-Backtracking (NCB) would do. I fail to see why one
+cannot apply TS after backtracking in this case, exactly as in the
+case of NCB. I also cannot see why one cannot apply TS after partial
+backtracking (as in Cadical [7]).
+
+3. The author dedicated Section 3 to "Potential Drawbacks of
+Chronological Backtracking". However, I wasn't convinced at all that
+the changes in SAT solver functionality due to CB, mentioned in
+Section 3, are actual drawbacks, since, as the authors themselves put
+it: "these impacts of C-bt might or might not be harmful to the SAT
+solver"
+
+4. Another argument against CB the authors seem to implicitly make in
+the conclusion is that CB breaks the original CDCL
+invariants. However, the original CDCL invariants aren't sacred; there
+is nothing wrong in changing them as long as there are new correct
+invariants (which is the case for CB [7]).
+
+*********************
+
+My suggestion to the authors would be to present TS as an algorithm
+orthogonal to backtracking schemes, which can work with ANY of them
+(which I believe is the case). I think that with very minor
+modifications (if at all), one should be able to run TS without
+turning off CB in state-of-the-art solvers. My bet is that one will
+get an even better performance, definitely with Maple and Cadical from
+[7]. Unfortunately, I don't see how the current version of the paper
+can be modified according to my suggestion, as it is too invested into
+arguing that TS is an alternative to CB. If the authors disagree that
+TS is compatible with CB, I'd like to see their argumentation in the
+rebuttal.
+
+*********************
+
+About CB history:
+
+I appreciate the reference [6], apparently missed in [9] and then also
+in [7]. However, it should probably also be mentioned that the
+possibility to backtrack partially (chronologically) in CDCL has been
+allowed and proven correct in resolution-based CDCL frameworks in the
+following works:
+
+Robert Nieuwenhuis, Albert Oliveras, Cesare Tinelli:Solving SAT and
+SAT Modulo Theories: From an abstract
+Davis--Putnam--Logemann--Loveland procedure to DPLL(T). J. ACM 53(6):
+937-977 (2006)
+
+Alexander Nadel, August 2009, “Understanding and Improving a Modern
+SAT Solver”. PhD thesis, Tel Aviv University.
+
+Moreover, CB is part of the original DPLL algorithm and it had been in
+use in all the SAT solvers before GRASP, so the following formulation
+doesn't seem to be accurate "Chronological bactracking (C-bt) is a
+technique originally proposed by Jiang and Zhang [6] under the name
+partial backtracking."
+
+For me, the main contribution of [9] is demonstrating that CB can
+actually improve the performance of modern SAT solvers and showing how
+it can be implemented shortly and efficiently. [7] further improves
+the CB heuristic in the context of modern SAT solving and proves
+correctness (again, in the context of modern SAT solving).
+
+*********************
+
+Minor comments:
+
+Abstract: Fix "is is"
+P. 3: Fix "includingÂa˘‘;"
+P. 12: There was a SAT Race, rather than a SAT Competition in 2019
+
+----------------------------------------------------------------------
+Review 2
+
+Overall evaluation: This paper proposes an improvement to the
+performance of non-chronological backtracking. The disadvantage of
+nonchronological backtracking over chronological backtracking is that
+a lot of unit propagation work is duplicated resetting previously set
+literals that were unset by backtracking. The advantage of
+nonchronological backtracking is that it can allow literals to be set
+at lower decision levels, and can make for better choices of decision
+literals in response to activity levels changes from learning.
+
+The paper under consideration seeks to improve the performance of
+nonchronological backtracking by bypassing the unit propagation of
+literals that were previously set, and only perform the unit
+propagation for newly set literals, or literals that are set at lower
+levels than previously. Tests are run that show some improvement in
+certainly situations, depending on what optimizations are performed.
+
+It is nice paper, a good addition to the literature. It is also well
+written and pleasant to read. On the other hand, it is somewhat
+incremental. And the tests showing improvement are nice, but the
+improvements are modest and not completely convincing.
+
+----------------------------------------------------------------------
+Review 3
+
+The paper proposes to reuse the trail which handle the successive
+decisions and propagation of solvers, when backtracking/jumping after
+conflict analysis. The idea is that, in some cases there can be a
+large number of decision/propagations after a conflict, before
+reaching the next one. It may be thus worth exploiting the last trail
+to efficiently propagate literals.
+
+I really appreciated reading this paper. It is particularly well
+written and can be followed by specialists and non specialists. I also
+very much like the idea of reusing the trail instead of rearranging
+the order of literals. This idea can probably be exploited in many
+ways in further papers.
+
+It is this kind of simple idea that you want to see immediately
+implemented in your solver.
+
+The theoretical part of the paper is very nice. Well explained and
+convincing.
+
+The experimental part is also very convincing (see below for a comment
+on this). About the propagation rates comparison with Cadical. The
+plot may be colored accordingly to the efficiency of the new version
+(like green if the new version was solving the problem much faster
+than the older, gray if they had the same performances, and red if the
+oldest version was solving the problems faster). What Is expected is
+that the propagation rate is related to the performances, but this is
+not sure. It may be the case were the solver is doing much more “easy”
+propagation that does not help it. Such a colored figure would help
+concluding positively.
+
+The only missing part of the paper is the availability of the source
+code of the implemented methods. They will probably participate to the
+competition, but this should be mentioned.
+
+I want to point out a possible bias in the experimental part. Authors
+are comparing their version on the set of problems from 2019. Thus,
+they may be (unintentionally) overfitting their new version on these
+problems. Cadical, for instance, was never launched on problems from
+2019. Thus, having +6 benchs may be less impressive. The same weak
+holds for the comparison with Maple. Ideally, the experiment should
+have been conducted by tuning/debugging the Cadical/Mapple versions
+released in 2019 on problems released before 2019. Then, conduct a
+single run of the different versions on the 2019 problems.
+
+----------------------------------------------------------------------
+Response:
+---------
+
+First and most importantly we wish to thank the reviewers for their
+efforts in these difficult times. We really appreciate it!
+
+---------
+Review 1.
+
+We enjoyed reading your review, thank you for your defense of
+Chronological Backtracking! It made us reassess our presentation. We
+feel that it will not be hard for us to make some changes that will
+relate Trail Saving (TS) to CB in a more balanced way.
+
+However, we do not think that the paper's discussion and comparison
+with CB is the core of the paper (although we agree that this should
+be improved). The core of the paper is the TS technique, the formalism
+for showing the method to be sound, and the methods we presented for
+further exploiting the saved trail. We believe that our contribution
+can spur interesting future research into other ways of using saved
+trails, with a clean formalism for verifying the soundness of these
+new ideas. The empirical results of the paper, we believe, demonstrate
+that TS has considerable potential and that it is an idea worth
+publicizing to other SAT researchers. W.r.t. your specific points:
+
+1. We agree that when descending the trail is very expensive, e.g.,
+when using theory propagation or component analysis, CB's ability to
+allow the solver avoid long backtracks can be essential. We did not
+intended to claim that CB is not useful, and will change our wording
+to ensure that this impression is no longer given by the paper. We
+will also mention this essential use of CB.
+
+2. We agree that Trail savings (TS) can be combined with CB but there
+are some complications. In particular, when CB does a non-chron
+backtrack, the trail it backtracks over, which would be saved by TS,
+might contain out-of-order literals. Such out-of-order literals cannot
+be efficiently restored from the saved trail (they will be restored by
+the more expensive unit prop. at their proper level before they reach
+the top of the saved trail). Is this a significant effect? Probably
+not, but this would have to be verified experimentally. One could also
+try to fix the out-of-orderness in the saved trail before using it to
+restore the trail on redescent, but this also would incur overhead. So
+again further experimental work would be required.
+
+In general, we think that combining CB and TS is an interesting area
+for future research. As the reviewer points out, using TS to enhance
+CB when it non-chron backtracks a potential combination. But other
+combinations are possible. With TS the solver can move in a different
+direction after backtrack. If we had a better predictor of when it is
+useful to allow solver to move in a different direction (TS) and when
+it is better to force it to stay put (CB), one could potentially
+decide in different contexts to apply CB or TS.
+
+3. We really did intend these to be *potential* as we don't know for
+sure if these things are good or bad. But you are right, the use of
+"drawbacks" in the section title is misleading. We should instead
+discuss these as potential impacts that CB can have on
+search---without labeling them pejoratively as "drawbacks".
+
+4. We did not intended to claim that CB breaking CDCL's invariants was
+a bad thing (as you say it remains sound, which is all that
+counts). We will correct the text to avoid giving the reader this
+impression.
+
+> Unfortunately, I don't see how the current version of the paper
+> can be modified according to my suggestion, as it is too invested into
+> arguing that TS is an alternative to CB.
+
+Here we disagree, CB is only discussed at the bottom of section 2 and
+in section 3. The bulk of the paper is independent of CB. We can
+change the wording in these sections to emphasize that CB has
+different properties than TS, has uses in contexts that TS cannot
+replace, and that TS and CB could be combined with a sketch of some of
+the issues to be resolved leaving such a combination to future work.
+
+To reemphasize, the relation with CB is not the original contribution
+of the paper. The original contribution is independent of CB. 
+
+Also thanks for the CB history. The other references you mention we
+did not know about, this will allow us to present a more accurate
+description of the history that will also allow Jiang and Zhang [6] to
+get proper (but not full) credit
+
+--------
+Review 2
+--------
+
+>but the improvements are modest and not completely convincing.
+
+We would point out that some configuration of TS improves on each
+baseline solver in all four dimensions, total number of instances
+solved, number of sat instances solved, number of unsat instances
+solved, and par2 score.
+
+--------
+Review 3
+--------
+
+Thanks for your suggestion about graphing the propagation rates. We
+will try it. The source will be made available and a pointer added to
+the paper. Our experiments were actually run with the union of 2018
+and 2019 instances (1st paragraph of Sect. 5). The main advantage of
+using Cadical of Jan 1 2020, is that it seems to be better than the
+other two solvers (fig 3 data vs fig 5 and fig 6), and so is closer to
+the state-of-the-art at this point (perhaps it is currently *the*
+state-of-the-art?). Hence, we think that being able to improve it with
+TS is a good result.
