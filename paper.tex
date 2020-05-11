@@ -65,7 +65,7 @@
 \title{Trail Saving on Backtrack}
 \author{Randy Hickey \and Fahiem Bacchus}
 \institute{Department of Computer Science, University of Toronto, Canada\\
-  \email{rgh000@gmail.com, fbacchus@cs.toronto.edu}}
+  \email{rhickey@cs.toronto.edu, fbacchus@cs.toronto.edu}}
 
 \begin{document}
 \maketitle
@@ -136,7 +136,7 @@ sometimes beneficial for the solver to backtrack fully and redo its
 trail, even if this takes more work. We will expand on why this might
 be the case below.
 
-In this paper we present an new trail saving method whereby we save
+In this paper we present a new trail saving method whereby we save
 the backtracked part of the solver's trail and attempt to use that
 information to make the solver's redescent more efficient. Unlike
 \cbt, our trail saving method preserves the traditional invariants of
@@ -338,7 +338,7 @@ contiguous, as $\deepestLit$ has a different level than the other
 literals at level $j$ (if $j\neq \btL$). This change has a number of
 consequences for the \sat solver's operation, all of which were
 described in \cite{DBLP:conf/lpar/JiangZ13}. M{\"{o}}hle and Biere
-\cite{DBLP:conf/satt/MohleB19} showed that despite these consequences
+\cite{DBLP:conf/sat/MohleB19} showed that despite these consequences
 partial backtracking can be made to preserve the soundness of a CDCL
 solver.
 
@@ -392,7 +392,7 @@ third impact, changing literal reasons, is not significant. However,
 the experiments in \cite{DBLP:journals/jsat/TakRH11} were run before
 good notions of clause quality were known
 \cite{DBLP:conf/ijcai/AudemardS09}. Our empirical results indicate
-that once clause quality is accounted, for changing the literal
+that once clause quality is accounted for, changing the literal
 reasons can have a significant impact.
 
 The first impact is worth discussing since it was mentioned in
@@ -721,37 +721,6 @@ conflict returned by \ust. Since trail saving can sometimes save
 hundreds or thousands of literals at a time these savings can in sum
 be significant.
 
-% \note{
-%   \begin{enumerate}
-%   \item Use simple backtrack and save to motivate and state the
-%       invariant. 
-%   \item Introduce notation for concatenating two trails.
-%   \item Name and state the invariant in text (e.g. a
-%       defn)---concenating the cached trail with the current trail
-%       yields a trail that is always reason valid, but not necessarily
-%       non-contradictory, non-conflicting, nor propagation complete).
-%   \item Proof (simple) that the invariant holds for caching on
-%       backtrack.
-%   \item On backtrack at least the asserted literal and any new
-%       propagants at the backtrack level are added.
-%   \item Prove that the invariant holds (???do we need an invariant or
-%       simply a property of the augmented trail) for trails with extras
-%       inbeween.
-%       $T_{\mathit{old}} + T_{\mathit{newlyAdded}} +
-%       T_{\mathit{saved}}$ also satisfies the invariant
-%   \item re-acheving propagation completeness for the augmented trail
-%       (a) only add one level of the cached trail at a time, and do
-%       unit prop after (b) only add non-contradicted decision from the
-%       old trail. Also note that conflicts are valid and can be learnt
-%       from even if the augmented trail is not propagation complete. 
-%   \item Finally figure out a way to formalize the extra technique of
-%       storing on top after repeated backtracking. 
-%   \item Explain how freedom for the search is maintained by makeing
-%       decisions then consulting the trail.
-%   \item 
-%   \end{enumerate}
-% }
-
 \subsection{Correctness}
 Now we will prove that our use of $\trailsave$ preserves the \sat
 solver's soundness. In particular, $\trailsave$ is only used in the
@@ -937,57 +906,6 @@ results also provides evidence against the argument given in
 impactful. With an appropriate clause quality metric the changing of literal
 reasons can have an impact.
 
-% \section{Related Work}
-% \subsection{Trail Saving for Assumption-Based SAT}
-% Trail saving was briefly introduced in the context of assumption-based
-% SAT \cite{DBLP:conf/sat/HickeyB19} in order to speed up the
-% propagation of the assumptions each time the solver backtracked past
-% the assumption levels. Note that the process is the same, but it only
-% works to restore the propagants and implicants of the assumptions and
-% only after a learnt unit clause. Becuase the number of propagants and
-% implicants of the assumptions tends to become dominated by the number
-% of assumptions in the applications it was tested on, the technique did
-% not yield a significant improvement. It would be interesting to
-% combine the extended version of trail saving outlined in this paper
-% with trail saving over the assumptions to see if that could produce
-% better results.
-
-% \subsection{Comparison to Chronological Backtracking}
-% As mentioned earlier, chronological backtracking also achieves some of
-% the theoretical speedups that trail saving achieves. One advantage of
-% chronological backtracking is that it does not require any caching of
-% the trail or accessing such a cache during propagation; it simply
-% leaves a vast portion of the trail intact rather than backtracking all
-% the way to the conflict level. Chronological backtracking will also
-% speed up propagations slightly more than trail saving, because it
-% leaves more literals assigned at once which leads to clauses being
-% detected as unit more quickly.
-
-% One disadvantage that chronological backtracking has compared to trail
-% saving is that it doesn't allow the search as much flexibility to jump
-% out of local neighbourhoods, as the common variable selection
-% heuristics tend to depend on
-% \cite{DBLP:conf/dac/MoskewiczMZZM01,DBLP:conf/sat/2015,DBLP:conf/sat/LiangGPC16}. Because
-% chronological backtracking leaves a large portion of the trail
-% assigned, it will behave similarly to how the solver would behave if
-% it was to force the decisions that do occur within this large portion
-% of literals, whereas trail saving does not force any decisions. As
-% variable selection heuristics become more refined, it is likely that
-% adhering to them will become more crucial to performance.
-
-% Another disadvantage is that, because propagation is not performed at
-% every decision level, literals that remain assigned during
-% chronological backtracking (but otherwise would have been unassigned)
-% do not have a chance to move their decision levels up. An example of
-% this is when the solver was supposed to backtrack over a literal that
-% would end up being unit propagated at level 0, but stays assigned at
-% its current decision level when chronological backtracking is
-% used. This could potentially effect the lbd score or length of the
-% learnt clause that gets generated at the next conflict. Additionally,
-% chronological backtracking breaks the invarant that all literals
-% appear on the trail in monotonically increasing order by decision
-% level, which makes its implementation slightly more complicated.
-
 \section{Experiments and Results}
 We implemented our techniques in two different SAT solvers, MapleSAT
 and Cadical, both of which have finished at or near the top of SAT
@@ -1021,7 +939,10 @@ first enhancement of saving over multiple backtracks,
 for conflicts by 2 decision levels, and
 "-trail-multipleBT-lookahead-reason" also adds the final enhancement
 to cease trail saving once a reason of "low quality" is reached. For
-more details on the enhancements, please see section 4.2.
+more details on the enhancements, please see section 4.2. The source
+code for our implementation of trail saving can be obtained from the
+web\footnote{https://github.com/rgh000/cadical-trail} or by downloading our submissions to the 2020 SAT Competition.
+
 
 Interestingly, \cbt made the newest version of cadical perform worse
 than the baseline (Figure~\ref{fig:cadicalNew}). This demonstrates
@@ -1035,7 +956,7 @@ tried both clause size and lbd as the clause quality metric, and both
 yielded a positive gain, with clause size being slightly more
 effective.
 
-\begin{figure}[H]
+\begin{figure}
 \centering
     \begin{tabular}{|l|l|l|l|l|l|}
       \hline
@@ -1104,21 +1025,6 @@ solvers.
 
 \begin{figure}\centering\includegraphics[scale=0.65]{figures/cactus_maple_new.pdf}\caption{\small{Cactus plot for MapleLCMDist comparing standard non-chronological backtracking to \cbt and various configurations of trail saving. The first 300 problems were solved in less than 600 seconds, so that part of the plot is truncated.}}\label{fig:cactus_maple}\end{figure}
 
-In Figure~\ref{fig:props} we plotted the propagations per second for
-each instance with and without trail saving enabled in cadical (rounded
-to the nearest 0.1 million). Only
-the 506 instances solved by both solvers are plotted. With trail saving
-enabled, 213 instances had more propagations per second, 149 instances
-had less propagations per second, and 144 instances had about the same
-number of propagations per second. On the graph, points above the diagonal
-represent instances where trail saving had faster propagation. The
-graph illustrates that the majority of the time
-cadical with trail saving enabled propagated literals faster than
-cadical without trail saving enabled, as we predicted would be the
-case earlier in this paper.
-
-\begin{figure}\centering\includegraphics[scale=0.7]{figures/scatter.pdf}\caption{Comparing propagations per second with and without trail saving in Cadical.}\label{fig:props}\end{figure}
-
 \section{Conclusion}
 We have shown that our trail saving technique can speed up two
 state-of-the-art \sat solvers, cadical and MapleSAT, as or more
@@ -1137,111 +1043,6 @@ chronological backtracking if one is willing to break the traditional
 invariants of CDCL, but it would require further work to determine
 whether or not this would be useful and how to best approach it.
 
-
-%\section{Future Work}
-
-%With more clever data structures the efficiency of restoring the trail
-%could be improved. There are a number of parameters which can be
-%tuned, including how often to refresh the trail, how large the cutoff
-%point for rejecting "long" reasons should be, how long to wait to
-%prune the trail cache if one is appending multiple trail caches
-%together, how far to look ahead on the trail cache for conflicts (in
-%terms of number of decisions or total number of literals). We only
-%experimented with a few different settings of these parameters that
-%made sense, but more careful fine-tuning of these parameters could
-%further enhance the effectiveness of the technique. There are
-%potentially other techniques one could use a trail cache for,
-%including inprocessing steps that involve probing. A look down the
-%trail cache is an incomplete but very fast way to do a probing step,
-%as opposed to propagation. It is also possible that trail saving and
-%chronological backtracking could be combined in some way to produce
-%even better results.
-
 \bibliography{sat}{}
 \bibliographystyle{splncs04}
 \end{document}
-
-\iffalse \textit{Example 1} Suppose the literal $y$ can be restored
-from the trail cache, and its reason clause $cr$ contains the literals
-${y \lnot x_1, \lnot x_2, ..., \lnot x_n}$. This means that
-$x1, ..., x_n$ have become true and are currently on the
-trail. Suppose $x_n$ is the most recent literal on the trail and
-Without trail saving, the propagation routine will have to access $cr$
-from the watchlist of one of the literals $\blacksquare$\newline
-
-\textit{Example 1} Suppose the literals $x_1, ... x_n$ are on the
-trail cache, with none of them having a null reason, and $x_1$ becomes
-true (e.g., the solver makes a decision for $x_1$ to be true). Then,
-$x_2, ... x_n$ are implied by the current trail. Now we will examine
-the propagation of a clause c which consists of the literals
-$l, \lnot x_1, \lnot x_2, ..., \lnot x_n$ with and without trail
-saving. Assume $l$ and $\lnot x_1$ are the current watched literals.
-
-Without trail saving, $\lnot x_1$ becomes false and a new watcher is
-searched for and found 1 literal later, $\lnot x_2$, and then
-$\lnot x_1$ and $\lnot x_2$ are swapped. Next $\lnot x_2$ becomes
-false, a new watcher is searched for and found 2 literals later,
-$\lnot x_3$, and then $\lnot x_2$ and $\lnot x_3$ are swapped. This
-process will continue until all $x_n$ literals are false, c becomes
-unit, and $l$ becomes forced to be true. This propagation took
-$1 + 2 + ... + n$ searches through clause c, for a total of $O(n^2)$
-searches.
-
-With trail saving, $x2, ... x_n$ are all assigned to be true as soon
-as $x_1$ is made true, so immediately the values of literals
-$\lnot x_1, ..., \lnot x_n$ in c are false. During propagation, a new
-watcher is searched for to replace $\lnot x_2$, n literals are
-searched over without finding any, thus c is detected as unit and $l$
-becomes forced to be true. This propagation took $O(n)$ searches
-through clause c. $\blacksquare$\newline \fi
-
-\iffalse
-\begin{figure}\includegraphics[scale=0.8]{figures/cactus_cadical.pdf}\caption{\small{Comparison
-        of run times for versions of cadical. cadical is without
-        chronological backtracking, cadical-chrono is with
-        chronological backtracking, cadical-trail is with the first
-        version of trail saving, cadical-trail-2levels-ahead is the
-        trail saving with all enhancements added.}}\end{figure}
-\begin{figure}\includegraphics[scale=0.8]{figures/cactus_maple2.pdf}\caption{\small{Comparison
-        of run times for versions of MapleSAT. maplelcmdist is from
-        the 2017 SAT Competition, maplelecmdist-chrono is with
-        chronological backtracking (2018 SAT Competition),
-        maplelcmdist-trail is with the first version of trail saving,
-        maplelcmdist-trail-enhanced is with trail saving and all
-        enhancements added.}}\end{figure}
-\begin{figure}\includegraphics[scale=0.8]{figures/test.pdf}\caption{}\end{figure}
-\begin{figure}\includegraphics[scale=0.8]{figures/test2.pdf}\caption{}\end{figure}
-\fi
-\iffalse
-\begin{figure}\includegraphics[scale=0.8]{figures/cactus_maple.pdf}\caption{\small{Comparison
-        of run times for versions of MapleSAT. maplelcmdist is from
-        the 2017 SAT Competition, maplelecmdist-chrono is with
-        chronological backtracking (2018 SAT Competition),
-        maplelcmdist-trail is with the first version of trail saving,
-        maplelcmdist-chrono-dl is with chronological backtracking and
-        duplicate learnts (2019 SAT Competition),
-        maplelcmdist-trail-dl is with trail saving and duplicate
-        learnts}}\end{figure}
-\fi
-
-\iffalse
-\begin{figure}[t]
-    \begin{center}
-        \fss{9pt}{10pt}
-        \setlength\tabcolsep{1pt}
-        \begin{tabular}{| p{4.2cm} | c | c | c | c | c | c | c | c |}
-          \hline
-          & \multicolumn{4}{|c|}{Total} & \multicolumn{2}{|c|}{Unweighted} & \multicolumn{2}{|c|}{Weighted} \\ \hline
-          & MaxHS & +/- & \hspace{1pt} RC2 \hspace{1pt} & +/- & MaxHS & \hspace{1pt} RC2 \hspace{1pt} & MaxHS & \hspace{1pt} RC2 \hspace{1pt} \\ \hline
-          original & 6052 & 0/0 & 6030 & 0/0 & 3940 & 3993 & 2112 & 2037 \\ \hline
-          enqueue assumptions as set & 6131 & 114/35 & 6081 & \hspace{0.5pt} 99/48 \hspace{0.5pt} & 3995 & 4032 & 2136 & 2049 \\ \hline
-          enqueue assumptions as set + \newline save literals after learnt units & 6136 & 120/36 & 6079 & \hspace{0.5pt} 95/46 \hspace{0.5pt} & 3991 & 4030 & 2145 & 2049 \\ \hline
-          enqueue assumptions as set + \newline save literals after learnt units + \newline save literals from last invocation & 6138 & 115/29 & 6080 & \hspace{0.5pt} 92/42 \hspace{0.5pt} & 3989 & 4030 & 2149 & 2050 \\ \hline
-        \end{tabular}
-    \end{center}
-    \caption{Number of \maxsat instances solved by MaxHS and RC2 using
-      different extensions of the underlying \sat solver. The +/- column shows
-      the number of instances gained/lost vs the original.}
-    \label{fig:nsolved}
-\end{figure}
-\fi

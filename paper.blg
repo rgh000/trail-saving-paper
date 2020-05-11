@@ -1,12 +1,11 @@
-This is BibTeX, Version 0.99d (TeX Live 2019)
+This is BibTeX, Version 0.99d (TeX Live 2017)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: paper.aux
 The style file: splncs04.bst
 Database file #1: sat.bib
-Warning--I didn't find a database entry for "DBLP:conf/satt/MohleB19"
 You've used 15 entries,
             2850 wiz_defined-function locations,
-            720 strings with 8906 characters,
+            718 strings with 8860 characters,
 and the built_in function-call counts, 9795 in all, are:
 = -- 834
 > -- 291
@@ -45,4 +44,3 @@ warning$ -- 0
 while$ -- 88
 width$ -- 17
 write$ -- 177
-(There was 1 warning)
