@@ -1,7 +1,7 @@
 # Fdb version 3
-["bibtex paper"] 1589552268 "paper.aux" "paper.bbl" "paper" 1589552269
+["bibtex paper"] 1589552268 "paper.aux" "paper.bbl" "paper" 1589557078
   "./splncs04.bst" 1582055469 32146 ee21ae2a29028dc8ad842a97200982c7 ""
-  "paper.aux" 1589552269 7797 757ed00ce3c5eef4742fd4d0eceadc30 ""
+  "paper.aux" 1589557078 7797 757ed00ce3c5eef4742fd4d0eceadc30 ""
   "sat.bib" 1589038843 10944 c7a825cca97716cef29c66a05538fe66 ""
   (generated)
   "paper.blg"
@@ -96,11 +96,11 @@
   "paper.out" 1582517045 60 cf08ba50ceb329fde3eb5f208f7cd1a7 ""
   "paper.tex" 1582517011 62389 b446da012c3f8b0d086bc93119dd55bc ""
   (generated)
+  "paper.aux"
   "paper.dvi"
   "paper.log"
   "paper.out"
-  "paper.aux"
-["pdflatex"] 1589552268 "paper.tex" "paper.pdf" "paper" 1589552269
+["pdflatex"] 1589557077 "paper.tex" "paper.pdf" "paper" 1589557078
   "/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1480098666 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2017/texmf-dist/fonts/map/fontname/texfonts.map" 1480098670 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/jknappen/ec/ecbi1000.tfm" 1480098696 3072 e6fe53b666f9cbd66cb135c6fdea66d3 ""
@@ -236,12 +236,12 @@
   "/usr/local/texlive/2017/texmf.cnf" 1495593465 577 2b71d4d888f9e5560b2e99985915a9fa ""
   "figures/cactus_cadical_new.pdf" 1582916478 70201 b5cae40049cd08b44e6680673f271874 ""
   "llncs.cls" 1582055469 42249 b08ec23e994470d7d8fc268d245cf555 ""
-  "paper.aux" 1589552269 7797 757ed00ce3c5eef4742fd4d0eceadc30 ""
+  "paper.aux" 1589557078 7797 757ed00ce3c5eef4742fd4d0eceadc30 ""
   "paper.bbl" 1589552268 5054 9163aaeb88cf074102dd7fc1ae60dcc7 "bibtex paper"
-  "paper.out" 1589552269 60 cf08ba50ceb329fde3eb5f208f7cd1a7 ""
-  "paper.tex" 1589552265 55638 95a4a924552746ce0b7a06ab91f68763 ""
+  "paper.out" 1589557078 60 cf08ba50ceb329fde3eb5f208f7cd1a7 ""
+  "paper.tex" 1589557071 55637 561a82da97f601608d6e5363cd09bae1 ""
   (generated)
   "paper.out"
-  "paper.log"
   "paper.pdf"
   "paper.aux"
+  "paper.log"
